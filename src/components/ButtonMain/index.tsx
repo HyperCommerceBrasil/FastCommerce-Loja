@@ -1,11 +1,11 @@
 import React from 'react';
 import { ButtonText, ThemedButton } from './styles';
 
-type ButtonMain = {
+type ButtonMainProps = {
   children: string;
 };
 
-const ButtonMain: React.FC = ({ children }) => (
+const ButtonMain: React.FC<ButtonMainProps> = ({ children }) => (
   <ThemedButton>
     <ButtonText>{children}</ButtonText>
   </ThemedButton>
