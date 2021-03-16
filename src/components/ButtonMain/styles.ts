@@ -6,6 +6,11 @@ export const ThemedButton = styled.button`
   padding: 20px;
   background-color: ${Colors.light?.primary.main};
   border-radius: 5px;
+
+  &:hover {
+    cursor: pointer;
+    background-color: ${Colors.light?.primary.darker};
+  }
 `;
 
 export const ButtonText = styled.p`
