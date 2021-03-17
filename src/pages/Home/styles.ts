@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 import { Colors } from '../../utils';
 
-// const { insane } = Spacings;
-
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
