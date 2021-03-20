@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Colors, Spacings } from '../../utils';
 
-const { small, giant } = Spacings;
+const { short, medium, giant } = Spacings;
 
 const defaultProductImageNotFound =
   'https://www.navigation.com/static/WFS/Shop-Site/-/Shop/en_US/Product%20Not%20Found.png';
@@ -51,9 +51,17 @@ export const TextWrapper = styled.div``;
 
 export const Title = styled.h3`
   font-size: 2rem;
+
+  @media (max-width: 1024px) {
+    text-align: center;
+  }
 `;
 
-export const Text = styled.p``;
+export const Text = styled.p`
+  @media (max-width: 1024px) {
+    text-align: center;
+  }
+`;
 
 export const OptionsWrapper = styled.div`
   display: flex;
@@ -71,16 +79,23 @@ export const CounterWrapper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+
+  @media (max-width: 1024px) {
+    margin: ${giant}px;
+  }
 `;
 
 export const CounterButton = styled.button`
   background-color: ${Colors.light?.primary.main};
   border-radius: 8px;
+  padding: ${short}px;
+
   &:hover {
     cursor: pointer;
   }
 `;
 
-export const CounterValue = styled.div`
-  margin: 0 ${small}px;
+export const CounterValue = styled.p`
+  font-size: 1.4rem;
+  margin: 0 ${medium}px;
 `;
