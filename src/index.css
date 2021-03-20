@@ -4,7 +4,9 @@
   transition: 0.3s;
 }
 
-button, input {
+button,
+input,
+select {
   border: none;
   outline: none;
 }
