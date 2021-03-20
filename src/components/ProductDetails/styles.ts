@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Colors, Spacings, Breakpoints } from '../../utils';
 
 const { short, medium, giant } = Spacings;
-const { laptop } = Breakpoints;
+const { tablet, laptop, fhd } = Breakpoints;
 
 const defaultProductImageNotFound =
   'https://www.navigation.com/static/WFS/Shop-Site/-/Shop/en_US/Product%20Not%20Found.png';
@@ -51,16 +51,24 @@ export const ContentWrapper = styled.div`
 export const TextWrapper = styled.div``;
 
 export const Title = styled.h3`
-  font-size: 2rem;
+  font-size: 4rem;
+  @media (max-width: ${fhd}px) {
+    font-size: 3rem;
+  }
 
   @media (max-width: ${laptop}px) {
+    font-size: 2rem;
+  }
+
+  @media (max-width: ${tablet}px) {
+    font-size: 1.6rem;
     text-align: center;
   }
 `;
 
 export const Text = styled.p`
-  @media (max-width: ${laptop}px) {
-    text-align: center;
+  @media (max-width: ${fhd}px) {
+    text-align: ce4ter;
   }
 `;
 
