@@ -7,15 +7,23 @@ import {
   CounterValue,
   CounterWrapper,
   ImageWrapper,
-  Img,
   Text,
   Title,
   Wrapper,
   TextWrapper,
   OptionsWrapper,
+  Image,
 } from './styles';
 
-const ProductDetails: React.FC = () => {
+type ProductDetailsProps = {
+  productImage?: string;
+  altImage?: string;
+};
+
+const ProductDetails: React.FC<ProductDetailsProps> = ({
+  altImage,
+  productImage,
+}) => {
   const [counterValue, setCounterValue] = useState(1);
 
   const handlePlusCounter = () => setCounterValue(counterValue + 1);
@@ -26,7 +34,7 @@ const ProductDetails: React.FC = () => {
   return (
     <Wrapper>
       <ImageWrapper>
-        <Img imageURL="https://www.escalaminiaturas.com.br/media/catalog/product/cache/3/image/9df78eab33525d08d6e5fb8d27136e95/x/1/x1678.jpg" />
+        <Image alt={altImage} src={productImage} />
       </ImageWrapper>
       <ContentWrapper>
         <TextWrapper>

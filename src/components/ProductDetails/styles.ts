@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-// import { FaShoppingCart as BaseFaShoppingCart } from 'react-icons/fa';
 import { Colors, Spacings } from '../../utils';
 
 const { small, giant } = Spacings;
@@ -8,13 +7,12 @@ const defaultProductImageNotFound =
   'https://www.navigation.com/static/WFS/Shop-Site/-/Shop/en_US/Product%20Not%20Found.png';
 
 type ImgProps = {
-  imageURL?: string;
+  src?: string;
 };
 
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
-  height: 100%;
 
   @media (max-width: 1024px) {
     flex-direction: column;
@@ -25,24 +23,20 @@ export const ImageWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   display: flex;
+  flex: 1;
   min-width: 40vw;
-  min-height: 60vh;
+  min-height: 40vh;
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
 `;
 
-export const Img = styled.div<ImgProps>`
-  display: flex;
-  flex: 1;
+export const Image = styled.img.attrs<ImgProps>(
+  ({ src = defaultProductImageNotFound }) => ({
+    src,
+  }),
+)`
   width: 100%;
   height: 100%;
-
-  ${({ imageURL = defaultProductImageNotFound }) =>
-    `background-image: url(${imageURL});`}
-
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
 `;
 
 export const ContentWrapper = styled.div`
