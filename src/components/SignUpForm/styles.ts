@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { TextField as TextFieldBase } from '@material-ui/core';
 import { Colors, Spacings } from '../../utils';
 
-const { medium, large, giant } = Spacings;
+const { medium, giant } = Spacings;
 
 export const Wrapper = styled.div`
   display: flex;
@@ -12,9 +12,7 @@ export const Wrapper = styled.div`
 
 export const Title = styled.h3``;
 
-export const FormWrapper = styled.div`
-  /* padding: ${giant}px; */
-`;
+export const FormWrapper = styled.div``;
 
 export const TextField = styled(TextFieldBase)`
   .MuiFormLabel-root.Mui-focused {
