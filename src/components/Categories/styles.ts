@@ -1,11 +1,20 @@
 import styled from 'styled-components';
-import { Colors } from '../../utils';
+import { Colors, Spacings } from '../../utils';
+
+const { large } = Spacings;
 
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
   height: 60px;
+`;
+
+export const ScrollabelDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  white-space: nowrap;
+  width: 100%;
 `;
 
 export const CategoryWrapper = styled.button`
@@ -15,6 +24,8 @@ export const CategoryWrapper = styled.button`
   flex: 1;
   align-items: center;
   justify-content: center;
+  padding: 0 ${large};
+  min-width: 200px;
 
   &:hover {
     background-color: ${Colors.light?.environment.dark};
