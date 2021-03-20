@@ -72,7 +72,6 @@ export const OptionsWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 0 ${giant}px;
 
   @media (max-width: ${laptop}px) {
     flex-direction: column;
