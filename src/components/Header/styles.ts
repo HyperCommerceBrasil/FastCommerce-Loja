@@ -1,7 +1,8 @@
 import styled from 'styled-components';
-import { Colors, Spacings } from '../../utils';
+import { Colors, Spacings, Breakpoints } from '../../utils';
 
 const { small, large, medium } = Spacings;
+const { laptop, tablet } = Breakpoints;
 
 export const Wrapper = styled.div`
   background-color: ${Colors.light?.primary.main};
@@ -11,15 +12,46 @@ export const Wrapper = styled.div`
   align-items: center;
   justify-content: space-around;
   padding: ${medium}px ${large}px;
+
+  @media (max-width: ${laptop}px) {
+    flex-direction: column;
+  }
 `;
 
-export const Logo = styled.h1``;
+export const Logo = styled.h1`
+  @media (max-width: ${laptop}px) {
+    font-size: 1.5rem;
+    margin-bottom: ${medium}px;
+  }
+
+  @media (max-width: ${tablet}px) {
+    font-size: 1rem;
+    justify-content: space-between;
+  }
+`;
 
 export const SearchWrapper = styled.div`
   display: flex;
   flex-wrap: nowrap;
   max-width: 500px;
   width: 100%;
+`;
+
+export const OptionsWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 25%;
+
+  @media (max-width: ${laptop}px) {
+    justify-content: space-evenly;
+    margin-top: ${medium}px;
+    width: 100%;
+  }
+
+  @media (max-width: ${tablet}px) {
+    justify-content: space-between;
+  }
 `;
 
 export const SearchInput = styled.input`
@@ -34,7 +66,6 @@ export const SearchInput = styled.input`
 `;
 
 export const SearchButton = styled.button`
-  border: none;
   color: #fff;
   background-color: #020202;
   border-radius: 5px;

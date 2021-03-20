@@ -4,6 +4,7 @@ import CartIcon from '../CartIcon';
 import {
   CartWrapper,
   Logo,
+  OptionsWrapper,
   SearchButton,
   SearchInput,
   SearchWrapper,
@@ -19,13 +20,15 @@ const Header: React.FC = () => (
       <SearchInput />
       <SearchButton>Pesquisar</SearchButton>
     </SearchWrapper>
-    <CartWrapper>
-      <CartIcon />
-    </CartWrapper>
-    <UserWrapper>
-      <FaUser size={28} />
-      <UserText>Minha conta</UserText>
-    </UserWrapper>
+    <OptionsWrapper>
+      <CartWrapper>
+        <CartIcon />
+      </CartWrapper>
+      <UserWrapper>
+        <FaUser size={28} />
+        <UserText>Minha conta</UserText>
+      </UserWrapper>
+    </OptionsWrapper>
   </Wrapper>
 );
 
