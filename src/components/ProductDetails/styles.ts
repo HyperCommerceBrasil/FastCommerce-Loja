@@ -66,11 +66,7 @@ export const Title = styled.h3`
   }
 `;
 
-export const Text = styled.p`
-  @media (max-width: ${fhd}px) {
-    text-align: ce4ter;
-  }
-`;
+export const Text = styled.p``;
 
 export const OptionsWrapper = styled.div`
   display: flex;
