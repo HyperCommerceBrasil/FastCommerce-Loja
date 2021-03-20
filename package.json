@@ -25,6 +25,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "prettier-format": "prettier --config .prettierrc 'src/**/*.{ts,tsx}' --write",
+    "eslint-format": "eslint 'src/**/*.{ts,tsx}' --fix",
+    "lint-fix": " yarn eslint-format && yarn prettier-format",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

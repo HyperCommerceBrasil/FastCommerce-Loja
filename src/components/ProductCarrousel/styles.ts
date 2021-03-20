@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Colors, Spacings } from '../../utils';
+import { Spacings } from '../../utils';
 
 const { medium } = Spacings;
 
