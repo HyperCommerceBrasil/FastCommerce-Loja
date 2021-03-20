@@ -1,26 +1,24 @@
 import React from 'react';
 import {
-  Banner,
   Categories,
   Footer,
-  ProductCarrousel,
   Header,
+  OptionSelector,
+  ContentWrapper,
 } from '../../components';
-import { Wrapper } from './styles';
+import { ProductsResults, SearchWrapper, Wrapper } from './styles';
 
 const ProductSearch: React.FC = () => {
   return (
     <Wrapper>
       <Header />
       <Categories />
-      <Banner />
-      <ProductCarrousel />
-      <select name="cars" id="cars">
-        <option value="volvo">Volvo</option>
-        <option value="saab">Saab</option>
-        <option value="mercedes">Mercedes</option>
-        <option value="audi">Audi</option>
-      </select>
+      <ContentWrapper>
+        <SearchWrapper>
+          <OptionSelector />
+          <ProductsResults />
+        </SearchWrapper>
+      </ContentWrapper>
       <Footer />
     </Wrapper>
   );

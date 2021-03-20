@@ -14,7 +14,7 @@ const DetailedProduct: React.FC = () => {
       <Header />
       <Categories />
       <ContentWrapper>
-        <ProductDetails productImage="https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-12-pro-max-family-hero-all?wid=940&hei=1112&fmt=jpeg&qlt=80&op_usm=0.5,0.5&.v=1604021663000" />
+        <ProductDetails productImage="https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-12-pro-family-hero?wid=940&amp;hei=1112&amp;fmt=jpeg&amp;qlt=80&amp;op_usm=0.5,0.5&amp;.v=1604021663000" />
       </ContentWrapper>
       <Footer />
     </Wrapper>

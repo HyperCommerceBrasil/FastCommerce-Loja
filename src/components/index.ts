@@ -6,3 +6,7 @@ export { default as ButtonMain } from './ButtonMain';
 export { default as Footer } from './Footer';
 export { default as Banner } from './Banner';
 export { default as CartIcon } from './CartIcon';
+export { default as OptionSelector } from './OptionSelector';
+export { default as ContentWrapper } from './ContentWrapper';
+export { default as ProductDetails } from './ProductDetails';
+export { default as SignUpForm } from './SignUpForm';

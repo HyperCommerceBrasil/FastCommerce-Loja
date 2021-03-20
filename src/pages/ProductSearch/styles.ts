@@ -13,3 +13,11 @@ export const ProductsCarrousel = styled.div`
   flex-direction: row;
   justify-content: space-around;
 `;
+
+export const SearchWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  background-color: #f15;
+`;
+
+export const ProductsResults = styled.div``;
