@@ -24,7 +24,6 @@ const SignUp: React.FC = () => {
           validationSchema={signUpSchema}
           initialValues={initialValues}
           enableReinitialize
-          validateOnBlur
         >
           <SignUpForm />
         </Formik>
