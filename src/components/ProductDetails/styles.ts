@@ -23,12 +23,9 @@ export const Wrapper = styled.div`
 export const ImageWrapper = styled.div`
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   display: flex;
   flex: 1;
-  min-width: 40vw;
-  min-height: 40vh;
-  border-top-left-radius: 16px;
-  border-top-right-radius: 16px;
 `;
 
 export const Image = styled.img.attrs<ImgProps>(
@@ -36,8 +33,11 @@ export const Image = styled.img.attrs<ImgProps>(
     src,
   }),
 )`
-  width: 100%;
-  height: 100%;
+  max-width: 40vw;
+
+  @media (max-width: ${laptop}px) {
+    max-width: 100vw;
+  }
 `;
 
 export const ContentWrapper = styled.div`
