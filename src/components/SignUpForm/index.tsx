@@ -30,11 +30,11 @@ const SignUpForm: React.FC = () => {
             placeholder="Jonas Adalberto Maria dos Santos"
             fullWidth
             value={values.fullName}
-            onChange={() => handleChange('fullname')}
-            onBlur={() => handleBlur('fullname')}
+            onChange={handleChange('fullName')}
+            onBlur={handleBlur('fullName')}
             error={!!errors?.fullName}
             helperText={errors?.fullName}
-            id="sign_up_input_fullname"
+            id="sign_up_input_fullName"
           />
         </InputWrapper>
         <InputWrapper>
@@ -43,8 +43,8 @@ const SignUpForm: React.FC = () => {
             label="CEP"
             placeholder="98780-103"
             value={values.zipCode}
-            onChange={() => handleChange('zipCode')}
-            onBlur={() => handleBlur('zipCode')}
+            onChange={handleChange('zipCode')}
+            onBlur={handleBlur('zipCode')}
             error={!!errors?.zipCode}
             helperText={errors?.zipCode}
             id="sign_up_input_zipCode"
@@ -56,8 +56,8 @@ const SignUpForm: React.FC = () => {
               label="UF"
               placeholder="RS"
               value={values.state}
-              onChange={() => handleChange('state')}
-              onBlur={() => handleBlur('state')}
+              onChange={handleChange('state')}
+              onBlur={handleBlur('state')}
               error={!!errors?.state}
               helperText={errors?.state}
               id="sign_up_input_state"
@@ -69,8 +69,8 @@ const SignUpForm: React.FC = () => {
               label="Cidade"
               placeholder="Santa Rosa"
               value={values.city}
-              onChange={() => handleChange('city')}
-              onBlur={() => handleBlur('city')}
+              onChange={handleChange('city')}
+              onBlur={handleBlur('city')}
               error={!!errors?.city}
               helperText={errors?.city}
               id="sign_up_input_city"
@@ -83,8 +83,8 @@ const SignUpForm: React.FC = () => {
             label="Endereço"
             placeholder="Rua Antunes Ribas nº 1813"
             value={values.address}
-            onChange={() => handleChange('address')}
-            onBlur={() => handleBlur('address')}
+            onChange={handleChange('address')}
+            onBlur={handleBlur('address')}
             error={!!errors?.address}
             helperText={errors?.address}
             id="sign_up_input_address"
@@ -96,8 +96,8 @@ const SignUpForm: React.FC = () => {
             label="Bairro"
             placeholder="Jacques Marciano"
             value={values.neighbourhood}
-            onChange={() => handleChange('neighbourhood')}
-            onBlur={() => handleBlur('neighbourhood')}
+            onChange={handleChange('neighbourhood')}
+            onBlur={handleBlur('neighbourhood')}
             error={!!errors?.neighbourhood}
             helperText={errors?.neighbourhood}
             id="sign_up_input_neighbourhood"
