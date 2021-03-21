@@ -13,16 +13,29 @@ import {
   Wrapper,
 } from './styles';
 
-const ProductCard: React.FC = () => (
+interface Product {
+  name: string;
+  price: number;
+  collection: {
+    id: string;
+    name: string;
+  };
+}
+
+interface ProductCardProps {
+  product: Product;
+}
+
+const ProductCard: React.FC<ProductCardProps> = ({ product }) => (
   <Wrapper>
     <ImageWrapper>
       <Img />
     </ImageWrapper>
     <InformationWrapper>
       <InformationList>
-        <Category>Eletrônicos</Category>
-        <Title>Redmi Air Dots 2</Title>
-        <Price>R$ 150,00</Price>
+        <Category>{product.collection.name}</Category>
+        <Title>{product.name}</Title>
+        <Price>{product.price}</Price>
       </InformationList>
       <AddCartWrapper>
         <AddCart>
