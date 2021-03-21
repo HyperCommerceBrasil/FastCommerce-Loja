@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { success, isValidEmail, error } from '../../utils';
 import ButtonMain from '../ButtonMain';
 import {
   Column,
@@ -10,36 +11,70 @@ import {
   Link,
   Subtitle,
   Input,
+  SignNewsletterWrapper,
+  ToastSuccessMessage,
+  ToastErrorMessage,
 } from './styles';
 
-const Footer: React.FC = () => (
-  <Wrapper>
-    <ColumnsWrapper>
-      <Column>
-        <Title>Five Stars Store</Title>
-        <Text>
-          Na Five Stars, acreditamos em uma vida mais sofisticada e um dia a dia
-          simplificado. Simplifique seu dia a dia e tenho uma vida 5 estrelas
-          com a five stars{' '}
-        </Text>
-        <Email href="mailto: abc@example.com">contato@fivestars.com.br</Email>
-      </Column>
+const Footer: React.FC = () => {
+  const [newsletterEmail, setNewsletterEmail] = useState('');
 
-      <Column>
-        <Title>Serviços de Atendimento ao Consumidor</Title>
-        <Link href="gaersd">Política de privacidade</Link>
-        <Link href="gaersd">Contate-nos</Link>
-        <Link href="gaersd">Termos de serviço</Link>
-      </Column>
+  const handleSignNewsletter = () =>
+    isValidEmail(newsletterEmail)
+      ? success(
+          <>
+            <ToastSuccessMessage>Show! 🎉</ToastSuccessMessage>
+            <ToastSuccessMessage>
+              Agora você ficará por dentro das novidades! 📰
+            </ToastSuccessMessage>
+          </>,
+        )
+      : error(
+          <>
+            <ToastErrorMessage>Opa, algo deu errado! 🤯</ToastErrorMessage>
+            <ToastErrorMessage>Seu email está correto?! 🤔</ToastErrorMessage>
+          </>,
+        );
 
-      <Column>
-        <Title>Assine nossa newsletter</Title>
-        <Subtitle>Receba promoções e notícias do mundo</Subtitle>
-        <Input onClick={() => ({})} />
-        <ButtonMain>Assinar</ButtonMain>
-      </Column>
-    </ColumnsWrapper>
-  </Wrapper>
-);
+  return (
+    <Wrapper>
+      <ColumnsWrapper>
+        <Column>
+          <Title>Five Stars Store</Title>
+          <Text>
+            Na Five Stars, acreditamos em uma vida mais sofisticada e um dia a
+            dia simplificado. Simplifique seu dia a dia e tenho uma vida 5
+            estrelas com a five stars{' '}
+          </Text>
+          <Email href="mailto: contato@fivestars.com.br">
+            contato@fivestars.com.br
+          </Email>
+        </Column>
+
+        <Column>
+          <Title>Serviços de Atendimento ao Consumidor</Title>
+          <Link href="services/privacy">Política de privacidade</Link>
+          <Link href="services/contacts">Contate-nos</Link>
+          <Link href="services/service-terms">Termos de serviço</Link>
+        </Column>
+
+        <Column>
+          <Title>Assine nossa newsletter</Title>
+          <Subtitle>Receba promoções e notícias do mundo</Subtitle>
+          <SignNewsletterWrapper>
+            <Input
+              value={newsletterEmail}
+              onChange={({ target }) => setNewsletterEmail(target.value)}
+              type="email"
+            />
+            <ButtonMain onClick={() => handleSignNewsletter()}>
+              Assinar
+            </ButtonMain>
+          </SignNewsletterWrapper>
+        </Column>
+      </ColumnsWrapper>
+    </Wrapper>
+  );
+};
 
 export default Footer;
