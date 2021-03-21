@@ -6,21 +6,22 @@ import {
   ScrollabelDiv,
 } from './styles';
 
+const defaultCategories = [
+  'INÍCIO',
+  'NOVIDADES',
+  'ELETRÔNICOS',
+  'WEARABLES',
+  'LAZER',
+];
+
 const Categories: React.FC = () => (
   <Wrapper>
     <ScrollabelDiv>
-      <CategoryWrapper>
-        <CategoryText>INÍCIO</CategoryText>
-      </CategoryWrapper>
-      <CategoryWrapper>
-        <CategoryText>NOVIDADES</CategoryText>
-      </CategoryWrapper>
-      <CategoryWrapper>
-        <CategoryText>ELETRÔNICOS</CategoryText>
-      </CategoryWrapper>
-      <CategoryWrapper>
-        <CategoryText>WEARABLES</CategoryText>
-      </CategoryWrapper>
+      {defaultCategories.map((item, index) => (
+        <CategoryWrapper to={index ? `search&query=${item}` : '/'}>
+          <CategoryText>{item}</CategoryText>
+        </CategoryWrapper>
+      ))}
     </ScrollabelDiv>
   </Wrapper>
 );
