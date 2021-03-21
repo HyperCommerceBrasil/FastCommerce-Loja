@@ -20,14 +20,6 @@ const defaultProducts: Product[] = [
     price: 9.99,
   },
   {
-    id: '5134512',
-    imageURL:
-      'https://www.extra-imagens.com.br/Control/ArquivoExibir.aspx?IdArquivo=887253487',
-    category: 'NEW',
-    title: 'Hotwheels Nissan 350z Preto',
-    price: 9.99,
-  },
-  {
     id: '61123',
     imageURL:
       'https://images-na.ssl-images-amazon.com/images/I/61ZTdXGjRYL._AC_SY450_.jpg',
@@ -45,20 +37,7 @@ const defaultProducts: Product[] = [
   },
 ];
 
-interface Product {
-  name: string;
-  price: number;
-  collection: {
-    id: string;
-    name: string;
-  };
-}
-
-interface CarouselProps {
-  products: Product[];
-}
-
-const ProductCarrousel: React.FC<CarouselProps> = ({ products }) => (
+const ProductCarrousel: React.FC = () => (
   <Wrapper>
     <CarrouselWrapper>
       {defaultProducts.map(({ category, title, id, imageURL, price }) => (
