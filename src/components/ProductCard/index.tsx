@@ -1,4 +1,5 @@
 import React from 'react';
+import { success } from '../../utils';
 import {
   AddCart,
   AddCartWrapper,
@@ -13,32 +14,33 @@ import {
   Wrapper,
 } from './styles';
 
-interface Product {
-  name: string;
+type ProductCardProps = {
+  id: string;
+  imageURL?: string;
+  category: string;
+  title: string;
   price: number;
-  collection: {
-    id: string;
-    name: string;
-  };
-}
+};
 
-interface ProductCardProps {
-  product: Product;
-}
-
-const ProductCard: React.FC<ProductCardProps> = ({ product }) => (
+const ProductCard: React.FC<ProductCardProps> = ({
+  id,
+  imageURL,
+  category,
+  title,
+  price,
+}) => (
   <Wrapper>
-    <ImageWrapper>
-      <Img />
+    <ImageWrapper to={`product&id=${id}`}>
+      <Img imageURL={imageURL} />
     </ImageWrapper>
     <InformationWrapper>
-      <InformationList>
-        <Category>{product.collection.name}</Category>
-        <Title>{product.name}</Title>
-        <Price>{product.price}</Price>
+      <InformationList to={`product&id=${id}`}>
+        <Category>{category}</Category>
+        <Title>{title}</Title>
+        <Price>{`R$${price}`}</Price>
       </InformationList>
       <AddCartWrapper>
-        <AddCart>
+        <AddCart onClick={() => success('Adicionado ao carrinho! 🛒')}>
           <FaShoppingCart size={20} />
         </AddCart>
       </AddCartWrapper>

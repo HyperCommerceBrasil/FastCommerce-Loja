@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Colors, Spacings } from '../../utils';
 
-const { small, large } = Spacings;
+const { small, large, short } = Spacings;
 const ballSize = 16;
 
 export const Wrapper = styled.div`
@@ -37,5 +37,5 @@ export const CartItems = styled.p`
 `;
 
 export const CartValue = styled.p`
-  margin-left: ${large}px;
+  margin-left: ${short}px;
 `;

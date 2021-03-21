@@ -1,46 +1,51 @@
 import styled from 'styled-components';
 import { FaShoppingCart as BaseFaShoppingCart } from 'react-icons/fa';
-import { Colors, Spacings } from '../../utils';
+import { Link } from 'react-router-dom';
+import { Colors, Spacings, Breakpoints } from '../../utils';
 
 const defaultProductImageNotFound =
   'https://www.navigation.com/static/WFS/Shop-Site/-/Shop/en_US/Product%20Not%20Found.png';
 
-const { short } = Spacings;
+const { short, huge } = Spacings;
+const { laptop } = Breakpoints;
 
 type ImgProps = {
   imageURL?: string;
 };
 
 export const Wrapper = styled.div`
-  margin: 40px;
+  margin: ${huge}px;
   display: flex;
   flex-direction: column;
   border-radius: 16px;
-  width: 300px;
-  height: 300px;
+  width: 18vw;
+  height: 400px;
   box-shadow: 0 0 14px #bbbbbb;
-
   &:hover {
     cursor: pointer;
-    width: 320px;
-    height: 320px;
+    width: 19vw;
+  }
+
+  @media (max-width: ${laptop}px) {
+    width: 270px;
+
+    &:hover {
+      cursor: pointer;
+      width: 280px;
+    }
   }
 `;
 
-export const ImageWrapper = styled.div`
-  flex-direction: column;
-  align-items: center;
+export const ImageWrapper = styled(Link)`
   display: flex;
   height: 60%;
   width: 100%;
-  background-color: ${Colors.light?.environment.main};
+  background-color: ${Colors.light?.text.lighter};
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
 `;
 
 export const Img = styled.div<ImgProps>`
-  display: flex;
-  flex: 1;
   width: 100%;
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
@@ -50,35 +55,39 @@ export const Img = styled.div<ImgProps>`
 
   background-repeat: no-repeat;
   background-position: center;
-  background-size: cover;
+  background-size: contain;
 `;
 
 export const InformationWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   height: 40%;
   padding: 12px;
   border-bottom-left-radius: 16px;
   border-bottom-right-radius: 16px;
-  background-color: ${Colors.light?.environment.lighter};
+  background-color: ${Colors.light?.environment.main};
 `;
 
-export const InformationList = styled.div`
+export const InformationList = styled(Link)`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  width: 100%;
+  text-decoration: none;
 `;
 
 export const Category = styled.p`
+  color: ${Colors.light?.text.main};
   font-weight: 300;
 `;
 
 export const Title = styled.h3`
+  color: ${Colors.light?.text.main};
   font-weight: 500;
 `;
 
 export const Price = styled.h6`
+  color: ${Colors.light?.text.main};
   font-weight: 500;
 `;
 
@@ -90,7 +99,6 @@ export const AddCartWrapper = styled.div`
 `;
 
 export const AddCart = styled.button`
-  border: none;
   width: 50px;
   height: 50px;
   border-radius: 25px;

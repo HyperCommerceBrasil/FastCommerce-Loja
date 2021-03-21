@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Colors, Spacings } from '../../utils';
 
@@ -17,7 +18,7 @@ export const ScrollabelDiv = styled.div`
   width: 100%;
 `;
 
-export const CategoryWrapper = styled.button`
+export const CategoryWrapper = styled(Link)`
   background-color: ${Colors.light?.environment.main};
   display: flex;
   flex-direction: column;
@@ -26,6 +27,7 @@ export const CategoryWrapper = styled.button`
   justify-content: center;
   padding: 0 ${large};
   min-width: 200px;
+  text-decoration: none;
 
   &:hover {
     background-color: ${Colors.light?.environment.dark};
