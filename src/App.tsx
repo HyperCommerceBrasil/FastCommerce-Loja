@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import React from 'react';
-import { DetailedProduct } from './pages';
+import { Home } from './pages';
 
 function App() {
   return (
     <div className="App">
-      <DetailedProduct />
+      <Home />
     </div>
   );
 }
