@@ -1,13 +1,15 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import React from 'react';
-import { DetailedProduct } from './pages';
+import { toast } from 'react-toastify';
+import { Routes } from './components/routes';
 
-function App() {
+toast.configure();
+
+const App: React.FC = () => {
   return (
     <div className="App">
-      <DetailedProduct />
+      <Routes />
     </div>
   );
-}
+};
 
 export default App;
