@@ -45,7 +45,20 @@ const defaultProducts: Product[] = [
   },
 ];
 
-const ProductCarrousel: React.FC = () => (
+interface Product {
+  name: string;
+  price: number;
+  collection: {
+    id: string;
+    name: string;
+  };
+}
+
+interface CarouselProps {
+  products: Product[];
+}
+
+const ProductCarrousel: React.FC<CarouselProps> = ({ products }) => (
   <Wrapper>
     <CarrouselWrapper>
       {defaultProducts.map(({ category, title, id, imageURL, price }) => (
