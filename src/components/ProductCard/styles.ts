@@ -27,7 +27,12 @@ export const Wrapper = styled.div`
   }
 
   @media (max-width: ${laptop}px) {
-    width: 280px;
+    width: 270px;
+
+    &:hover {
+      cursor: pointer;
+      width: 280px;
+    }
   }
 `;
 

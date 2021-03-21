@@ -20,6 +20,14 @@ const defaultProducts: Product[] = [
     price: 9.99,
   },
   {
+    id: '5134512',
+    imageURL:
+      'https://www.extra-imagens.com.br/Control/ArquivoExibir.aspx?IdArquivo=887253487',
+    category: 'NEW',
+    title: 'Hotwheels Nissan 350z Preto',
+    price: 9.99,
+  },
+  {
     id: '61123',
     imageURL:
       'https://images-na.ssl-images-amazon.com/images/I/61ZTdXGjRYL._AC_SY450_.jpg',
