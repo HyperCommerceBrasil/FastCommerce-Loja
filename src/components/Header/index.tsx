@@ -22,15 +22,7 @@ const Header: React.FC = () => {
   const handleSearch = () =>
     isValidSearch(searchValue)
       ? history.push(`search&query=${searchValue}`)
-      : error(
-          <div>
-            <img
-              alt="Que?"
-              src="https://media.giphy.com/media/lkdH8FmImcGoylv3t3/giphy.gif"
-            />
-            Não entendi... use só letras e números!
-          </div>,
-        );
+      : error('🤔 Não entendi... use só letras, números ou espaços!');
   return (
     <Wrapper>
       <Logo>FastCommerce</Logo>
