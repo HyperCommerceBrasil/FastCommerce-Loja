@@ -16,27 +16,28 @@ import {
 
 type ProductCardProps = {
   id: string;
-  imageURL?: string;
-  category: string;
-  title: string;
+  imageURL?: string[];
+  collectionName: string;
+  name: string;
   price: number;
+  quantity: number;
 };
 
 const ProductCard: React.FC<ProductCardProps> = ({
   id,
-  imageURL,
-  category,
-  title,
+  imageURL = [],
+  collectionName,
+  name,
   price,
 }) => (
   <Wrapper>
     <ImageWrapper to={`product&id=${id}`}>
-      <Img imageURL={imageURL} />
+      <Img imageURL={imageURL[0]} />
     </ImageWrapper>
     <InformationWrapper>
       <InformationList to={`product&id=${id}`}>
-        <Category>{category}</Category>
-        <Title>{title}</Title>
+        <Category>{collectionName}</Category>
+        <Title>{name}</Title>
         <Price>{`R$${price}`}</Price>
       </InformationList>
       <AddCartWrapper>
