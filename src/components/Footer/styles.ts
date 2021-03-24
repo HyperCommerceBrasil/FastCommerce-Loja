@@ -4,8 +4,14 @@ import { Colors, Spacings, Breakpoints } from '../../utils';
 const { medium, short, smaller } = Spacings;
 const { laptop } = Breakpoints;
 
-export const Wrapper = styled.div`
+type WrapperProps = {
+  shouldHaveBottomPadding?: number;
+};
+
+export const Wrapper = styled.div<WrapperProps>`
   background-color: ${Colors.light?.environment.main};
+  padding-bottom: ${({ shouldHaveBottomPadding = 0 }) =>
+    shouldHaveBottomPadding}px;
 `;
 
 export const ColumnsWrapper = styled.div`

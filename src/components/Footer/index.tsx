@@ -16,7 +16,11 @@ import {
   ToastErrorMessage,
 } from './styles';
 
-const Footer: React.FC = () => {
+type FooterProps = {
+  shouldHaveBottomPadding?: number;
+};
+
+const Footer: React.FC<FooterProps> = ({ shouldHaveBottomPadding }) => {
   const [newsletterEmail, setNewsletterEmail] = useState('');
 
   const handleSignNewsletter = () =>
@@ -37,7 +41,7 @@ const Footer: React.FC = () => {
         );
 
   return (
-    <Wrapper>
+    <Wrapper shouldHaveBottomPadding={shouldHaveBottomPadding}>
       <ColumnsWrapper>
         <Column>
           <Title>Five Stars Store</Title>
