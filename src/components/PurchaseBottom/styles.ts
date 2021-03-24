@@ -10,12 +10,7 @@ export const ScrollabelContent = styled.div``;
 export const ButtonWrapper = styled.div`
   position: fixed;
   bottom: 0;
-  /* background-image: linear-gradient(
-    to top,
-    ${Colors.light?.primary.main},
-    #f000
-  ); */
-  background-image: linear-gradient(to top, #fff, #f000);
+  background: linear-gradient(to top, ${Colors.light?.primary.main}, #f000);
   width: 100%;
 `;
 
