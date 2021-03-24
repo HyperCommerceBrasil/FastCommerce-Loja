@@ -10,3 +10,4 @@ export { default as OptionSelector } from './OptionSelector';
 export { default as ContentWrapper } from './ContentWrapper';
 export { default as ProductDetails } from './ProductDetails';
 export { default as SignUpForm } from './SignUpForm';
+export { default as PurchaseBottom } from './PurchaseBottom';
