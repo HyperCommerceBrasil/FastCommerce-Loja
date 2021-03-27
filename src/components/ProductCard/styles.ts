@@ -28,7 +28,7 @@ export const Wrapper = styled.div`
 
   @media (max-width: ${laptop}px) {
     width: 270px;
-
+    font-size: 1rem;
     &:hover {
       cursor: pointer;
       width: 280px;
@@ -83,10 +83,9 @@ export const Category = styled.p`
 
 export const Title = styled.h3`
   color: ${Colors.light?.text.main};
-  font-weight: 500;
 `;
 
-export const Price = styled.h6`
+export const Price = styled.h4`
   color: ${Colors.light?.text.main};
   font-weight: 500;
 `;

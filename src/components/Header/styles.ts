@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Colors, Spacings, Breakpoints } from '../../utils';
 
@@ -19,6 +20,7 @@ export const Wrapper = styled.div`
 `;
 
 export const Logo = styled.h1`
+  color: ${Colors.light?.text.lighter};
   @media (max-width: ${laptop}px) {
     font-size: 1.5rem;
     margin-bottom: ${medium}px;
@@ -28,6 +30,10 @@ export const Logo = styled.h1`
     font-size: 1rem;
     justify-content: space-between;
   }
+`;
+
+export const LogoWrapper = styled(Link)`
+  text-decoration: none;
 `;
 
 export const SearchWrapper = styled.div`
