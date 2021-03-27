@@ -6,6 +6,7 @@ import CartIcon from '../CartIcon';
 import {
   CartWrapper,
   Logo,
+  LogoWrapper,
   OptionsWrapper,
   SearchButton,
   SearchInput,
@@ -25,7 +26,9 @@ const Header: React.FC = () => {
       : error('🤔 Não entendi... use só letras, números ou espaços!');
   return (
     <Wrapper>
-      <Logo>FastCommerce</Logo>
+      <LogoWrapper to="/">
+        <Logo>FastCommerce</Logo>
+      </LogoWrapper>
       <SearchWrapper>
         <SearchInput
           value={searchValue}
