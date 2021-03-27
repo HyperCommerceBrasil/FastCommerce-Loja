@@ -69,10 +69,11 @@ export const InformationWrapper = styled.div`
 `;
 
 export const InformationList = styled(Link)`
+  word-wrap: break-word;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 100%;
+  width: 75%;
   text-decoration: none;
 `;
 
@@ -92,6 +93,7 @@ export const Price = styled.h4`
 
 export const AddCartWrapper = styled.div`
   display: flex;
+  width: 25%;
   flex-direction: column;
   justify-content: flex-end;
   margin-left: ${short}px;
