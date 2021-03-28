@@ -52,7 +52,12 @@ export const ContentWrapper = styled.div`
   padding: ${giant}px;
 `;
 
-export const TextWrapper = styled.div``;
+export const TextWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: space-around;
+`;
 
 export const Title = styled.h3`
   color: ${Colors.light?.text.main};
@@ -72,7 +77,13 @@ export const Title = styled.h3`
 `;
 
 export const Text = styled.p`
+  margin: ${medium}px 0;
   color: ${Colors.light?.text.main};
+`;
+
+export const Price = styled.h3`
+  margin: ${medium}px 0;
+  color: ${Colors.light?.primary.main};
 `;
 
 export const OptionsWrapper = styled.div`
@@ -115,4 +126,8 @@ export const CounterValue = styled.p`
 export const CustomizedDescriptionWrapper = styled.div`
   color: ${Colors.light?.text.main};
   padding: ${giant}px;
+`;
+
+export const CustomizedDescriptionTitle = styled.h2`
+  margin: ${medium}px 0;
 `;

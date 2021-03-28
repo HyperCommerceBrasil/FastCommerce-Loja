@@ -16,6 +16,8 @@ import {
   Image,
   Wrapper,
   CustomizedDescriptionWrapper,
+  Price,
+  CustomizedDescriptionTitle,
 } from './styles';
 
 type ProductDetailsProps = {
@@ -174,6 +176,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({
               ordem dos tratores não altera o pão duris. Leite de capivaris,
               leite de mula manquis sem cabeça.
             </Text>
+            <Price>R$6231,79</Price>
           </TextWrapper>
           <OptionsWrapper>
             <CounterWrapper>
@@ -189,7 +192,12 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({
           </OptionsWrapper>
         </ContentWrapper>
       </DefaultDescriptionWrapper>
-      <CustomizedDescriptionWrapper>{parse(html)}</CustomizedDescriptionWrapper>
+      <CustomizedDescriptionWrapper>
+        <CustomizedDescriptionTitle>
+          Detalhes do produto
+        </CustomizedDescriptionTitle>
+        {parse(html)}
+      </CustomizedDescriptionWrapper>
     </Wrapper>
   );
 };
