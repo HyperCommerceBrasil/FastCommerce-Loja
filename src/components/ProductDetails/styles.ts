@@ -13,7 +13,11 @@ type ImgProps = {
 
 export const Wrapper = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+`;
+
+export const DefaultDescriptionWrapper = styled.div`
+  display: flex;
 
   @media (max-width: ${laptop}px) {
     flex-direction: column;
@@ -36,7 +40,7 @@ export const Image = styled.img.attrs<ImgProps>(
   max-width: 40vw;
 
   @media (max-width: ${laptop}px) {
-    max-width: 100vw;
+    max-width: 100%;
   }
 `;
 
@@ -48,9 +52,15 @@ export const ContentWrapper = styled.div`
   padding: ${giant}px;
 `;
 
-export const TextWrapper = styled.div``;
+export const TextWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: space-around;
+`;
 
 export const Title = styled.h3`
+  color: ${Colors.light?.text.main};
   font-size: 4rem;
   @media (max-width: ${fhd}px) {
     font-size: 3rem;
@@ -66,7 +76,15 @@ export const Title = styled.h3`
   }
 `;
 
-export const Text = styled.p``;
+export const Text = styled.p`
+  margin: ${medium}px 0;
+  color: ${Colors.light?.text.main};
+`;
+
+export const Price = styled.h3`
+  margin: ${medium}px 0;
+  color: ${Colors.light?.primary.main};
+`;
 
 export const OptionsWrapper = styled.div`
   display: flex;
@@ -100,6 +118,16 @@ export const CounterButton = styled.button`
 `;
 
 export const CounterValue = styled.p`
+  color: ${Colors.light?.text.main};
   font-size: 1.4rem;
   margin: 0 ${medium}px;
+`;
+
+export const CustomizedDescriptionWrapper = styled.div`
+  color: ${Colors.light?.text.main};
+  padding: ${giant}px;
+`;
+
+export const CustomizedDescriptionTitle = styled.h2`
+  margin: ${medium}px 0;
 `;

@@ -14,6 +14,7 @@ import {
   SignNewsletterWrapper,
   ToastSuccessMessage,
   ToastErrorMessage,
+  CopyrightWrapper,
 } from './styles';
 
 type FooterProps = {
@@ -77,6 +78,7 @@ const Footer: React.FC<FooterProps> = ({ shouldHaveBottomPadding }) => {
           </SignNewsletterWrapper>
         </Column>
       </ColumnsWrapper>
+      <CopyrightWrapper>Five Stars Store © 2021</CopyrightWrapper>
     </Wrapper>
   );
 };
