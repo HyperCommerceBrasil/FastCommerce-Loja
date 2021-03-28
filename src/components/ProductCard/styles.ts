@@ -28,7 +28,7 @@ export const Wrapper = styled.div`
 
   @media (max-width: ${laptop}px) {
     width: 270px;
-
+    font-size: 1rem;
     &:hover {
       cursor: pointer;
       width: 280px;
@@ -62,17 +62,20 @@ export const InformationWrapper = styled.div`
   display: flex;
   flex-direction: row;
   height: 40%;
-  padding: 12px;
+  padding: ${short}px;
   border-bottom-left-radius: 16px;
   border-bottom-right-radius: 16px;
   background-color: ${Colors.light?.environment.main};
+  text-overflow: ellipsis;
 `;
 
 export const InformationList = styled(Link)`
+  overflow: hidden;
+  word-wrap: break-word;
   display: flex;
+  flex: 1;
   flex-direction: column;
   justify-content: space-between;
-  width: 100%;
   text-decoration: none;
 `;
 
@@ -83,10 +86,9 @@ export const Category = styled.p`
 
 export const Title = styled.h3`
   color: ${Colors.light?.text.main};
-  font-weight: 500;
 `;
 
-export const Price = styled.h6`
+export const Price = styled.h4`
   color: ${Colors.light?.text.main};
   font-weight: 500;
 `;
@@ -111,5 +113,5 @@ export const AddCart = styled.button`
 `;
 
 export const FaShoppingCart = styled(BaseFaShoppingCart)`
-  color: ${Colors.light?.environment.lighter};
+  color: ${Colors.light?.text.lighter};
 `;
