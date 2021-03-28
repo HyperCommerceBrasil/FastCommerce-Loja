@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Colors, Spacings, Breakpoints } from '../../utils';
 
-const { medium, short, smaller } = Spacings;
+const { medium, short, smaller, big } = Spacings;
 const { laptop } = Breakpoints;
 
 type WrapperProps = {
@@ -92,4 +92,11 @@ export const ToastSuccessMessage = styled.p`
 
 export const ToastErrorMessage = styled.p`
   color: ${Colors.light?.text.lighter};
+`;
+
+export const CopyrightWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  padding: ${big}px 0;
+  color: ${Colors.light?.text.main};
 `;
