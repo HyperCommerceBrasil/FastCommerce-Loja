@@ -39,7 +39,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = () => {
     }
 
     getDataProducts();
-  }, []);
+  }, [id]);
 
   const handlePlusCounter = () => setCounterValue(counterValue + 1);
 
