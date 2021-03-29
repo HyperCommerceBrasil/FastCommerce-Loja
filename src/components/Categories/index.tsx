@@ -18,7 +18,7 @@ const Categories: React.FC = () => (
   <Wrapper>
     <ScrollabelDiv>
       {defaultCategories.map((item, index) => (
-        <CategoryWrapper key={item} to={index ? `search&query=${item}` : '/'}>
+        <CategoryWrapper key={item} to={index ? `search/${item}` : '/'}>
           <CategoryText>{item}</CategoryText>
         </CategoryWrapper>
       ))}
