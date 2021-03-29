@@ -29,7 +29,6 @@ export const ImageWrapper = styled.div`
   align-items: center;
   justify-content: center;
   display: flex;
-  flex: 1;
 `;
 
 export const Image = styled.img.attrs<ImgProps>(
@@ -46,6 +45,7 @@ export const Image = styled.img.attrs<ImgProps>(
 
 export const ContentWrapper = styled.div`
   display: flex;
+  flex: 1;
   flex-direction: column;
   justify-content: space-between;
   margin-left: 2%;
@@ -81,7 +81,7 @@ export const Text = styled.p`
   color: ${Colors.light?.text.main};
 `;
 
-export const Price = styled.h3`
+export const Price = styled.h2`
   margin: ${medium}px 0;
   color: ${Colors.light?.primary.main};
 `;
@@ -124,6 +124,8 @@ export const CounterValue = styled.p`
 `;
 
 export const CustomizedDescriptionWrapper = styled.div`
+  z-index: 5;
+  overflow-y: hidden;
   color: ${Colors.light?.text.main};
   padding: ${giant}px;
 `;

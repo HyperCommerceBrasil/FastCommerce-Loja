@@ -16,11 +16,11 @@ import {
 
 type ProductCardProps = {
   id: string;
-  imageURL?: string[];
+  imageURL?: ProductImage[];
   collectionName: string;
   name: string;
   price: number;
-  quantity: number;
+  quantity?: number;
 };
 
 const ProductCard: React.FC<ProductCardProps> = ({
@@ -31,8 +31,8 @@ const ProductCard: React.FC<ProductCardProps> = ({
   price,
 }) => (
   <Wrapper>
-    <ImageWrapper to={`product&id=${id}`}>
-      <Img imageURL={imageURL[0]} />
+    <ImageWrapper to={`product/${id}`}>
+      <Img imageURL={imageURL[0]?.image} />
     </ImageWrapper>
     <InformationWrapper>
       <InformationList to={`product&id=${id}`}>

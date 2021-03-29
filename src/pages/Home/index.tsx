@@ -6,7 +6,7 @@ import {
   ProductCarrousel,
   Header,
 } from '../../components';
-import api from '../../services/api';
+import { fetchTrendingProducts } from '../../services';
 import { Wrapper } from './styles';
 
 const Home: React.FC = () => {
@@ -14,7 +14,7 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     async function getDataProducts() {
-      const response = await api.get<Product[]>('/public/products/trends');
+      const response = await fetchTrendingProducts();
       setProducts(response.data);
     }
 

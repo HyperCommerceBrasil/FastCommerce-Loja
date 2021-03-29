@@ -10,7 +10,7 @@ const { short, huge } = Spacings;
 const { laptop } = Breakpoints;
 
 type ImgProps = {
-  imageURL?: string;
+  imageURL?: string | undefined;
 };
 
 export const Wrapper = styled.div`

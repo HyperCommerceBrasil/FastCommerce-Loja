@@ -3,7 +3,9 @@ import { Colors } from '../../utils';
 
 const internButtonWrapperHeight = 100;
 
-export const Wrapper = styled.div``;
+export const Wrapper = styled.div`
+  z-index: 10;
+`;
 
 export const ScrollabelContent = styled.div``;
 
