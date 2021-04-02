@@ -18,8 +18,8 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   border-radius: 16px;
-  width: 18vw;
-  height: 400px;
+  width: 20vw;
+  height: 300px;
   box-shadow: 0 0 14px #bbbbbb;
   &:hover {
     cursor: pointer;
@@ -61,7 +61,7 @@ export const Img = styled.div<ImgProps>`
 export const InformationWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  height: 40%;
+  height: 45%;
   padding: ${short}px;
   border-bottom-left-radius: 16px;
   border-bottom-right-radius: 16px;
@@ -75,8 +75,8 @@ export const InformationList = styled(Link)`
   display: flex;
   flex: 1;
   flex-direction: column;
-  justify-content: space-between;
   text-decoration: none;
+  line-height: 1.5;
 `;
 
 export const Category = styled.p`
@@ -86,16 +86,19 @@ export const Category = styled.p`
 
 export const Title = styled.h3`
   color: ${Colors.light?.text.main};
+  font-size: 24px;
 `;
 
 export const Price = styled.h4`
   color: ${Colors.light?.text.main};
-  font-weight: 500;
+  font-weight: 300;
+  font-size: 24px;
 `;
 
 export const AddCartWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  height: 80px;
   justify-content: flex-end;
   margin-left: ${short}px;
 `;

@@ -38,7 +38,12 @@ const ProductCard: React.FC<ProductCardProps> = ({
       <InformationList to={`product&id=${id}`}>
         <Category>{collectionName}</Category>
         <Title>{name}</Title>
-        <Price>{`R$${price}`}</Price>
+        <Price>
+          {Intl.NumberFormat('pt-BR', {
+            style: 'currency',
+            currency: 'BRL',
+          }).format(price)}
+        </Price>
       </InformationList>
       <AddCartWrapper>
         <AddCart onClick={() => success('Adicionado ao carrinho! 🛒')}>
