@@ -7,7 +7,7 @@ const { laptop, tablet } = Breakpoints;
 
 export const Wrapper = styled.div`
   background-color: ${Colors.light?.primary.main};
-  color: #fff;
+  color: ${Colors.light?.text.lighter};
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -19,21 +19,14 @@ export const Wrapper = styled.div`
   }
 `;
 
-export const Logo = styled.h1`
-  color: ${Colors.light?.text.lighter};
-  @media (max-width: ${laptop}px) {
-    font-size: 1.5rem;
-    margin-bottom: ${medium}px;
-  }
-
-  @media (max-width: ${tablet}px) {
-    font-size: 1rem;
-    justify-content: space-between;
-  }
-`;
-
 export const LogoWrapper = styled(Link)`
+  display: flex;
   text-decoration: none;
+
+  @media (max-width: ${laptop}px) {
+    justify-content: space-evenly;
+    width: 100%;
+  }
 `;
 
 export const SearchWrapper = styled.div`
@@ -69,16 +62,24 @@ export const SearchInput = styled.input`
   &:hover {
     cursor: text;
   }
+
+  @media (max-width: ${laptop}px) {
+    margin-top: ${medium}px;
+  }
 `;
 
 export const SearchButton = styled.button`
-  color: #fff;
+  color: ${Colors.light?.text.lighter};
   background-color: #020202;
   border-radius: 5px;
   padding: ${small}px ${medium}px;
 
   &:hover {
     cursor: pointer;
+  }
+
+  @media (max-width: ${laptop}px) {
+    margin-top: ${medium}px;
   }
 `;
 

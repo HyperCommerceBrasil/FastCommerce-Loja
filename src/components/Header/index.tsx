@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { FaUser } from 'react-icons/fa';
 import { useHistory } from 'react-router-dom';
+import { Logo } from '../../assets';
 import { error, isValidSearch } from '../../utils';
 import CartIcon from '../CartIcon';
 import {
   CartWrapper,
-  Logo,
   LogoWrapper,
   OptionsWrapper,
   SearchButton,
@@ -27,7 +27,7 @@ const Header: React.FC = () => {
   return (
     <Wrapper>
       <LogoWrapper to="/">
-        <Logo>FastCommerce</Logo>
+        <Logo color="#fff" height={50} width={200} />
       </LogoWrapper>
       <SearchWrapper>
         <SearchInput
