@@ -1,5 +1,5 @@
 import React from 'react';
-import { success } from '../../utils';
+import { success, toLocalCurrency } from '../../utils';
 import {
   AddCart,
   AddCartWrapper,
@@ -38,8 +38,9 @@ const ProductCard: React.FC<ProductCardProps> = ({
       <InformationList to={`product&id=${id}`}>
         <Category>{collectionName}</Category>
         <Title>{name}</Title>
-        <Price>{`R$${price}`}</Price>
+        <Price>{toLocalCurrency(price)}</Price>
       </InformationList>
+
       <AddCartWrapper>
         <AddCart onClick={() => success('Adicionado ao carrinho! 🛒')}>
           <FaShoppingCart size={20} />
