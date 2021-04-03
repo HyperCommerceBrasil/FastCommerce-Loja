@@ -40,6 +40,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
         <Title>{name}</Title>
         <Price>{toLocalCurrency(price)}</Price>
       </InformationList>
+
       <AddCartWrapper>
         <AddCart onClick={() => success('Adicionado ao carrinho! 🛒')}>
           <FaShoppingCart size={20} />

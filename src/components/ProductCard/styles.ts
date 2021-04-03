@@ -38,7 +38,7 @@ export const Wrapper = styled.div`
 
 export const ImageWrapper = styled(Link)`
   display: flex;
-  height: 60%;
+  height: 150px;
   width: 100%;
   background-color: ${Colors.light?.text.lighter};
   border-top-left-radius: 16px;
@@ -86,13 +86,13 @@ export const Category = styled.p`
 
 export const Title = styled.h3`
   color: ${Colors.light?.text.main};
-  font-size: 24px;
+  font-size: 18px;
 `;
 
 export const Price = styled.h4`
   color: ${Colors.light?.text.main};
   font-weight: 300;
-  font-size: 24px;
+  font-size: 18px;
 `;
 
 export const AddCartWrapper = styled.div`
