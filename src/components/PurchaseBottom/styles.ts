@@ -23,7 +23,7 @@ export const ButtonWrapper = styled.div`
     ${Colors.light?.primary.main} -80%,
     #f000
   );
-  width: 100vw;
+  width: 100%;
 `;
 
 export const InternButtonWrapper = styled.div`
