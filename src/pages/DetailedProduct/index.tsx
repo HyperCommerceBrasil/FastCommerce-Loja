@@ -5,7 +5,6 @@ import {
   Header,
   ContentWrapper,
   ProductDetails,
-  PurchaseBottom,
 } from '../../components';
 import { Wrapper } from './styles';
 
@@ -18,7 +17,6 @@ const DetailedProduct: React.FC = () => {
         <ProductDetails />
       </ContentWrapper>
       <Footer shouldHaveBottomPadding={100} />
-      <PurchaseBottom />
     </Wrapper>
   );
 };

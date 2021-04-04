@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { HiPlus, HiMinus } from 'react-icons/hi';
 import { useParams } from 'react-router';
 import parse from 'html-react-parser';
+import { Helmet } from 'react-helmet';
 import { fetchSingleProduct } from '../../services';
-import ButtonMain from '../ButtonMain';
 import {
   CounterButton,
   ContentWrapper,
@@ -20,8 +20,10 @@ import {
   CustomizedDescriptionWrapper,
   Price,
   CustomizedDescriptionTitle,
+  ButtonMain,
 } from './styles';
 import { success, toLocalCurrency } from '../../utils';
+import { PurchaseBottom } from '..';
 
 type ProductDetailsProps = {
   id?: string;
@@ -51,7 +53,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = () => {
       ? success(`${counterValue} itens adicionados ao carrinho! 🛒`)
       : success(`Item adicionado ao carrinho! 🛒`);
 
-  const handleRetrieveProductImage = () => {
+  const handleRetrieveFirstProductImage = () => {
     if (productData?.images) {
       try {
         return productData.images[0].image;
@@ -64,9 +66,12 @@ const ProductDetails: React.FC<ProductDetailsProps> = () => {
 
   return (
     <Wrapper>
+      <Helmet title={productData?.name}>
+        <meta name="description" content={productData?.description} />
+      </Helmet>
       <DefaultDescriptionWrapper>
         <ImageWrapper>
-          <Image alt="product-image" src={handleRetrieveProductImage()} />
+          <Image alt="product-image" src={handleRetrieveFirstProductImage()} />
         </ImageWrapper>
         <ContentWrapper>
           <TextWrapper>
@@ -96,6 +101,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = () => {
         </CustomizedDescriptionTitle>
         {parse(productData?.details || '')}
       </CustomizedDescriptionWrapper>
+      <PurchaseBottom addToCard={handleAddToCart} />
     </Wrapper>
   );
 };

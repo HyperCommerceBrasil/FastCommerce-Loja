@@ -1,7 +1,8 @@
 import styled from 'styled-components';
+import { ButtonMain as ButtonMainBase } from '..';
 import { Colors, Spacings, Breakpoints } from '../../utils';
 
-const { short, medium, giant } = Spacings;
+const { short, medium, giant, insane } = Spacings;
 const { tablet, laptop, fhd } = Breakpoints;
 
 const defaultProductImageNotFound =
@@ -18,9 +19,17 @@ export const Wrapper = styled.div`
 
 export const DefaultDescriptionWrapper = styled.div`
   display: flex;
+  flex: 1;
+  justify-content: center;
+  padding: ${giant}px ${insane}px;
 
   @media (max-width: ${laptop}px) {
     flex-direction: column;
+  }
+
+  @media (max-width: ${tablet}px) {
+    flex-direction: column;
+    padding: ${giant}px ${medium}px;
   }
 `;
 
@@ -36,7 +45,8 @@ export const Image = styled.img.attrs<ImgProps>(
     src,
   }),
 )`
-  max-width: 40vw;
+  max-width: 400px;
+  max-height: 400px;
 
   @media (max-width: ${laptop}px) {
     max-width: 100%;
@@ -45,11 +55,14 @@ export const Image = styled.img.attrs<ImgProps>(
 
 export const ContentWrapper = styled.div`
   display: flex;
-  flex: 1;
   flex-direction: column;
   justify-content: space-between;
-  margin-left: 2%;
-  padding: ${giant}px;
+  max-width: 900px;
+  padding: 0 ${giant}px;
+
+  @media (max-width: ${laptop}px) {
+    padding: ${giant}px 0;
+  }
 `;
 
 export const TextWrapper = styled.div`
@@ -89,7 +102,7 @@ export const Price = styled.h2`
 export const OptionsWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  /* justify-content: space-between; */
 
   @media (max-width: ${laptop}px) {
     flex-direction: column;
@@ -101,9 +114,16 @@ export const CounterWrapper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  margin-right: ${giant}px;
 
   @media (max-width: ${laptop}px) {
     margin: ${giant}px;
+  }
+`;
+
+export const ButtonMain = styled(ButtonMainBase)`
+  @media (max-width: ${laptop}px) {
+    display: none;
   }
 `;
 
