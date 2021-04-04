@@ -1,5 +1,4 @@
 import React from 'react';
-import { Helmet } from 'react-helmet';
 import {
   Categories,
   Footer,
@@ -12,7 +11,6 @@ import { Wrapper } from './styles';
 const DetailedProduct: React.FC = () => {
   return (
     <Wrapper>
-      <Helmet title="KKK" />
       <Header />
       <Categories />
       <ContentWrapper>
