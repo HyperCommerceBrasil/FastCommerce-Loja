@@ -8,10 +8,7 @@ declare type Product = {
   name: string;
   price: number;
   trending: boolean;
-  collection: {
-    id: string;
-    name: string;
-  };
+  collection: Collections;
   images: ProductImage[];
   ean?: string;
   description?: string;
