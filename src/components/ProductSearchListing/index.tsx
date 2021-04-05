@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { ProductCard } from '..';
-// import { useParams } from 'react-router';
 import {
   ProductListing,
   ProductListingWrapper,
@@ -171,20 +170,11 @@ const productMock: Product[] = [
   },
 ];
 
-const ProductDetails: React.FC = () => {
-  // const { id = '' } = useParams();
-  // const [counterValue, setCounterValue] = useState(1);
-  // const [productData, setProductData] = useState<Product>();
+type ProductDetailsProps = {
+  products?: Product[];
+};
 
-  // useEffect(() => {
-  //   async function getDataProducts() {
-  //     const response = await fetchSingleProduct(id);
-  //     setProductData(response.data);
-  //   }
-
-  //   getDataProducts();
-  // }, [id]);
-
+const ProductDetails: React.FC<ProductDetailsProps> = () => {
   return (
     <Wrapper>
       <ProductListingWrapper>
