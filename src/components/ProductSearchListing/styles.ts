@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Colors, Spacings, Breakpoints } from '../../utils';
 
 // const { short, medium, giant, insane } = Spacings;
-const { tablet, laptop, largeLaptop } = Breakpoints;
+const { tablet, laptop, fhd } = Breakpoints;
 
 const defaultImageNoProductsFound =
   'https://www.navigation.com/static/WFS/Shop-Site/-/Shop/en_US/Product%20Not%20Found.png';
@@ -26,7 +26,7 @@ export const ProductListing = styled.div`
   align-items: center;
   justify-content: center;
 
-  @media (max-width: ${largeLaptop}px) {
+  @media (max-width: ${fhd}px) {
     grid-template-columns: 1fr 1fr 1fr;
   }
   @media (max-width: ${laptop}px) {
