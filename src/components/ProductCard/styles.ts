@@ -20,10 +20,10 @@ export const Wrapper = styled.div`
   border-radius: 16px;
   width: 20vw;
   height: 300px;
-  box-shadow: 0 0 14px #bbbbbb;
+  box-shadow: 0 0 24px #cccccc;
   &:hover {
     cursor: pointer;
-    width: 19vw;
+    box-shadow: 0 0 14px ${Colors.light?.primary.lighter};
   }
 
   @media (max-width: ${laptop}px) {
