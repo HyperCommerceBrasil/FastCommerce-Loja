@@ -7,7 +7,7 @@ const defaultProductImageNotFound =
   'https://www.navigation.com/static/WFS/Shop-Site/-/Shop/en_US/Product%20Not%20Found.png';
 
 const { short, huge } = Spacings;
-const { laptop } = Breakpoints;
+const { laptop, fhd, tablet } = Breakpoints;
 
 type ImgProps = {
   imageURL?: string | undefined;
@@ -18,21 +18,24 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   border-radius: 16px;
-  width: 20vw;
+  width: 18vw;
   height: 300px;
-  box-shadow: 0 0 14px #bbbbbb;
+  box-shadow: 0 0 24px #cccccc;
   &:hover {
     cursor: pointer;
-    width: 19vw;
+    box-shadow: 0 0 14px ${Colors.light?.primary.lighter};
+  }
+
+  @media (max-width: ${fhd}px) {
+    width: 25vw;
   }
 
   @media (max-width: ${laptop}px) {
-    width: 270px;
-    font-size: 1rem;
-    &:hover {
-      cursor: pointer;
-      width: 280px;
-    }
+    width: 40vw;
+  }
+
+  @media (max-width: ${tablet}px) {
+    width: 60vw;
   }
 `;
 

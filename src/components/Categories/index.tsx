@@ -22,7 +22,7 @@ const Categories: React.FC = () => {
     <Wrapper>
       <ScrollabelDiv>
         {collections.map(({ id, name }) => (
-          <CategoryWrapper key={id} to={`search/${name}`}>
+          <CategoryWrapper key={id} to={`/search/${name}`}>
             <CategoryText>{name}</CategoryText>
           </CategoryWrapper>
         ))}
