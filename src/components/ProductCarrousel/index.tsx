@@ -12,7 +12,7 @@ const ProductCarrousel: React.FC<ProductCarrouselProps> = ({ products }) => (
       {products.map(
         ({ id, name, price, trending, collection, images, quantity }) =>
           trending ? (
-            <ItemWrapper>
+            <ItemWrapper key={id}>
               <ProductCard
                 key={id}
                 id={id}

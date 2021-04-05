@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { fetchCollections } from '../../services';
 import {
   CategoryText,
   CategoryWrapper,
@@ -6,24 +7,28 @@ import {
   ScrollabelDiv,
 } from './styles';
 
-const defaultCategories = [
-  'INÍCIO',
-  'NOVIDADES',
-  'ELETRÔNICOS',
-  'WEARABLES',
-  'LAZER',
-];
+const Categories: React.FC = () => {
+  const [collections, setCollections] = useState<Collections[]>([]);
 
-const Categories: React.FC = () => (
-  <Wrapper>
-    <ScrollabelDiv>
-      {defaultCategories.map((item, index) => (
-        <CategoryWrapper key={item} to={index ? `search/${item}` : '/'}>
-          <CategoryText>{item}</CategoryText>
-        </CategoryWrapper>
-      ))}
-    </ScrollabelDiv>
-  </Wrapper>
-);
+  useEffect(() => {
+    async function getDataProducts() {
+      const response = await fetchCollections();
+      setCollections(response.data);
+    }
+    getDataProducts();
+  }, []);
+
+  return (
+    <Wrapper>
+      <ScrollabelDiv>
+        {collections.map(({ id, name }) => (
+          <CategoryWrapper key={id} to={`search/${name}`}>
+            <CategoryText>{name}</CategoryText>
+          </CategoryWrapper>
+        ))}
+      </ScrollabelDiv>
+    </Wrapper>
+  );
+};
 
 export default Categories;
