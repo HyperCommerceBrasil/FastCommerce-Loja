@@ -1,8 +1,8 @@
 import { AxiosResponse } from 'axios';
 import api from '../api';
 
-const baseURLPublic = '/public';
+// const baseURLPublic = '/public';
 
 export const fetchCollections = async (): Promise<
   AxiosResponse<Collections[]>
-> => api.get<Collections[]>(`${baseURLPublic}/collections`);
+> => api.get<Collections[]>(`/collections`);
