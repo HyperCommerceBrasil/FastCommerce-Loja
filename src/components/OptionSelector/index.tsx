@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { FormControl, InputLabel, MenuItem, Select } from '@material-ui/core';
 import { Wrapper } from './styles';
+import { GlobalCategoriesContext } from '../../contexts';
 
 const OptionSelector: React.FC = () => {
+  const { categories } = useContext(GlobalCategoriesContext);
   const [category, setCategory] = useState('');
 
   const handleChange = (
@@ -23,9 +25,11 @@ const OptionSelector: React.FC = () => {
           value={category}
           onChange={({ target }) => handleChange(target)}
         >
-          <MenuItem value="10">Ten</MenuItem>
-          <MenuItem value="20">Twenty</MenuItem>
-          <MenuItem value="30">Thirty</MenuItem>
+          {categories.map(({ id, name }) => (
+            <MenuItem key={id} value={name}>
+              {name}
+            </MenuItem>
+          ))}
         </Select>
       </FormControl>
     </Wrapper>
