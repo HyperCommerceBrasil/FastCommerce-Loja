@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Spacings, Breakpoints } from '../../utils';
 
-const { medium, giant, insane } = Spacings;
+const { insane } = Spacings;
 const { tablet, laptop, fhd } = Breakpoints;
 
 // const defaultImageNoProductsFound =
