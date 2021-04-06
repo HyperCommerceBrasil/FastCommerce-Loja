@@ -21,21 +21,17 @@ export const ProductListing = styled.div`
   display: grid;
   grid-template-rows: 1fr;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  align-items: center;
-  justify-content: center;
   padding: 0 ${insane}px;
 
   @media (max-width: ${fhd}px) {
     grid-template-columns: 1fr 1fr 1fr;
-    padding: 0 ${giant}px;
+    padding: 0;
   }
   @media (max-width: ${laptop}px) {
     grid-template-columns: 1fr 1fr;
-    padding: 0 ${medium}px;
   }
   @media (max-width: ${tablet}px) {
     grid-template-columns: 1fr;
-    padding: 0;
   }
 `;
 
