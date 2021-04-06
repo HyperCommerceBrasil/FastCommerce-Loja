@@ -56,7 +56,6 @@ export const FormControl = styled(FormControlBase).attrs({
   .MuiOutlinedInput-root {
     border-color: ${Colors.light?.primary.main};
   }
-  width: 100%;
 `;
 
 export const Select = styled(SelectBase)`

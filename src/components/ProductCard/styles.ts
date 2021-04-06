@@ -32,7 +32,7 @@ export const Wrapper = styled.div`
   }
 
   @media (max-width: ${laptop}px) {
-    width: 40vw;
+    width: 35vw;
   }
 
   @media (max-width: ${tablet}px) {

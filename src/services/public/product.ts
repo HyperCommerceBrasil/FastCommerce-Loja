@@ -11,3 +11,6 @@ export const fetchSingleProduct = async (
   productID: string,
 ): Promise<AxiosResponse<Product>> =>
   api.get<Product>(`${baseURLPublic}/products/listone/${productID}`);
+
+export const fetchAllProducts = async (): Promise<AxiosResponse<Product[]>> =>
+  api.get<Product[]>(`${baseURLPublic}/products`);
