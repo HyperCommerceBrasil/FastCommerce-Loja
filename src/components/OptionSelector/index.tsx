@@ -1,17 +1,24 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { FormControl, InputLabel, MenuItem } from '@material-ui/core';
 import { useParams } from 'react-router';
 import { Wrapper, Select } from './styles';
 import { GlobalCategoriesContext } from '../../contexts';
 
-type OptionSelectorProps = {
+type OptionSelectorParams = {
   query?: string;
 };
 
-const OptionSelector: React.FC<OptionSelectorProps> = () => {
-  const { query = 'Coleção Padrão' } = useParams<OptionSelectorProps>();
+type OptionSelectorProps = {
+  category: string;
+  setCategory(category: string): void;
+};
+
+const OptionSelector: React.FC<OptionSelectorProps> = ({
+  category,
+  setCategory,
+}) => {
+  const { query = 'Coleção Padrão' } = useParams<OptionSelectorParams>();
   const { categories } = useContext(GlobalCategoriesContext);
-  const [category, setCategory] = useState(query);
 
   const handleChange = (
     target: EventTarget & { name?: string | undefined; value: unknown },
@@ -22,7 +29,7 @@ const OptionSelector: React.FC<OptionSelectorProps> = () => {
 
   useEffect(() => {
     setCategory(query);
-  }, [query]);
+  }, [query, setCategory]);
 
   return (
     <Wrapper>

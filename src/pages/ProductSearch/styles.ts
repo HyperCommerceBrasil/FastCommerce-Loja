@@ -16,8 +16,8 @@ export const ProductsCarrousel = styled.div`
 
 export const SearchWrapper = styled.div`
   display: flex;
+  flex: 1;
   flex-direction: row;
-  background-color: #f15;
 `;
 
 export const ProductsResults = styled.div``;
