@@ -5,11 +5,11 @@ type CategoriesData = {
   categories: Collections[];
 };
 
-export const CategoriesContext = createContext<CategoriesData>(
+export const GlobalCategoriesContext = createContext<CategoriesData>(
   {} as CategoriesData,
 );
 
-export const CategoriesProviderGlobal: React.FC = ({ children }) => {
+export const GlobalCategoriesProvider: React.FC = ({ children }) => {
   const [categories, setCategories] = useState<Collections[]>([]);
 
   useEffect(() => {
@@ -22,8 +22,8 @@ export const CategoriesProviderGlobal: React.FC = ({ children }) => {
   }, []);
 
   return (
-    <CategoriesContext.Provider value={{ categories }}>
+    <GlobalCategoriesContext.Provider value={{ categories }}>
       {children}
-    </CategoriesContext.Provider>
+    </GlobalCategoriesContext.Provider>
   );
 };
