@@ -11,7 +11,7 @@ const productMock: Product[] = [
   {
     collection: {
       id: 'fqe4tq3',
-      name: 'awsomeName',
+      name: 'Coleção Padrão',
     },
     id: 'rt134rt134t1',
     images: [
@@ -31,7 +31,7 @@ const productMock: Product[] = [
   {
     collection: {
       id: 'fqe4tq3',
-      name: 'awsomeName',
+      name: 'Coleção Padrão',
     },
     id: 'rt134rt134t1',
     images: [
@@ -50,8 +50,8 @@ const productMock: Product[] = [
   },
   {
     collection: {
-      id: 'fqe4tq3',
-      name: 'awsomeName',
+      id: 'fqe4tq3613',
+      name: 'Widgets',
     },
     id: 'rt134rt134t1',
     images: [

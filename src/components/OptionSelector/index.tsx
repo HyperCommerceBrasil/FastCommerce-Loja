@@ -1,9 +1,17 @@
-import React, { useState } from 'react';
-import { FormControl, InputLabel, MenuItem, Select } from '@material-ui/core';
-import { Wrapper } from './styles';
+import React, { useContext, useEffect, useState } from 'react';
+import { FormControl, InputLabel, MenuItem } from '@material-ui/core';
+import { useParams } from 'react-router';
+import { Wrapper, Select } from './styles';
+import { GlobalCategoriesContext } from '../../contexts';
 
-const OptionSelector: React.FC = () => {
-  const [category, setCategory] = useState('');
+type OptionSelectorProps = {
+  query?: string;
+};
+
+const OptionSelector: React.FC<OptionSelectorProps> = () => {
+  const { query = 'Coleção Padrão' } = useParams<OptionSelectorProps>();
+  const { categories } = useContext(GlobalCategoriesContext);
+  const [category, setCategory] = useState(query);
 
   const handleChange = (
     target: EventTarget & { name?: string | undefined; value: unknown },
@@ -11,9 +19,14 @@ const OptionSelector: React.FC = () => {
     const { value } = target;
     setCategory(value as string);
   };
+
+  useEffect(() => {
+    setCategory(query);
+  }, [query]);
+
   return (
     <Wrapper>
-      <FormControl variant="outlined" className="some_class_name">
+      <FormControl fullWidth variant="outlined">
         <InputLabel id="demo-simple-select-label">Categoria</InputLabel>
         <Select
           placeholder="Categoria"
@@ -23,9 +36,11 @@ const OptionSelector: React.FC = () => {
           value={category}
           onChange={({ target }) => handleChange(target)}
         >
-          <MenuItem value="10">Ten</MenuItem>
-          <MenuItem value="20">Twenty</MenuItem>
-          <MenuItem value="30">Thirty</MenuItem>
+          {categories.map(({ id, name }) => (
+            <MenuItem key={id} value={name}>
+              {name}
+            </MenuItem>
+          ))}
         </Select>
       </FormControl>
     </Wrapper>

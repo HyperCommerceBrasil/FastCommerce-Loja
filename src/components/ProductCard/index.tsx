@@ -31,11 +31,11 @@ const ProductCard: React.FC<ProductCardProps> = ({
   price,
 }) => (
   <Wrapper>
-    <ImageWrapper to={`product/${id}`}>
+    <ImageWrapper to={`/product/${id}`}>
       <Img imageURL={imageURL[0]?.image} />
     </ImageWrapper>
     <InformationWrapper>
-      <InformationList to={`product&id=${id}`}>
+      <InformationList to={`/product/${id}`}>
         <Category>{collectionName}</Category>
         <Title>{name}</Title>
         <Price>{toLocalCurrency(price)}</Price>
