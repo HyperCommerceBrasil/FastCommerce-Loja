@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { createNoSubstitutionTemplateLiteral } from 'typescript';
 import { fetchCollections } from '../../services';
 import {
   CategoryText,
@@ -26,7 +25,6 @@ const Categories: React.FC = () => {
     getDataProducts();
   }, []);
 
-  console.log(collections);
   return (
     <Wrapper>
       <ScrollabelDiv>

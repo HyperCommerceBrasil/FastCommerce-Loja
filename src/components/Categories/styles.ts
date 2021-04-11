@@ -14,7 +14,7 @@ export const ScrollabelDiv = styled.div`
   display: flex;
   flex-direction: row;
   overflow-x: auto;
-  white-space: nowrap;
+  /* white-space: nowrap; */
   width: 100%;
 `;
 
@@ -26,7 +26,7 @@ export const CategoryWrapper = styled(Link)`
   align-items: center;
   justify-content: center;
   padding: 0 ${large};
-  min-width: 160px;
+  min-width: 180px;
   text-decoration: none;
 
   &:hover {
