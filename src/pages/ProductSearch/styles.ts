@@ -19,5 +19,3 @@ export const SearchWrapper = styled.div`
   flex: 1;
   flex-direction: row;
 `;
-
-export const ProductsResults = styled.div``;
