@@ -13,7 +13,7 @@ import {
 // import { fetchAllProducts } from '../../services';
 import { filterByCollection, paginateArray } from '../../utils';
 import { SearchWrapper, Wrapper } from './styles';
-import { newFetchetProducts, productMock } from './mock';
+import { productMock } from './mock';
 
 type ProductSearchParams = {
   query?: string;
@@ -33,7 +33,7 @@ const ProductSearch: React.FC<ProductSearchProps> = ({
   const [category, setCategory] = useState(query);
   const [lastPageLoaded, setLastPageLoaded] = useState(1);
   const [hasMore, setHasMore] = useState(true);
-  const [noProductsFound, setNoProductsFound] = useState(false);
+  // const [noProductsFound, setNoProductsFound] = useState(false);
 
   // Products
   const [products, setProducts] = useState<Product[]>([]);
@@ -83,6 +83,7 @@ const ProductSearch: React.FC<ProductSearchProps> = ({
   };
 
   useEffect(() => {
+    setAllProducts(allProducts);
     setLastPageLoaded(1);
     setHasMore(true);
     handleInitData();
