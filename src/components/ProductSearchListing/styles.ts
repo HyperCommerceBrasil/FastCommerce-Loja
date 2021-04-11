@@ -6,12 +6,8 @@ const { tablet, laptop, fhd } = Breakpoints;
 
 export const Wrapper = styled.div`
   display: flex;
-  flex-direction: column;
-`;
-
-export const ProductListingWrapper = styled.div`
-  display: flex;
   justify-content: center;
+  flex-direction: column;
 `;
 
 export const ProductListing = styled.div`
