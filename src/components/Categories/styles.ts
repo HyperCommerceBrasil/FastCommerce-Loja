@@ -26,7 +26,7 @@ export const CategoryWrapper = styled(Link)`
   align-items: center;
   justify-content: center;
   padding: 0 ${large};
-  min-width: 200px;
+  min-width: 160px;
   text-decoration: none;
 
   &:hover {
