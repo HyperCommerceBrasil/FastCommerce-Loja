@@ -10,8 +10,11 @@ type WrapperProps = {
 
 export const Wrapper = styled.div<WrapperProps>`
   background-color: ${Colors.light?.environment.main};
-  padding-bottom: ${({ shouldHaveBottomPadding = 0 }) =>
-    shouldHaveBottomPadding}px;
+
+  @media (max-width: ${laptop}px) {
+    padding-bottom: ${({ shouldHaveBottomPadding = 0 }) =>
+      shouldHaveBottomPadding}px;
+  }
 `;
 
 export const ColumnsWrapper = styled.div`
