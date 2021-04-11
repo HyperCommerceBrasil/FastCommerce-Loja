@@ -12,3 +12,4 @@ export { default as ProductDetails } from './ProductDetails';
 export { default as SignUpForm } from './SignUpForm';
 export { default as PurchaseBottom } from './PurchaseBottom';
 export { default as ProductSearchListing } from './ProductSearchListing';
+export { default as InfiniteScrollStatusBar } from './InfiniteScrollStatusBar';

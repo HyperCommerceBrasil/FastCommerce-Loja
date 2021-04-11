@@ -4,17 +4,10 @@ import { Spacings, Breakpoints } from '../../utils';
 const { insane } = Spacings;
 const { tablet, laptop, fhd } = Breakpoints;
 
-// const defaultImageNoProductsFound =
-//   'https://www.navigation.com/static/WFS/Shop-Site/-/Shop/en_US/Product%20Not%20Found.png';
-
 export const Wrapper = styled.div`
   display: flex;
-  flex-direction: column;
-`;
-
-export const ProductListingWrapper = styled.div`
-  display: flex;
   justify-content: center;
+  flex-direction: column;
 `;
 
 export const ProductListing = styled.div`
