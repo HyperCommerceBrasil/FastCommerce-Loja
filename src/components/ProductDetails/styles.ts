@@ -144,12 +144,18 @@ export const CounterValue = styled.p`
 `;
 
 export const CustomizedDescriptionWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   z-index: 5;
-  overflow-y: hidden;
   color: ${Colors.light?.text.main};
-  padding: ${giant}px;
+
+  img {
+    width: 100%;
+  }
 `;
 
-export const CustomizedDescriptionTitle = styled.h2`
+export const CustomizedDescriptionTitle = styled.h3`
+  font-size: 1.6rem;
   margin: ${medium}px 0;
 `;
