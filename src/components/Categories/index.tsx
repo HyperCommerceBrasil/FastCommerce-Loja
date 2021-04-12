@@ -7,13 +7,20 @@ import {
   ScrollabelDiv,
 } from './styles';
 
+const defaultCollections: Collections[] = [
+  {
+    id: 'default_home',
+    name: 'Início',
+  },
+];
+
 const Categories: React.FC = () => {
   const { categories } = useContext(GlobalCategoriesContext);
 
   return (
     <Wrapper>
       <ScrollabelDiv>
-        {categories.map(({ id, name }) => {
+        {defaultCollections.concat(categories).map(({ id, name }) => {
           switch (name) {
             case 'Início':
               return (
