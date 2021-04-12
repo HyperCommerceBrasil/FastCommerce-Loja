@@ -14,7 +14,6 @@ import {
 import { filterByCollection, paginateArray } from '../../utils';
 import { SearchWrapper, Wrapper } from './styles';
 import { filterByName } from '../../utils/array/filterByName';
-import { productMock } from './mock';
 import { fetchAllProducts } from '../../services';
 
 type ProductSearchParams = {
@@ -40,7 +39,7 @@ const ProductSearch: React.FC<ProductSearchProps> = ({
   // Products
   const [products, setProducts] = useState<Product[]>([]);
   const [allProducts, setAllProducts] = useState<Product[]>(
-    initialAllProducts || productMock,
+    initialAllProducts || [],
   );
   const [
     allFilteredPaginatedProducts,
