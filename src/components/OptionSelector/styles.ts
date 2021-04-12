@@ -3,10 +3,7 @@ import {
   Select as SelectBase,
   FormControl as FormControlBase,
 } from '@material-ui/core';
-import { Colors, Spacings, Breakpoints } from '../../utils/theme';
-
-const { big, short } = Spacings;
-const { laptop } = Breakpoints;
+import { Colors } from '../../utils/theme';
 
 export const Wrapper = styled.div`
   display: flex;
@@ -43,9 +40,6 @@ export const Wrapper = styled.div`
   .MuiOutlinedInput-root {
     color: ${Colors.light?.primary.main};
     border-color: ${Colors.light?.primary.main};
-  }
-  @media (max-width: ${laptop}px) {
-    padding: ${big}px ${short}px;
   }
 `;
 

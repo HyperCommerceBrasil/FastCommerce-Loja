@@ -20,5 +20,7 @@ export const SearchWrapper = styled.div`
   display: flex;
   flex: 1;
   flex-direction: column;
+  justify-content: space-between;
+  height: 140px;
   padding: ${huge}px;
 `;

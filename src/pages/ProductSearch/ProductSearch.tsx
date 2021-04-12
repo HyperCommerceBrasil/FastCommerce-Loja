@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import { Input } from '@material-ui/core';
+import { TextField } from '@material-ui/core';
 import {
   Categories,
   Footer,
@@ -96,7 +96,7 @@ const ProductSearch: React.FC<ProductSearchProps> = ({
       <ContentWrapper>
         <SearchWrapper>
           <OptionSelector setCategory={setCategory} category={category} />
-          <Input fullWidth placeholder="Pesquisar" />
+          <TextField fullWidth placeholder="Pesquisar" variant="outlined" />
         </SearchWrapper>
         <InfiniteScroll
           dataLength={products?.length}
