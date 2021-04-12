@@ -11,12 +11,14 @@ type OptionSelectorParams = {
 type OptionSelectorProps = {
   category: string;
   setCategory(category: string): void;
+  onCategoryChange?(): void;
   style?: React.CSSProperties;
 };
 
 const OptionSelector: React.FC<OptionSelectorProps> = ({
   category,
   setCategory,
+  onCategoryChange,
   style,
 }) => {
   const { query = 'Coleção Padrão' } = useParams<OptionSelectorParams>();
@@ -27,6 +29,7 @@ const OptionSelector: React.FC<OptionSelectorProps> = ({
   ) => {
     const { value } = target;
     setCategory(value as string);
+    if (onCategoryChange) onCategoryChange();
   };
 
   useEffect(() => {
