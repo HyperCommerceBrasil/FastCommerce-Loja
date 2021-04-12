@@ -5,6 +5,13 @@ type CategoriesData = {
   categories: Collections[];
 };
 
+const defaultCollections: Collections[] = [
+  {
+    id: 'default_home',
+    name: 'Início',
+  },
+];
+
 export const GlobalCategoriesContext = createContext<CategoriesData>(
   {} as CategoriesData,
 );
@@ -15,7 +22,7 @@ export const GlobalCategoriesProvider: React.FC = ({ children }) => {
   useEffect(() => {
     const getCategories = async () => {
       const categoriesResponse = await fetchCollections();
-      setCategories(categoriesResponse.data);
+      setCategories(defaultCollections.concat(categoriesResponse.data));
     };
 
     getCategories();
