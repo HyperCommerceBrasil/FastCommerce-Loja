@@ -11,11 +11,15 @@ type OptionSelectorParams = {
 type OptionSelectorProps = {
   category: string;
   setCategory(category: string): void;
+  onCategoryChange?(): void;
+  style?: React.CSSProperties;
 };
 
 const OptionSelector: React.FC<OptionSelectorProps> = ({
   category,
   setCategory,
+  onCategoryChange,
+  style,
 }) => {
   const { query = 'Coleção Padrão' } = useParams<OptionSelectorParams>();
   const { categories } = useContext(GlobalCategoriesContext);
@@ -25,6 +29,7 @@ const OptionSelector: React.FC<OptionSelectorProps> = ({
   ) => {
     const { value } = target;
     setCategory(value as string);
+    if (onCategoryChange) onCategoryChange();
   };
 
   useEffect(() => {
@@ -32,7 +37,7 @@ const OptionSelector: React.FC<OptionSelectorProps> = ({
   }, [query, setCategory]);
 
   return (
-    <Wrapper>
+    <Wrapper style={style}>
       <FormControl fullWidth variant="outlined">
         <InputLabel id="demo-simple-select-label">Categoria</InputLabel>
         <Select
