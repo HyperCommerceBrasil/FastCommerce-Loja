@@ -30,6 +30,7 @@ const ProductSearch: React.FC<ProductSearchProps> = ({
 }) => {
   // PageConfigs
   const { query = '' } = useParams<ProductSearchParams>();
+  const [searchByName, setSearchByName] = useState('');
   const [category, setCategory] = useState(query);
   const [lastPageLoaded, setLastPageLoaded] = useState(1);
   const [hasMore, setHasMore] = useState(true);
@@ -82,6 +83,12 @@ const ProductSearch: React.FC<ProductSearchProps> = ({
     }
   };
 
+  const handleSearchChange = (
+    target: EventTarget & (HTMLTextAreaElement | HTMLInputElement),
+  ) => {
+    setSearchByName(target.value);
+  };
+
   useEffect(() => {
     setAllProducts(allProducts);
     setLastPageLoaded(1);
@@ -96,13 +103,19 @@ const ProductSearch: React.FC<ProductSearchProps> = ({
       <ContentWrapper>
         <SearchWrapper>
           <OptionSelector setCategory={setCategory} category={category} />
-          <TextField fullWidth placeholder="Pesquisar" variant="outlined" />
+          <TextField
+            fullWidth
+            placeholder="Pesquisar"
+            variant="outlined"
+            value={searchByName}
+            onChange={({ target }) => handleSearchChange(target)}
+          />
         </SearchWrapper>
         <InfiniteScroll
           dataLength={products?.length}
           next={handleNext}
           hasMore={hasMore}
-          loader={<h4>Loading...</h4>}
+          loader={<InfiniteScrollStatusBar statusMessage="Procurando... 🔎" />}
           endMessage={
             <InfiniteScrollStatusBar statusMessage="Foi tudo o que encontramos! 🕵️" />
           }
