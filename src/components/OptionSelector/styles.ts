@@ -5,13 +5,12 @@ import {
 } from '@material-ui/core';
 import { Colors, Spacings, Breakpoints } from '../../utils/theme';
 
-const { huge, big, short } = Spacings;
+const { big, short } = Spacings;
 const { laptop } = Breakpoints;
 
 export const Wrapper = styled.div`
   display: flex;
   flex: 1;
-  padding: ${huge}px;
 
   .MuiFormControl-root:after {
     color: ${Colors.light?.primary.main};
