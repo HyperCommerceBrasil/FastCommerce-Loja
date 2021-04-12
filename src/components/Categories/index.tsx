@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { fetchCollections } from '../../services';
+import React, { useContext } from 'react';
+import { GlobalCategoriesContext } from '../../contexts';
 import {
   CategoryText,
   CategoryWrapper,
@@ -7,28 +7,13 @@ import {
   ScrollabelDiv,
 } from './styles';
 
-const defaultCollections: Collections[] = [
-  {
-    id: 'default_home',
-    name: 'Início',
-  },
-];
-
 const Categories: React.FC = () => {
-  const [collections, setCollections] = useState<Collections[]>([]);
-
-  useEffect(() => {
-    async function getDataProducts() {
-      const response = await fetchCollections();
-      setCollections(defaultCollections.concat(response.data));
-    }
-    getDataProducts();
-  }, []);
+  const { categories } = useContext(GlobalCategoriesContext);
 
   return (
     <Wrapper>
       <ScrollabelDiv>
-        {collections.map(({ id, name }) => {
+        {categories.map(({ id, name }) => {
           switch (name) {
             case 'Início':
               return (
