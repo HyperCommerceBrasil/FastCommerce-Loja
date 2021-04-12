@@ -1,9 +1,20 @@
 import React from 'react';
-import { productMock } from './mock';
+// import { fetchAllProducts } from '../../services';
 import ProductSearch from './ProductSearch';
 
 const ProductSearchContainer: React.FC = () => {
-  return <ProductSearch initialAllProducts={productMock} />;
+  // const [initialAllProducts, setInitialProducts] = useState<Product[]>([]);
+
+  // useEffect(() => {
+  //   async function getProducts() {
+  //     const categoriesResponse = await fetchAllProducts();
+  //     setInitialProducts(categoriesResponse.data);
+  //   }
+
+  //   getProducts();
+  // }, []);
+
+  return <ProductSearch />;
 };
 
 export default ProductSearchContainer;

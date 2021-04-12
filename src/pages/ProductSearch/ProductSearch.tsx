@@ -13,15 +13,16 @@ import {
 } from '../../components';
 import { filterByCollection, paginateArray } from '../../utils';
 import { SearchWrapper, Wrapper } from './styles';
-import { productMock } from './mock';
 import { filterByName } from '../../utils/array/filterByName';
+import { productMock } from './mock';
+import { fetchAllProducts } from '../../services';
 
 type ProductSearchParams = {
   query?: string;
 };
 
 type ProductSearchProps = {
-  initialAllProducts: Product[];
+  initialAllProducts?: Product[];
   itemsAmmountOnPage?: number;
 };
 
@@ -38,7 +39,9 @@ const ProductSearch: React.FC<ProductSearchProps> = ({
 
   // Products
   const [products, setProducts] = useState<Product[]>([]);
-  const [allProducts, setAllProducts] = useState<Product[]>(initialAllProducts);
+  const [allProducts, setAllProducts] = useState<Product[]>(
+    initialAllProducts || productMock,
+  );
   const [
     allFilteredPaginatedProducts,
     setAllFilteredPaginatedProducts,
@@ -113,6 +116,21 @@ const ProductSearch: React.FC<ProductSearchProps> = ({
     handleInitData('byName');
   };
 
+  const handleCategoryChange = () => {
+    setLastPageLoaded(1);
+    setHasMore(true);
+    handleInitData('byCategory');
+  };
+
+  useEffect(() => {
+    async function getProducts() {
+      const categoriesResponse = await fetchAllProducts();
+      setAllProducts(categoriesResponse.data);
+    }
+
+    getProducts();
+  }, [category, searchByName]);
+
   useEffect(() => {
     setLastPageLoaded(1);
     setHasMore(true);
@@ -125,7 +143,11 @@ const ProductSearch: React.FC<ProductSearchProps> = ({
       <Categories />
       <ContentWrapper>
         <SearchWrapper>
-          <OptionSelector setCategory={setCategory} category={category} />
+          <OptionSelector
+            setCategory={setCategory}
+            category={category}
+            onCategoryChange={handleCategoryChange}
+          />
           <TextField
             fullWidth
             placeholder="Pesquisar"
