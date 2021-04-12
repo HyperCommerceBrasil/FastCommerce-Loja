@@ -17,12 +17,12 @@ import {
 } from './styles';
 
 const Header: React.FC = () => {
-  const history = useHistory();
+  const { push } = useHistory();
   const [searchValue, setSearchValue] = useState('');
 
   const handleSearch = () =>
     isValidSearch(searchValue)
-      ? history.push(`search&query=${searchValue}`)
+      ? push(`/search/${searchValue}`)
       : error('🤔 Não entendi... use só letras, números ou espaços!');
   return (
     <Wrapper>
