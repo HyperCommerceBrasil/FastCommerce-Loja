@@ -1,10 +1,13 @@
 export const filterByCollection = (
   collectionToFilter: string,
-  products: Product[],
+  products?: Product[],
 ): Product[] => {
-  const filteredProducts = products.filter(({ collection }) => {
-    return collection.name === collectionToFilter;
-  });
+  if (products) {
+    const filteredProducts = products.filter(({ collection }) => {
+      return collection.name === collectionToFilter;
+    });
 
-  return filteredProducts;
+    return filteredProducts;
+  }
+  return [];
 };

@@ -1,12 +1,15 @@
 export const filterByName = (
   nameToFilter: string,
-  products: Product[],
+  products?: Product[],
 ): Product[] => {
-  const regex = new RegExp(nameToFilter, 'i');
+  if (products) {
+    const regex = new RegExp(nameToFilter, 'i');
 
-  const filteredProducts = products.filter(({ name }) => {
-    return regex.test(name);
-  });
+    const filteredProducts = products.filter(({ name }) => {
+      return regex.test(name);
+    });
 
-  return filteredProducts;
+    return filteredProducts;
+  }
+  return [];
 };
