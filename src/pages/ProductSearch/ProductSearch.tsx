@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
-import InfiniteScroll from 'react-infinite-scroll-component';
 import { TextField } from '@material-ui/core';
 import {
   Categories,
@@ -9,7 +8,6 @@ import {
   OptionSelector,
   ContentWrapper,
   ProductSearchListing,
-  InfiniteScrollStatusBar,
 } from '../../components';
 import { filterByCollection, paginateArray } from '../../utils';
 import { SearchWrapper, Wrapper } from './styles';
@@ -21,13 +19,11 @@ type ProductSearchParams = {
 };
 
 type ProductSearchProps = {
-  initialAllProducts?: Product[];
   itemsAmmountOnPage?: number;
 };
 
 const ProductSearch: React.FC<ProductSearchProps> = ({
   itemsAmmountOnPage = 9,
-  initialAllProducts,
 }) => {
   // PageConfigs
   const { query = '' } = useParams<ProductSearchParams>();
@@ -38,9 +34,7 @@ const ProductSearch: React.FC<ProductSearchProps> = ({
 
   // Products
   const [products, setProducts] = useState<Product[]>([]);
-  const [allProducts, setAllProducts] = useState<Product[]>(
-    initialAllProducts || [],
-  );
+  const [allProducts, setAllProducts] = useState<Product[]>();
   const [
     allFilteredPaginatedProducts,
     setAllFilteredPaginatedProducts,
@@ -128,13 +122,7 @@ const ProductSearch: React.FC<ProductSearchProps> = ({
     }
 
     getProducts();
-  }, [category, searchByName]);
-
-  useEffect(() => {
-    setLastPageLoaded(1);
-    setHasMore(true);
-    handleInitData('byCategory');
-  }, [category]);
+  }, []);
 
   return (
     <Wrapper>
@@ -155,17 +143,11 @@ const ProductSearch: React.FC<ProductSearchProps> = ({
             onChange={({ target }) => handleSearchChange(target)}
           />
         </SearchWrapper>
-        <InfiniteScroll
-          dataLength={products?.length}
+        <ProductSearchListing
+          products={products}
           next={handleNext}
           hasMore={hasMore}
-          loader={<InfiniteScrollStatusBar statusMessage="Procurando... 🔎" />}
-          endMessage={
-            <InfiniteScrollStatusBar statusMessage="Foi tudo o que encontramos! 🕵️" />
-          }
-        >
-          <ProductSearchListing products={products} />
-        </InfiniteScroll>
+        />
       </ContentWrapper>
       <Footer />
     </Wrapper>
