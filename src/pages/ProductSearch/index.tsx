@@ -1,14 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { GlobalCategoriesContext } from '../../contexts';
 import { fetchAllProducts } from '../../services';
-// import {
-//   filterByCollection,
-//   filterByName,
-//   paginateArray,
-//   useQuery,
-// } from '../../utils';
 import ProductSearch from './ProductSearch';
-import { Products } from '../../mocks';
 import {
   filterByCollection,
   filterByName,
@@ -73,7 +66,6 @@ const ProductSearchContainer: React.FC = () => {
   const handleSearchTextChange = (
     e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>,
   ) => {
-    console.log('text changed');
     const { value } = e.target;
     handleFilterProducts(allProducts, undefined, value);
   };
@@ -98,15 +90,12 @@ const ProductSearchContainer: React.FC = () => {
       setHasMore(true);
       const categoriesResponse = await fetchAllProducts();
       setAllProducts(categoriesResponse.data);
-      console.log('All Products: ', categoriesResponse.data);
       initializeData(categoriesResponse.data);
     }
 
     initialize();
   }, []);
   // const productsy = Products;
-  console.log('ComputedProducts: ', computedProducts);
-  console.log('ComputedProducts: ', allFilteredProducts);
   return (
     <ProductSearch
       products={computedProducts}

@@ -1,4 +1,8 @@
-const useQuery = () => {
+type useQueryMethods = {
+  getURLQueryParam(paramName: string): string | null;
+};
+
+const useQuery = (): useQueryMethods => {
   const getURLQueryParam = (paramName: string): string | null => {
     const urlSearchParams = new URLSearchParams(window.location.search);
 
