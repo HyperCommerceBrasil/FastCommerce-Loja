@@ -1,66 +1,39 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { GlobalCategoriesContext } from '../../contexts';
 import { fetchAllProducts } from '../../services';
-import { filterByCollection, filterByName, paginateArray } from '../../utils';
+// import {
+//   filterByCollection,
+//   filterByName,
+//   paginateArray,
+//   useQuery,
+// } from '../../utils';
 import ProductSearch from './ProductSearch';
 import { Products } from '../../mocks';
+import { filterByCollection, paginateArray, useQuery } from '../../utils';
 
 const ProductSearchContainer: React.FC = () => {
-  const productsy = Products;
+  // URL Query Params
+  const { getURLQueryParam } = useQuery();
+  const nameURLParam = getURLQueryParam('name');
+  const categoryURLParam = getURLQueryParam('category');
+
+  // Config
   const { categoriesOnly } = useContext(GlobalCategoriesContext);
-
-  const [searchText, setSearchText] = useState('');
-  const [category, setCategory] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('');
   const [lastPageLoaded, setLastPageLoaded] = useState(1);
-  const [hasMore, setHasMore] = useState(true);
+  const [hasMore, setHasMore] = useState(false);
 
-  // Products
-  const [products, setProducts] = useState<Product[]>(productsy);
-  const [allProducts, setAllProducts] = useState<Product[]>();
-  const [
-    allFilteredPaginatedProducts,
-    setAllFilteredPaginatedProducts,
-  ] = useState<Product[][]>([]);
-
-  const handleSearchTextChange = (
-    e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>,
-  ) => {
-    setSearchText(e.target.value);
-  };
-
-  const getAllFilteredPaginatedArray = (
-    searchMode: 'byName' | 'byCategory',
-  ) => {
-    if (searchMode === 'byCategory') {
-      return paginateArray(9, filterByCollection(category, allProducts));
-    }
-    return paginateArray(9, filterByName(searchText, allProducts));
-  };
-
-  const handleInitData = (searchMode: 'byName' | 'byCategory') => {
-    if (searchMode === 'byCategory') {
-      setAllFilteredPaginatedProducts(
-        paginateArray(9, filterByCollection(category, allProducts)),
-      );
-      setProducts(
-        paginateArray(9, filterByCollection(category, allProducts))[0],
-      );
-    } else {
-      setAllFilteredPaginatedProducts(
-        paginateArray(9, filterByName(searchText, allProducts)),
-      );
-      setProducts(paginateArray(9, filterByName(searchText, allProducts))[0]);
-    }
-
-    if (getAllFilteredPaginatedArray(searchMode).length < 2) {
-      setHasMore(false);
-    }
-  };
+  // Products states
+  const [allProducts, setAllProducts] = useState<Product[]>([]);
+  const [allFilteredProducts, setAllFilteredProducts] = useState<Product[][]>(
+    [],
+  );
+  const [computedProducts, setComputedProducts] = useState<Product[]>([]);
 
   const handleNext = () => {
-    if (lastPageLoaded + 1 < allFilteredPaginatedProducts.length) {
-      setProducts(
-        products.concat(allFilteredPaginatedProducts[lastPageLoaded]),
+    if (lastPageLoaded + 1 < allFilteredProducts.length) {
+      setComputedProducts(
+        computedProducts.concat(allFilteredProducts[lastPageLoaded]),
       );
       setLastPageLoaded(lastPageLoaded + 1);
     } else {
@@ -68,41 +41,56 @@ const ProductSearchContainer: React.FC = () => {
     }
   };
 
-  const handleSearchChange = (
-    target: EventTarget & (HTMLTextAreaElement | HTMLInputElement),
+  const handleFilterProducts = (
+    data?: Product[],
+    category?: string | null,
+    name?: string | null,
   ) => {
-    setLastPageLoaded(1);
-    setHasMore(true);
-    setSearchText(target.value);
-    handleInitData('byName');
+    let filteredProducts;
+    if (category) {
+      setSelectedCategory(category);
+      filteredProducts = paginateArray(9, filterByCollection(category, data));
+    }
+
+    if (name) {
+      filteredProducts = paginateArray(9, filterByCollection(name, data));
+    }
+
+    if (filteredProducts) {
+      setAllFilteredProducts(filteredProducts);
+      setComputedProducts(filteredProducts[0]);
+    }
   };
 
-  const handleCategoryChange = () => {
-    setLastPageLoaded(1);
-    setHasMore(true);
-    handleInitData('byCategory');
+  const initializeData = (data?: Product[]) => {
+    handleFilterProducts(data, categoryURLParam, nameURLParam);
   };
 
   useEffect(() => {
-    async function getProducts() {
+    async function initialize() {
+      setHasMore(true);
       const categoriesResponse = await fetchAllProducts();
       setAllProducts(categoriesResponse.data);
+      console.log('All Products: ', categoriesResponse.data);
+      initializeData(categoriesResponse.data);
+      setHasMore(false);
     }
 
-    getProducts();
+    initialize();
   }, []);
-
+  // const productsy = Products;
+  console.log('ComputedProducts: ', computedProducts);
   return (
     <ProductSearch
-      products={products}
-      searchText={searchText}
-      handleSearchTextChange={handleSearchTextChange}
+      products={computedProducts}
+      searchText=""
+      handleSearchTextChange={() => ({})}
       options={categoriesOnly}
+      option={selectedCategory}
+      setSelectedOption={() => ({})}
+      onOptionChange={() => ({})}
+      next={() => ({})}
       hasMore={hasMore}
-      option={category}
-      setSelectedOption={setCategory}
-      next={handleNext}
-      onOptionChange={handleCategoryChange}
       itemsAmmountOnPage={9}
     />
   );

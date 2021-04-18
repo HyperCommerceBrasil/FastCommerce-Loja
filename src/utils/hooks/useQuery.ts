@@ -1,5 +1,5 @@
 const useQuery = () => {
-  const getURLQueryParam = (paramName: string) => {
+  const getURLQueryParam = (paramName: string): string | null => {
     const urlSearchParams = new URLSearchParams(window.location.search);
 
     return urlSearchParams.get(paramName);
