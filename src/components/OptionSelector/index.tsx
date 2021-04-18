@@ -2,7 +2,7 @@ import React from 'react';
 import { FormControl, InputLabel, MenuItem } from '@material-ui/core';
 import { Wrapper, Select } from './styles';
 
-type OptionSelectorProps = {
+export type OptionSelectorProps = {
   option: string;
   options?: string[];
   setSelectedOption(option: string): void;
