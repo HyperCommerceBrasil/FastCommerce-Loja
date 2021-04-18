@@ -22,7 +22,7 @@ const Header: React.FC = () => {
 
   const handleSearch = () =>
     isValidSearch(searchValue)
-      ? push(`/search/${searchValue}`)
+      ? push(`/search?name=${searchValue}`)
       : error('🤔 Não entendi... use só letras, números ou espaços!');
   return (
     <Wrapper>
