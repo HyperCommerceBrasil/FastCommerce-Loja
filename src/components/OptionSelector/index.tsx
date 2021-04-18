@@ -5,26 +5,18 @@ import { Wrapper, Select } from './styles';
 export type OptionSelectorProps = {
   option: string;
   options?: string[];
-  setSelectedOption(option: string): void;
-  onOptionChange?(): void;
+  onOptionChange(
+    target: EventTarget & { name?: string | undefined; value: unknown },
+  ): void;
   style?: React.CSSProperties;
 };
 
 const OptionSelector: React.FC<OptionSelectorProps> = ({
   option,
   options = [],
-  setSelectedOption,
   onOptionChange,
   style,
 }) => {
-  const handleChange = (
-    target: EventTarget & { name?: string | undefined; value: unknown },
-  ) => {
-    const { value } = target;
-    setSelectedOption(value as string);
-    if (onOptionChange) onOptionChange();
-  };
-
   return (
     <Wrapper style={style}>
       <FormControl fullWidth variant="outlined">
@@ -35,7 +27,7 @@ const OptionSelector: React.FC<OptionSelectorProps> = ({
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           value={option}
-          onChange={({ target }) => handleChange(target)}
+          onChange={({ target }) => onOptionChange(target)}
         >
           {options.map(arrayOption => (
             <MenuItem key={`arrayOption_${arrayOption}`} value={arrayOption}>
