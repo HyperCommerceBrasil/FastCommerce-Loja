@@ -30,7 +30,7 @@ const Categories: React.FC = () => {
               );
             default:
               return (
-                <CategoryWrapper key={id} to={`/search/${name}`}>
+                <CategoryWrapper key={id} to={`/search?category=${name}`}>
                   <CategoryText>{name}</CategoryText>
                 </CategoryWrapper>
               );

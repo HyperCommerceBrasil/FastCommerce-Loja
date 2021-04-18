@@ -13,7 +13,7 @@ const Routes: React.FC = () => (
       <Route path="/" exact component={Home} />
       <Route path="/signup" component={SignUp} />
       <Route path="/product/:id" component={DetailedProduct} />
-      <Route path="/search/:query" component={ProductSearchContainer} />
+      <Route path="/search" component={ProductSearchContainer} />
     </Switch>
   </BrowserRouter>
 );

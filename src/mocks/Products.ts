@@ -1,4 +1,4 @@
-export const productMock: Product[] = [
+export const Products: Product[] = [
   {
     collection: {
       id: 'fqe4tq3',
