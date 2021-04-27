@@ -29,25 +29,32 @@ const ProductCard: React.FC<ProductCardProps> = ({
   collectionName,
   name,
   price,
-}) => (
-  <Wrapper>
-    <ImageWrapper to={`/product/${id}`}>
-      <Img imageURL={imageURL[0]?.image} />
-    </ImageWrapper>
-    <InformationWrapper>
-      <InformationList to={`/product/${id}`}>
-        <Category>{collectionName}</Category>
-        <Title>{name}</Title>
-        <Price>{toLocalCurrency(price)}</Price>
-      </InformationList>
+}) => {
+  const handleAddToCart = (id: string) => {
+    console.log(id);
+    success('Adicionado ao carrinho! 🛒');
+  };
 
-      <AddCartWrapper>
-        <AddCart onClick={() => success('Adicionado ao carrinho! 🛒')}>
-          <FaShoppingCart size={20} />
-        </AddCart>
-      </AddCartWrapper>
-    </InformationWrapper>
-  </Wrapper>
-);
+  return (
+    <Wrapper>
+      <ImageWrapper to={`/product/${id}`}>
+        <Img imageURL={imageURL[0]?.image} />
+      </ImageWrapper>
+      <InformationWrapper>
+        <InformationList to={`/product/${id}`}>
+          <Category>{collectionName}</Category>
+          <Title>{name}</Title>
+          <Price>{toLocalCurrency(price)}</Price>
+        </InformationList>
+
+        <AddCartWrapper>
+          <AddCart onClick={() => handleAddToCart(id)}>
+            <FaShoppingCart size={20} />
+          </AddCart>
+        </AddCartWrapper>
+      </InformationWrapper>
+    </Wrapper>
+  );
+};
 
 export default ProductCard;
