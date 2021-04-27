@@ -83,7 +83,12 @@ export const SearchButton = styled.button`
   }
 `;
 
-export const CartWrapper = styled.div``;
+export const CartWrapper = styled.button`
+  background-color: transparent;
+  &:hover {
+    cursor: pointer;
+  }
+`;
 
 export const CartIcon = styled.div``;
 
