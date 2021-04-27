@@ -4,6 +4,10 @@ import { Colors, Spacings } from '../../utils';
 const { small, large, short } = Spacings;
 const ballSize = 16;
 
+type CircleProps = {
+  backgroundColor?: string;
+};
+
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
@@ -16,7 +20,7 @@ export const CartWrapper = styled.div`
   flex-direction: row;
 `;
 
-export const ItemsCircle = styled.div`
+export const ItemsCircle = styled.div<CircleProps>`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -26,16 +30,18 @@ export const ItemsCircle = styled.div`
   position: absolute;
   margin-top: -${small}px;
   margin-left: ${large}px;
-  background-color: ${Colors.light?.text.darker};
+  background-color: ${({ backgroundColor }) =>
+    backgroundColor || Colors.light?.text.darker};
   border-radius: ${ballSize}px;
   padding: 2px;
 `;
 
 export const CartItems = styled.p`
   font-size: 0.9rem;
-  color: ${Colors.light?.text.lighter};
+  color: ${({ color }) => color || Colors.light?.text.lighter};
 `;
 
 export const CartValue = styled.p`
   margin-left: ${short}px;
+  color: ${({ color }) => color || Colors.light?.text.lighter};
 `;
