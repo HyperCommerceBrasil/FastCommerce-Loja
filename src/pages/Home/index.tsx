@@ -23,10 +23,10 @@ const Home: React.FC = () => {
   }, []);
   return (
     <Wrapper>
-      <Cart />
       <Header />
       <Categories />
       <Banner />
+      <Cart />
       <ProductCarrousel products={products} />
       <Footer />
     </Wrapper>

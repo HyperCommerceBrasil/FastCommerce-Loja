@@ -19,7 +19,9 @@ import {
 
 const Header: React.FC = () => {
   const { push } = useHistory();
-  const { setIsCartShowing } = useContext(GlobalCartContext);
+  const { setIsCartShowing, totalPrice, totalProductsOnCart } = useContext(
+    GlobalCartContext,
+  );
   const [searchValue, setSearchValue] = useState('');
 
   const handleSearch = () =>
@@ -43,7 +45,7 @@ const Header: React.FC = () => {
       </SearchWrapper>
       <OptionsWrapper>
         <CartWrapper onClick={() => handleCartClick()}>
-          <CartIcon />
+          <CartIcon totalPrice={totalPrice} cartItems={totalProductsOnCart} />
         </CartWrapper>
         <UserWrapper>
           <FaUser size={28} />
