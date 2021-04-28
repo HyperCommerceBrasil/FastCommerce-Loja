@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { GlobalCartContext } from '../../contexts';
 import { success, toLocalCurrency } from '../../utils';
 import {
   AddCart,
@@ -21,6 +22,7 @@ type ProductCardProps = {
   name: string;
   price: number;
   quantity?: number;
+  product: Product;
 };
 
 const ProductCard: React.FC<ProductCardProps> = ({
@@ -29,11 +31,10 @@ const ProductCard: React.FC<ProductCardProps> = ({
   collectionName,
   name,
   price,
+  product,
 }) => {
-  const handleAddToCart = (id: string) => {
-    console.log(id);
-    success('Adicionado ao carrinho! 🛒');
-  };
+  const { pushProduct } = useContext(GlobalCartContext);
+  const handleAddToCart = (product: ProductOnCart) => pushProduct(product);
 
   return (
     <Wrapper>
@@ -48,7 +49,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
         </InformationList>
 
         <AddCartWrapper>
-          <AddCart onClick={() => handleAddToCart(id)}>
+          <AddCart onClick={() => handleAddToCart(product)}>
             <FaShoppingCart size={20} />
           </AddCart>
         </AddCartWrapper>
