@@ -30,20 +30,19 @@ const ProductSearchListing: React.FC<ProductSearchListingProps> = ({
     >
       <Wrapper>
         <ProductListing>
-          {products?.map(
-            ({ collection, id, name, price, images, quantity }) => (
-              <ProductWrapper key={id}>
-                <ProductCard
-                  id={id}
-                  collectionName={collection.name}
-                  name={name}
-                  price={price}
-                  imageURL={images}
-                  quantity={quantity}
-                />
-              </ProductWrapper>
-            ),
-          )}
+          {products?.map(product => (
+            <ProductWrapper key={product.id}>
+              <ProductCard
+                id={product.id}
+                collectionName={product.collection.name}
+                name={product.name}
+                price={product.price}
+                imageURL={product.images}
+                quantity={product.quantity}
+                product={product}
+              />
+            </ProductWrapper>
+          ))}
         </ProductListing>
       </Wrapper>
     </InfiniteScroll>

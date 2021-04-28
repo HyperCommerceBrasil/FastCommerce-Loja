@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { FaUser } from 'react-icons/fa';
 import { useHistory } from 'react-router-dom';
 import { Logo } from '../../assets';
+import { GlobalCartContext } from '../../contexts';
 import { error, isValidSearch } from '../../utils';
 import CartIcon from '../CartIcon';
 import {
@@ -18,12 +19,18 @@ import {
 
 const Header: React.FC = () => {
   const { push } = useHistory();
+  const { setIsCartShowing, totalPrice, totalProductsOnCart } = useContext(
+    GlobalCartContext,
+  );
   const [searchValue, setSearchValue] = useState('');
 
   const handleSearch = () =>
     isValidSearch(searchValue)
       ? push(`/search?name=${searchValue}`)
       : error('🤔 Não entendi... use só letras, números ou espaços!');
+
+  const handleCartClick = () => setIsCartShowing();
+
   return (
     <Wrapper>
       <LogoWrapper to="/">
@@ -37,8 +44,8 @@ const Header: React.FC = () => {
         <SearchButton onClick={handleSearch}>Pesquisar</SearchButton>
       </SearchWrapper>
       <OptionsWrapper>
-        <CartWrapper>
-          <CartIcon />
+        <CartWrapper onClick={() => handleCartClick()}>
+          <CartIcon totalPrice={totalPrice} cartItems={totalProductsOnCart} />
         </CartWrapper>
         <UserWrapper>
           <FaUser size={28} />

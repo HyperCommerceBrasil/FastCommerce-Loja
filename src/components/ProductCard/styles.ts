@@ -2,9 +2,7 @@ import styled from 'styled-components';
 import { FaShoppingCart as BaseFaShoppingCart } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { Colors, Spacings, Breakpoints } from '../../utils';
-
-const defaultProductImageNotFound =
-  'https://www.navigation.com/static/WFS/Shop-Site/-/Shop/en_US/Product%20Not%20Found.png';
+import { IMAGE } from '../../utils/enums';
 
 const { short, huge } = Spacings;
 const { laptop, fhd, tablet } = Breakpoints;
@@ -54,8 +52,7 @@ export const Img = styled.div<ImgProps>`
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
 
-  ${({ imageURL = defaultProductImageNotFound }) =>
-    `background-image: url(${imageURL});`}
+  ${({ imageURL = IMAGE.NOT_FOUND }) => `background-image: url(${imageURL});`}
 
   background-repeat: no-repeat;
   background-position: center;
@@ -112,6 +109,7 @@ export const AddCart = styled.button`
   height: 50px;
   border-radius: 25px;
   background-color: ${Colors.light?.primary.main};
+  transition: 0.2s;
 
   &:hover {
     cursor: pointer;

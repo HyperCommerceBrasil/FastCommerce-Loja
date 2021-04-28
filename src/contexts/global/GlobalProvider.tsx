@@ -1,8 +1,12 @@
 import React from 'react';
-import { GlobalCategoriesProvider } from './index';
+import { GlobalCategoriesProvider, GlobalCartProvider } from './index';
 
 const GlobalProvider: React.FC = ({ children }) => {
-  return <GlobalCategoriesProvider>{children}</GlobalCategoriesProvider>;
+  return (
+    <GlobalCategoriesProvider>
+      <GlobalCartProvider>{children}</GlobalCartProvider>
+    </GlobalCategoriesProvider>
+  );
 };
 
 export default GlobalProvider;

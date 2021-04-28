@@ -16,3 +16,17 @@ declare type Product = {
   details?: string;
   quantity?: number;
 };
+
+declare type ProductOnCart = {
+  id: string;
+  name: string;
+  price: number;
+  trending: boolean;
+  collection: Collections;
+  images: ProductImage[];
+  ean?: string;
+  description?: string;
+  pricePromotional?: string;
+  details?: string;
+  quantity?: number;
+};

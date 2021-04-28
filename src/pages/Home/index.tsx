@@ -5,6 +5,7 @@ import {
   Footer,
   ProductCarrousel,
   Header,
+  Cart,
 } from '../../components';
 import { fetchTrendingProducts } from '../../services';
 import { Wrapper } from './styles';
@@ -25,6 +26,7 @@ const Home: React.FC = () => {
       <Header />
       <Categories />
       <Banner />
+      <Cart />
       <ProductCarrousel products={products} />
       <Footer />
     </Wrapper>

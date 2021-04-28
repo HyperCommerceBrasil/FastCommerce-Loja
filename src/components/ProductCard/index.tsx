@@ -1,5 +1,6 @@
-import React from 'react';
-import { success, toLocalCurrency } from '../../utils';
+import React, { useContext } from 'react';
+import { GlobalCartContext } from '../../contexts';
+import { toLocalCurrency } from '../../utils';
 import {
   AddCart,
   AddCartWrapper,
@@ -21,6 +22,7 @@ type ProductCardProps = {
   name: string;
   price: number;
   quantity?: number;
+  product: Product;
 };
 
 const ProductCard: React.FC<ProductCardProps> = ({
@@ -29,25 +31,31 @@ const ProductCard: React.FC<ProductCardProps> = ({
   collectionName,
   name,
   price,
-}) => (
-  <Wrapper>
-    <ImageWrapper to={`/product/${id}`}>
-      <Img imageURL={imageURL[0]?.image} />
-    </ImageWrapper>
-    <InformationWrapper>
-      <InformationList to={`/product/${id}`}>
-        <Category>{collectionName}</Category>
-        <Title>{name}</Title>
-        <Price>{toLocalCurrency(price)}</Price>
-      </InformationList>
+  product,
+}) => {
+  const { pushProduct } = useContext(GlobalCartContext);
+  const handleAddToCart = (product: ProductOnCart) => pushProduct(product);
 
-      <AddCartWrapper>
-        <AddCart onClick={() => success('Adicionado ao carrinho! 🛒')}>
-          <FaShoppingCart size={20} />
-        </AddCart>
-      </AddCartWrapper>
-    </InformationWrapper>
-  </Wrapper>
-);
+  return (
+    <Wrapper>
+      <ImageWrapper to={`/product/${id}`}>
+        <Img imageURL={imageURL[0]?.image} />
+      </ImageWrapper>
+      <InformationWrapper>
+        <InformationList to={`/product/${id}`}>
+          <Category>{collectionName}</Category>
+          <Title>{name}</Title>
+          <Price>{toLocalCurrency(price)}</Price>
+        </InformationList>
+
+        <AddCartWrapper>
+          <AddCart onClick={() => handleAddToCart(product)}>
+            <FaShoppingCart size={20} />
+          </AddCart>
+        </AddCartWrapper>
+      </InformationWrapper>
+    </Wrapper>
+  );
+};
 
 export default ProductCard;
