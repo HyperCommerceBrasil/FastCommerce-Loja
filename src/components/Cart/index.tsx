@@ -1,7 +1,17 @@
 import React, { useContext } from 'react';
-import { BsArrowRightShort } from 'react-icons/bs';
 import { GlobalCartContext } from '../../contexts';
-import { CartHeader, Wrapper } from './styles';
+import { toLocalCurrency } from '../../utils';
+import CartItem from '../CartItem';
+import {
+  ArrowWrapper,
+  CartFooter,
+  CartHeader,
+  CartItemsWrapper,
+  FinalPrice,
+  HeaderTitle,
+  HideArrow,
+  Wrapper,
+} from './styles';
 
 // type ProductCardProps = {
 //   id: string;
@@ -13,16 +23,28 @@ import { CartHeader, Wrapper } from './styles';
 // };
 
 const Cart: React.FC = () => {
-  const { isCartShowing, setIsCartShowing } = useContext(GlobalCartContext);
+  const { isCartShowing, setIsCartShowing, products, totalPrice } = useContext(
+    GlobalCartContext,
+  );
 
   const handleHideCart = () => setIsCartShowing();
 
   return (
     <Wrapper isShowing={isCartShowing}>
       <CartHeader>
-        <BsArrowRightShort size={40} onClick={() => handleHideCart} />
+        <ArrowWrapper isShowing={isCartShowing}>
+          <HideArrow onClick={() => handleHideCart()} />
+        </ArrowWrapper>
+        <HeaderTitle>Produtos</HeaderTitle>
       </CartHeader>
-      <h1>Produtis</h1>
+      <CartItemsWrapper>
+        {products.map(product => (
+          <CartItem product={product} key={product.id} />
+        ))}
+      </CartItemsWrapper>
+      <CartFooter>
+        <FinalPrice>{toLocalCurrency(totalPrice)}</FinalPrice>
+      </CartFooter>
     </Wrapper>
   );
 };
