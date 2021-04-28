@@ -9,21 +9,21 @@ type ProductCarrouselProps = {
 const ProductCarrousel: React.FC<ProductCarrouselProps> = ({ products }) => (
   <Wrapper>
     <CarrouselWrapper>
-      {products.map(
-        ({ id, name, price, trending, collection, images, quantity }) =>
-          trending ? (
-            <ItemWrapper key={id}>
-              <ProductCard
-                key={id}
-                id={id}
-                price={price}
-                collectionName={collection.name}
-                name={name}
-                imageURL={images}
-                quantity={quantity}
-              />
-            </ItemWrapper>
-          ) : null,
+      {products.map(product =>
+        product.trending ? (
+          <ItemWrapper key={product.id}>
+            <ProductCard
+              key={product.id}
+              id={product.id}
+              price={product.price}
+              collectionName={product.collection.name}
+              name={product.name}
+              imageURL={product.images}
+              quantity={product.quantity}
+              product={product}
+            />
+          </ItemWrapper>
+        ) : null,
       )}
     </CarrouselWrapper>
   </Wrapper>
