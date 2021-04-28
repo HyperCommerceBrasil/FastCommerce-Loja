@@ -14,7 +14,6 @@ export const ScrollabelDiv = styled.div`
   display: flex;
   flex-direction: row;
   overflow-x: auto;
-  /* white-space: nowrap; */
   width: 100%;
 `;
 
