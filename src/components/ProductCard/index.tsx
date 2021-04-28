@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { GlobalCartContext } from '../../contexts';
-import { success, toLocalCurrency } from '../../utils';
+import { toLocalCurrency } from '../../utils';
 import {
   AddCart,
   AddCartWrapper,

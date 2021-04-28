@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Colors, Spacings } from '../../utils';
 import { IMAGE } from '../../utils/enums';
 
-const { meaningless, small, large, short } = Spacings;
+const { small, short } = Spacings;
 
 type ProductImageProps = {
   src?: string;

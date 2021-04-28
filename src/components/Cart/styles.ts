@@ -1,10 +1,6 @@
 import styled from 'styled-components';
-// import { Link } from 'react-router-dom';
 import { BsArrowRightShort as BsArrowRightShortBase } from 'react-icons/bs';
 import { Colors, Spacings, Breakpoints } from '../../utils';
-
-// const defaultProductImageNotFound =
-//   'https://www.navigation.com/static/WFS/Shop-Site/-/Shop/en_US/Product%20Not%20Found.png';
 
 const { short, medium } = Spacings;
 const { laptop, fhd, tablet } = Breakpoints;

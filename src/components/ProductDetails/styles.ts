@@ -1,12 +1,10 @@
 import styled from 'styled-components';
 import { ButtonMain as ButtonMainBase } from '..';
 import { Colors, Spacings, Breakpoints } from '../../utils';
+import { IMAGE } from '../../utils/enums';
 
 const { short, medium, giant, insane } = Spacings;
 const { tablet, laptop, fhd } = Breakpoints;
-
-const defaultProductImageNotFound =
-  'https://www.navigation.com/static/WFS/Shop-Site/-/Shop/en_US/Product%20Not%20Found.png';
 
 type ImgProps = {
   src?: string;
@@ -41,7 +39,7 @@ export const ImageWrapper = styled.div`
 `;
 
 export const Image = styled.img.attrs<ImgProps>(
-  ({ src = defaultProductImageNotFound }) => ({
+  ({ src = IMAGE.NOT_FOUND }) => ({
     src,
   }),
 )`

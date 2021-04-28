@@ -4,9 +4,6 @@ import { Link } from 'react-router-dom';
 import { Colors, Spacings, Breakpoints } from '../../utils';
 import { IMAGE } from '../../utils/enums';
 
-const defaultProductImageNotFound =
-  'https://www.navigation.com/static/WFS/Shop-Site/-/Shop/en_US/Product%20Not%20Found.png';
-
 const { short, huge } = Spacings;
 const { laptop, fhd, tablet } = Breakpoints;
 

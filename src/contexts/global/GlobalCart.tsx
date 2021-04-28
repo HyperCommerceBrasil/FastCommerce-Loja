@@ -61,7 +61,7 @@ export const GlobalCartProvider: React.FC = ({ children }) => {
   const removeProduct = (product: ProductOnCart) => {
     const updatedProducts = products;
     updatedProducts.splice(updatedProducts.indexOf(product), 1);
-    console.log(updatedProducts);
+    // console.log(updatedProducts);
   };
 
   const handleSetProducts = (products: ProductOnCart[]) => {
