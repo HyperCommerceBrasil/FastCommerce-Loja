@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { HiPlus, HiMinus } from 'react-icons/hi';
 import { useParams } from 'react-router';
 import parse from 'html-react-parser';
@@ -22,8 +22,9 @@ import {
   CustomizedDescriptionTitle,
   ButtonMain,
 } from './styles';
-import { success, toLocalCurrency } from '../../utils';
+import { toLocalCurrency } from '../../utils';
 import { PurchaseBottom } from '..';
+import { GlobalCartContext } from '../../contexts';
 
 type ProductDetailsProps = {
   id?: string;
@@ -31,6 +32,7 @@ type ProductDetailsProps = {
 
 const ProductDetails: React.FC<ProductDetailsProps> = () => {
   const { id = '' } = useParams<ProductDetailsProps>();
+  const { pushProduct } = useContext(GlobalCartContext);
   const [counterValue, setCounterValue] = useState(1);
   const [productData, setProductData] = useState<Product>();
 
@@ -41,17 +43,14 @@ const ProductDetails: React.FC<ProductDetailsProps> = () => {
     }
 
     getDataProducts();
-  }, [id]);
+  }, []);
 
   const handlePlusCounter = () => setCounterValue(counterValue + 1);
 
   const handleMinusCounter = () =>
     counterValue >= 2 ? setCounterValue(counterValue - 1) : counterValue;
 
-  const handleAddToCart = () =>
-    counterValue > 1
-      ? success(`${counterValue} itens adicionados ao carrinho! 🛒`)
-      : success(`Item adicionado ao carrinho! 🛒`);
+  const handleAddToCart = () => pushProduct(productData as ProductOnCart);
 
   const handleRetrieveFirstProductImage = () => {
     if (productData?.images) {

@@ -4,7 +4,7 @@ import { success, warning } from '../../utils';
 type CartData = {
   products: ProductOnCart[];
   pushProduct(product: ProductOnCart): void;
-  removeProduct(product: ProductOnCart, id: string): void;
+  removeProduct(product: ProductOnCart): void;
   handleSetProducts: (products: ProductOnCart[]) => void;
   isCartShowing: boolean;
   setIsCartShowing(): void;
@@ -58,10 +58,18 @@ export const GlobalCartProvider: React.FC = ({ children }) => {
     success(`${product.name} adicionado ao carrinho! 🛒`);
   };
 
-  const removeProduct = (product: ProductOnCart) => {
-    const updatedProducts = products;
-    updatedProducts.splice(updatedProducts.indexOf(product), 1);
-    // console.log(updatedProducts);
+  const removeProduct = (product: ProductOnCart): void => {
+    const updatedProducts = [];
+    let i = 0;
+
+    while (i < products.length) {
+      if (products[i].id !== product.id) updatedProducts.push(products[i]);
+      i += 1;
+    }
+
+    setTotalPrice(handleGetTotalPrice(updatedProducts));
+    setTotalProductsOnCart(updatedProducts.length);
+    setProducts(updatedProducts);
   };
 
   const handleSetProducts = (products: ProductOnCart[]) => {

@@ -6,10 +6,3 @@ export const Wrapper = styled.div`
   flex-direction: column;
   background-color: ${Colors.light?.environment.lighter};
 `;
-
-export const ProductsCarrousel = styled.div`
-  display: flex;
-  flex: 1;
-  flex-direction: row;
-  justify-content: space-around;
-`;

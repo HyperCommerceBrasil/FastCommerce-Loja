@@ -12,8 +12,6 @@ type ProductImageProps = {
 export const Wrapper = styled(Link)`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
   height: 100px;
   padding: ${small}px;
   margin: ${short}px 0;
@@ -23,7 +21,6 @@ export const Wrapper = styled(Link)`
 `;
 
 export const ProductImage = styled.div<ProductImageProps>`
-  display: flex;
   max-width: 100px;
   width: 100%;
   height: 100%;
@@ -33,9 +30,25 @@ export const ProductImage = styled.div<ProductImageProps>`
   background-size: contain;
   background-color: ${Colors.light?.text.lighter};
   border-radius: 16px;
+  margin-right: ${short}px;
 `;
 
-export const DetailsWrapper = styled.div``;
+export const DetailsWrapper = styled.div`
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+`;
+
+export const TextDeatilsWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+
+export const HeaderCartItem = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
 
 export const Name = styled.h3`
   color: ${Colors.light?.text.lighter};
@@ -47,4 +60,9 @@ export const Price = styled.h3`
 
 export const TotalPrice = styled.h2`
   color: ${Colors.light?.text.lighter};
+`;
+
+export const DeleteWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
 `;

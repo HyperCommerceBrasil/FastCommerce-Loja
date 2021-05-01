@@ -7,43 +7,57 @@ import {
   OptionSelector,
   ContentWrapper,
   ProductSearchListing,
+  Cart,
+  ButtonMain,
 } from '../../components';
-import { SearchWrapper, Wrapper } from './styles';
+import { SearchInputWrapper, SearchWrapper, Wrapper } from './styles';
 import { OptionSelectorProps } from '../../components/OptionSelector';
 
 type ProductSearchProps = {
   hasMore: boolean;
   itemsAmmountOnPage?: number;
-  handleSearchTextChange(
-    e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>,
-  ): void;
-  searchText: string;
+  handleSearchClick(name: string): void;
+  handleCategoryChange(name: string): void;
   next?(): void;
   products: Product[];
+  searchValue: string;
+  setSearchValue(value: string): void;
 };
 
 const ProductSearch: React.FC<ProductSearchProps & OptionSelectorProps> = ({
   products,
   next = () => ({}),
   hasMore = false,
-  handleSearchTextChange = () => ({}),
-  searchText,
+  handleSearchClick,
+  handleCategoryChange,
+  setSearchValue,
+  searchValue,
   ...optionSelectorProps
 }) => {
   return (
     <Wrapper>
-      <Header />
-      <Categories />
+      <Header onSearchName={handleSearchClick} />
+      <Categories handleOptionPress={handleCategoryChange} />
+      <Cart />
       <ContentWrapper>
         <SearchWrapper>
-          <OptionSelector {...optionSelectorProps} />
-          <TextField
-            fullWidth
-            placeholder="Pesquisar"
-            variant="outlined"
-            value={searchText}
-            onChange={e => handleSearchTextChange(e)}
-          />
+          <SearchInputWrapper>
+            <OptionSelector {...optionSelectorProps} />
+          </SearchInputWrapper>
+          <SearchInputWrapper>
+            <TextField
+              fullWidth
+              placeholder="Pesquisar"
+              variant="outlined"
+              value={searchValue}
+              onChange={({ target }) => setSearchValue(target.value as string)}
+            />
+          </SearchInputWrapper>
+          <SearchInputWrapper>
+            <ButtonMain onClick={() => handleSearchClick(searchValue)}>
+              Pesquisar
+            </ButtonMain>
+          </SearchInputWrapper>
         </SearchWrapper>
         <ProductSearchListing
           products={products}

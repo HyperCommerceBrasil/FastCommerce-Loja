@@ -7,6 +7,10 @@ import {
   ScrollabelDiv,
 } from './styles';
 
+type CategoriesProps = {
+  handleOptionPress?(name: string): void;
+};
+
 const defaultCollections: Collections[] = [
   {
     id: 'default_home',
@@ -14,8 +18,12 @@ const defaultCollections: Collections[] = [
   },
 ];
 
-const Categories: React.FC = () => {
+const Categories: React.FC<CategoriesProps> = ({ handleOptionPress }) => {
   const { categories } = useContext(GlobalCategoriesContext);
+
+  const handleCategoryPress = (name: string): void => {
+    if (handleOptionPress) handleOptionPress(name);
+  };
 
   return (
     <Wrapper>
@@ -30,7 +38,11 @@ const Categories: React.FC = () => {
               );
             default:
               return (
-                <CategoryWrapper key={id} to={`/search?category=${name}`}>
+                <CategoryWrapper
+                  key={id}
+                  to={`/search?category=${name}`}
+                  onClick={() => handleCategoryPress(name)}
+                >
                   <CategoryText>{name}</CategoryText>
                 </CategoryWrapper>
               );
