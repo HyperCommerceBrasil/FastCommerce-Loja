@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import { BsArrowRightShort as BsArrowRightShortBase } from 'react-icons/bs';
 import { Colors, Spacings, Breakpoints } from '../../utils';
 
-const { short, medium } = Spacings;
-const { laptop, fhd, tablet } = Breakpoints;
+const { medium, big } = Spacings;
+const { tablet, mobileWider } = Breakpoints;
 
 type WrapperProps = {
   isShowing?: boolean;
@@ -15,30 +15,33 @@ type ArrowWrapperProps = {
 
 export const Wrapper = styled.div<WrapperProps>`
   display: flex;
-  flex-direction: column;
-  border-top-left-radius: 16px;
-  border-bottom-left-radius: 16px;
-  padding: ${medium}px;
-  width: 450px;
-  z-index: 10;
+  border-top-left-radius: 24px;
+  border-bottom-left-radius: 24px;
+  width: 500px;
   height: 100%;
+  z-index: 20;
   box-shadow: 0 0 24px #cccccc;
   position: fixed;
   background-color: ${Colors.light?.environment.main};
   right: ${({ isShowing }) => (isShowing ? 0 : -550)}px;
   transition: 0.6s;
 
-  @media (max-width: ${fhd}px) {
-    /* width: 25vw; */
-  }
-
-  @media (max-width: ${laptop}px) {
-    /* width: 35vw; */
-  }
-
   @media (max-width: ${tablet}px) {
-    /* width: 60vw; */
+    width: 400px;
   }
+
+  @media (max-width: ${mobileWider}px) {
+    width: 100vw;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+`;
+
+export const InternalWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: ${medium}px;
 `;
 
 export const CartHeader = styled.div`
@@ -46,7 +49,7 @@ export const CartHeader = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  /* padding: ${short}px; */
+  padding: ${medium}px 0;
 `;
 
 export const ArrowWrapper = styled.div<ArrowWrapperProps>`
@@ -91,12 +94,16 @@ export const CartFooter = styled.div`
   display: flex;
   flex-direction: column;
   align-items: right;
-  height: 100px;
+  padding: ${medium}px;
+  background-color: ${Colors.light?.primary.main};
+  /* border: 1px solid ${Colors.light?.primary.main}; */
+  border-radius: 16px;
+  margin: ${big}px 0;
 `;
 
 export const FinalPrice = styled.h2`
   text-align: right;
   font-weight: 700;
-  font-size: 2.5rem;
-  color: ${Colors.light?.text.main};
+  font-size: 2rem;
+  color: ${Colors.light?.text.lighter};
 `;
