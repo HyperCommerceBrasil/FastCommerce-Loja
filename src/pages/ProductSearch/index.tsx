@@ -63,12 +63,8 @@ const ProductSearchContainer: React.FC = () => {
     handleFilterProducts(allProducts, category);
   };
 
-  const handleSearchTextChange = (
-    e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>,
-  ) => {
-    const { value } = e.target;
-    handleFilterProducts(allProducts, undefined, value);
-  };
+  const handleSearchClick = (name: string) =>
+    handleFilterProducts(allProducts, undefined, name);
 
   const handleNext = () => {
     if (lastPageLoaded + 1 < allFilteredProducts.length) {
@@ -85,6 +81,11 @@ const ProductSearchContainer: React.FC = () => {
     handleFilterProducts(data, categoryURLParam, nameURLParam);
   };
 
+  const handleCategoryBarClick = (name: string) => {
+    setSelectedCategory(name);
+    handleFilterProducts(allProducts, name);
+  };
+
   useEffect(() => {
     async function initialize() {
       setHasMore(true);
@@ -95,18 +96,19 @@ const ProductSearchContainer: React.FC = () => {
 
     initialize();
   }, []);
-  // const productsy = Products;
   return (
     <ProductSearch
+      searchValue={searchText}
+      setSearchValue={setSearchText}
       products={computedProducts}
-      searchText={searchText}
-      handleSearchTextChange={e => handleSearchTextChange(e)}
+      handleSearchClick={handleSearchClick}
       options={categoriesOnly}
       option={selectedCategory}
       onOptionChange={target => handleCategoryChange(target)}
       next={handleNext}
       hasMore={hasMore}
       itemsAmmountOnPage={9}
+      handleCategoryChange={handleCategoryBarClick}
     />
   );
 };

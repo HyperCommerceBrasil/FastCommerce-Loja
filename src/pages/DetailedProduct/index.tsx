@@ -5,6 +5,7 @@ import {
   Header,
   ContentWrapper,
   ProductDetails,
+  Cart,
 } from '../../components';
 import { Wrapper } from './styles';
 
@@ -13,6 +14,7 @@ const DetailedProduct: React.FC = () => {
     <Wrapper>
       <Header />
       <Categories />
+      <Cart />
       <ContentWrapper>
         <ProductDetails />
       </ContentWrapper>
