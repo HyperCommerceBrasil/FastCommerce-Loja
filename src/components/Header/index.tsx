@@ -17,17 +17,25 @@ import {
   Wrapper,
 } from './styles';
 
-const Header: React.FC = () => {
+type HeaderProps = {
+  onSearchName?(name: string): void;
+};
+
+const Header: React.FC<HeaderProps> = ({ onSearchName }) => {
   const { push } = useHistory();
   const { setIsCartShowing, totalPrice, totalProductsOnCart } = useContext(
     GlobalCartContext,
   );
   const [searchValue, setSearchValue] = useState('');
 
-  const handleSearch = () =>
-    isValidSearch(searchValue)
-      ? push(`/search?name=${searchValue}`)
-      : error('🤔 Não entendi... use só letras, números ou espaços!');
+  const handleSearch = () => {
+    if (isValidSearch(searchValue)) {
+      push(`/search?name=${searchValue}`);
+      if (onSearchName) onSearchName(searchValue);
+    } else {
+      error('🤔 Não entendi... use só letras, números ou espaços!');
+    }
+  };
 
   const handleCartClick = () => setIsCartShowing();
 
