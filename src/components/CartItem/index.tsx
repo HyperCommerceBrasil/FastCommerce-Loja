@@ -1,5 +1,6 @@
 import React from 'react';
 import { IoMdClose } from 'react-icons/io';
+import { useHistory } from 'react-router';
 import { toLocalCurrency } from '../../utils';
 import {
   DetailsWrapper,
@@ -20,26 +21,30 @@ type CartIconProps = {
 const CartItem: React.FC<CartIconProps> = ({
   product,
   handleRemoveProduct = () => ({}),
-}) => (
-  <Wrapper to={`/product/${product.id}`}>
-    <DetailsWrapper>
-      <ProductImage src={product?.images[0].image} />
-      <TextDeatilsWrapper>
-        <HeaderCartItem>
-          <Name>{product?.name || 'Some name'}</Name>
-        </HeaderCartItem>
-        <Price>{toLocalCurrency(product?.price)}</Price>
-        <TotalPrice>{toLocalCurrency(product?.price)}</TotalPrice>
-      </TextDeatilsWrapper>
-    </DetailsWrapper>
-    <DeleteWrapper>
-      <IoMdClose
-        color="#fff"
-        size={30}
-        onClick={() => handleRemoveProduct(product)}
-      />
-    </DeleteWrapper>
-  </Wrapper>
-);
+}) => {
+  const { push } = useHistory();
+
+  return (
+    <Wrapper>
+      <DetailsWrapper onClick={() => push(`/product/${product.id}`)}>
+        <ProductImage src={product?.images[0].image} />
+        <TextDeatilsWrapper>
+          <HeaderCartItem>
+            <Name>{product?.name || 'Some name'}</Name>
+          </HeaderCartItem>
+          <Price>{toLocalCurrency(product?.price)}</Price>
+          <TotalPrice>{toLocalCurrency(product?.price)}</TotalPrice>
+        </TextDeatilsWrapper>
+      </DetailsWrapper>
+      <DeleteWrapper>
+        <IoMdClose
+          color="#fff"
+          size={30}
+          onClick={() => handleRemoveProduct(product)}
+        />
+      </DeleteWrapper>
+    </Wrapper>
+  );
+};
 
 export default CartItem;
