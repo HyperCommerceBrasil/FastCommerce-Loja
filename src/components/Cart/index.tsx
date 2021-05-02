@@ -29,7 +29,7 @@ const Cart: React.FC = () => {
     <Wrapper isShowing={isCartShowing}>
       <InternalWrapper>
         <CartHeader>
-          <HeaderTitle>Produtos</HeaderTitle>
+          <HeaderTitle>Carrinho</HeaderTitle>
           <ArrowWrapper isShowing={isCartShowing}>
             <HideArrow onClick={() => handleHideCart()} />
           </ArrowWrapper>

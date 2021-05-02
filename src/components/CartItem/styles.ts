@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Colors, Spacings } from '../../utils';
 import { IMAGE } from '../../utils/enums';
@@ -9,7 +8,7 @@ type ProductImageProps = {
   src?: string;
 };
 
-export const Wrapper = styled(Link)`
+export const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
   height: 100px;
@@ -18,6 +17,12 @@ export const Wrapper = styled(Link)`
   border-radius: 16px;
   background-color: ${Colors.light?.primary.main};
   text-decoration: none;
+
+  transition: 0.4s;
+
+  &:hover {
+    background-color: ${Colors.light?.primary.dark};
+  }
 `;
 
 export const ProductImage = styled.div<ProductImageProps>`
@@ -37,6 +42,10 @@ export const DetailsWrapper = styled.div`
   display: flex;
   flex: 1;
   flex-direction: row;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export const TextDeatilsWrapper = styled.div`
@@ -65,4 +74,5 @@ export const TotalPrice = styled.h2`
 export const DeleteWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  padding-left: ${small}px;
 `;
