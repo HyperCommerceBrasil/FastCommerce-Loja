@@ -29,7 +29,7 @@ const CartItem: React.FC<CartIconProps> = ({
 
   const handleItemClick = () => {
     push(`/product/${product.id}`);
-    setIsCartShowing();
+    setTimeout(() => setIsCartShowing(), 50);
   };
 
   return (
