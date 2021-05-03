@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { IoMdClose } from 'react-icons/io';
 import { useHistory } from 'react-router';
+import { GlobalCartContext } from '../../contexts';
 import { toLocalCurrency } from '../../utils';
 import {
   DetailsWrapper,
@@ -18,15 +19,22 @@ type CartIconProps = {
   product: ProductOnCart;
   handleRemoveProduct?(product: ProductOnCart): void;
 };
+
 const CartItem: React.FC<CartIconProps> = ({
   product,
   handleRemoveProduct = () => ({}),
 }) => {
   const { push } = useHistory();
+  const { setIsCartShowing } = useContext(GlobalCartContext);
+
+  const handleItemClick = () => {
+    push(`/product/${product.id}`);
+    setIsCartShowing();
+  };
 
   return (
     <Wrapper>
-      <DetailsWrapper onClick={() => push(`/product/${product.id}`)}>
+      <DetailsWrapper onClick={() => handleItemClick()}>
         <ProductImage src={product?.images[0].image} />
         <TextDeatilsWrapper>
           <HeaderCartItem>
