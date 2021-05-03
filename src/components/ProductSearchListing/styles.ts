@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Spacings, Breakpoints } from '../../utils';
+import { Spacings, Breakpoints, Colors } from '../../utils';
 
 const { insane } = Spacings;
 const { tablet, laptop, fhd } = Breakpoints;
@@ -8,6 +8,7 @@ export const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
+  background-color: ${Colors.light?.environment.lighter};
 `;
 
 export const ProductListing = styled.div`
@@ -32,4 +33,20 @@ export const ProductWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+export const NoProductFoundWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  min-height: 420px;
+  height: 100%;
+  background-color: ${Colors.light?.environment.lighter};
+`;
+
+export const NoProductFoundWrapperText = styled.h2`
+  font-weight: 300;
+  font-size: 2rem;
+  color: ${Colors.light?.text.main};
 `;

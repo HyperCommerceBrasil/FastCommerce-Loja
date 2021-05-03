@@ -96,6 +96,7 @@ const ProductSearchContainer: React.FC = () => {
 
     initialize();
   }, []);
+
   return (
     <ProductSearch
       searchValue={searchText}

@@ -19,7 +19,7 @@ type ProductSearchProps = {
   handleSearchClick(name: string): void;
   handleCategoryChange(name: string): void;
   next?(): void;
-  products: Product[];
+  products?: Product[];
   searchValue: string;
   setSearchValue(value: string): void;
 };

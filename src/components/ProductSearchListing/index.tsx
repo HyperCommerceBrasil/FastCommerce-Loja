@@ -1,7 +1,13 @@
 import React from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { InfiniteScrollStatusBar, ProductCard } from '..';
-import { ProductListing, ProductWrapper, Wrapper } from './styles';
+import {
+  NoProductFoundWrapper,
+  NoProductFoundWrapperText,
+  ProductListing,
+  ProductWrapper,
+  Wrapper,
+} from './styles';
 
 type ProductSearchListingProps = {
   products?: Product[];
@@ -17,8 +23,8 @@ const ProductSearchListing: React.FC<ProductSearchListingProps> = ({
   hasMore = false,
   loaderEndMessage = 'Procurando... 🔎',
   loaderStatusMessage = 'Foi tudo o que encontramos! 🕵️',
-}) => {
-  return (
+}) =>
+  products ? (
     <InfiniteScroll
       dataLength={products?.length || 0}
       next={next}
@@ -46,7 +52,12 @@ const ProductSearchListing: React.FC<ProductSearchListingProps> = ({
         </ProductListing>
       </Wrapper>
     </InfiniteScroll>
+  ) : (
+    <NoProductFoundWrapper>
+      <NoProductFoundWrapperText>
+        Não encontramos nada na pesquisa! :(
+      </NoProductFoundWrapperText>
+    </NoProductFoundWrapper>
   );
-};
 
 export default ProductSearchListing;
