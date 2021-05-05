@@ -1,14 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { HiPlus, HiMinus } from 'react-icons/hi';
 import { useParams } from 'react-router';
 import parse from 'html-react-parser';
 import { Helmet } from 'react-helmet';
 import { fetchSingleProduct } from '../../services';
 import {
-  CounterButton,
   ContentWrapper,
-  CounterValue,
-  CounterWrapper,
   ImageWrapper,
   Text,
   Title,
@@ -21,9 +17,10 @@ import {
   Price,
   CustomizedDescriptionTitle,
   ButtonMain,
+  CounterWrapper,
 } from './styles';
-import { toLocalCurrency } from '../../utils';
-import { PurchaseBottom } from '..';
+import { toLocalCurrency, warning } from '../../utils';
+import { PurchaseBottom, Counter } from '..';
 import { GlobalCartContext } from '../../contexts';
 
 type ProductDetailsProps = {
@@ -45,12 +42,21 @@ const ProductDetails: React.FC<ProductDetailsProps> = () => {
     getDataProducts();
   }, []);
 
-  const handlePlusCounter = () => setCounterValue(counterValue + 1);
+  const handlePlusCounter = () => {
+    if (productData?.quantity === counterValue) {
+      warning(
+        `Calma aí! Só temos ${productData.quantity} unidades disponíveis! 😬`,
+      );
+      return;
+    }
+    setCounterValue(counterValue + 1);
+  };
 
   const handleMinusCounter = () =>
     counterValue >= 2 ? setCounterValue(counterValue - 1) : counterValue;
 
-  const handleAddToCart = () => pushProduct(productData as ProductOnCart);
+  const handleAddToCart = () =>
+    pushProduct({ product: productData as ProductOnCart });
 
   const handleRetrieveFirstProductImage = () => {
     if (productData?.images) {
@@ -80,13 +86,11 @@ const ProductDetails: React.FC<ProductDetailsProps> = () => {
           </TextWrapper>
           <OptionsWrapper>
             <CounterWrapper>
-              <CounterButton onClick={() => handleMinusCounter()}>
-                <HiMinus size={25} color="#fff" />
-              </CounterButton>
-              <CounterValue>{counterValue}</CounterValue>
-              <CounterButton onClick={() => handlePlusCounter()}>
-                <HiPlus size={25} color="#fff" />
-              </CounterButton>
+              <Counter
+                counterValue={counterValue}
+                setCounterValueMinus={handleMinusCounter}
+                setCounterValuePlus={handlePlusCounter}
+              />
             </CounterWrapper>
             <ButtonMain onClick={() => handleAddToCart()}>
               ADICIONAR AO CARRINHO
