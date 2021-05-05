@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Spacings, Breakpoints, Colors } from '../../utils';
 
-const { insane } = Spacings;
+const { insane, medium } = Spacings;
 const { tablet, laptop, fhd } = Breakpoints;
 
 export const Wrapper = styled.div`
@@ -43,10 +43,16 @@ export const NoProductFoundWrapper = styled.div`
   min-height: 420px;
   height: 100%;
   background-color: ${Colors.light?.environment.lighter};
+  padding: 0 ${medium}px;
 `;
 
 export const NoProductFoundWrapperText = styled.h2`
+  text-align: center;
   font-weight: 300;
   font-size: 2rem;
   color: ${Colors.light?.text.main};
+
+  @media (max-width: ${tablet}px) {
+    font-size: 1.4rem;
+  }
 `;
