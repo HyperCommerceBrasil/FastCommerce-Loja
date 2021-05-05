@@ -1,5 +1,10 @@
 import React, { createContext, useState } from 'react';
-import { productOnCartExistsOnArray, success, warning } from '../../utils';
+import {
+  productOnCartExistsOnArray,
+  success,
+  warning,
+  warningProductLimitReachedAmountOrdered,
+} from '../../utils';
 
 type PushProductProps = {
   amountOrdered?: number;
@@ -86,6 +91,10 @@ export const GlobalCartProvider: React.FC = ({ children }) => {
     while (i < products.length) {
       product = products[i];
       if (products[i].id === productId) {
+        if (products[i].quantityOrdered === products[i].quantity) {
+          warningProductLimitReachedAmountOrdered(products[i].quantity);
+          return;
+        }
         product.quantityOrdered += 1;
         updatedProducts.push(product);
       } else {

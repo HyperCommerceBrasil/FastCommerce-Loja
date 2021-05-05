@@ -19,7 +19,10 @@ import {
   ButtonMain,
   CounterWrapper,
 } from './styles';
-import { toLocalCurrency, warning } from '../../utils';
+import {
+  toLocalCurrency,
+  warningProductLimitReachedAmountOrdered,
+} from '../../utils';
 import { PurchaseBottom, Counter } from '..';
 import { GlobalCartContext } from '../../contexts';
 
@@ -44,9 +47,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = () => {
 
   const handlePlusCounter = () => {
     if (productData?.quantity === counterValue) {
-      warning(
-        `Calma aí! Só temos ${productData.quantity} unidades disponíveis! 😬`,
-      );
+      warningProductLimitReachedAmountOrdered(productData.quantity);
       return;
     }
     setCounterValue(counterValue + 1);
