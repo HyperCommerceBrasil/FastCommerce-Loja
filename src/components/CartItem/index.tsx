@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import { IoMdClose } from 'react-icons/io';
 import { useHistory } from 'react-router';
 import { GlobalCartContext } from '../../contexts';
 import { toLocalCurrency } from '../../utils';
@@ -9,12 +8,14 @@ import {
   ProductImage,
   Name,
   Price,
+  IoMdClose,
   TotalPrice,
   Wrapper,
   HeaderCartItem,
   DeleteWrapper,
   TextDeatilsWrapper,
   CounterWrapper,
+  ImageWrapper,
 } from './styles';
 
 type CartIconProps = {
@@ -41,15 +42,23 @@ const CartItem: React.FC<CartIconProps> = ({
   return (
     <Wrapper>
       <DetailsWrapper>
-        <ProductImage
-          src={product?.images[0].image}
-          onClick={() => handleItemClick()}
-        />
+        <ImageWrapper>
+          <ProductImage
+            src={product?.images[0].image}
+            onClick={() => handleItemClick()}
+          />
+        </ImageWrapper>
         <TextDeatilsWrapper>
           <HeaderCartItem>
             <Name onClick={() => handleItemClick()}>
               {product?.name || 'Some name'}
             </Name>
+            <DeleteWrapper>
+              <IoMdClose
+                size={30}
+                onClick={() => handleRemoveProduct(product)}
+              />
+            </DeleteWrapper>
           </HeaderCartItem>
           <CounterWrapper>
             <Counter
@@ -63,18 +72,11 @@ const CartItem: React.FC<CartIconProps> = ({
             />
             <Price>x {toLocalCurrency(product?.price)}</Price>
           </CounterWrapper>
-          <TotalPrice>
-            {toLocalCurrency(product?.price * product.quantityOrdered)}
-          </TotalPrice>
         </TextDeatilsWrapper>
       </DetailsWrapper>
-      <DeleteWrapper>
-        <IoMdClose
-          color="#fff"
-          size={30}
-          onClick={() => handleRemoveProduct(product)}
-        />
-      </DeleteWrapper>
+      <TotalPrice>
+        Total: {toLocalCurrency(product?.price * product.quantityOrdered)}
+      </TotalPrice>
     </Wrapper>
   );
 };

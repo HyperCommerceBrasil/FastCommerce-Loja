@@ -44,7 +44,8 @@ const Cart: React.FC = () => {
           ))}
         </CartItemsWrapper>
         <CartFooter>
-          <FinalPrice>Preço total: {toLocalCurrency(totalPrice)}</FinalPrice>
+          <FinalPrice>Preço total</FinalPrice>
+          <FinalPrice>{toLocalCurrency(totalPrice)}</FinalPrice>
         </CartFooter>
       </InternalWrapper>
     </Wrapper>
