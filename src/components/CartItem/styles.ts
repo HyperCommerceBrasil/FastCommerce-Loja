@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Counter as CounterBase } from '..';
 import { Colors, Spacings } from '../../utils';
 import { IMAGE } from '../../utils/enums';
 
@@ -11,7 +12,7 @@ type ProductImageProps = {
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
-  height: 100px;
+  min-height: 100px;
   padding: ${small}px;
   margin: ${short}px 0;
   border-radius: 16px;
@@ -36,16 +37,16 @@ export const ProductImage = styled.div<ProductImageProps>`
   background-color: ${Colors.light?.text.lighter};
   border-radius: 16px;
   margin-right: ${short}px;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export const DetailsWrapper = styled.div`
   display: flex;
   flex: 1;
   flex-direction: row;
-
-  &:hover {
-    cursor: pointer;
-  }
 `;
 
 export const TextDeatilsWrapper = styled.div`
@@ -61,9 +62,28 @@ export const HeaderCartItem = styled.div`
 
 export const Name = styled.h3`
   color: ${Colors.light?.text.lighter};
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
+export const CounterWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: ${small}px 0;
+  border-radius: 10px;
+`;
+
+export const Counter = styled(CounterBase).attrs({
+  counterValueSizeRem: 1,
+  iconSize: 20,
+})``;
+
 export const Price = styled.h3`
+  font-size: 1rem;
   color: ${Colors.light?.text.lighter};
 `;
 

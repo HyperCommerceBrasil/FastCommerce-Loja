@@ -11,7 +11,8 @@ type CartData = {
   pushProduct(props: PushProductProps): void;
   removeProduct(product: ProductOnCart): void;
   handleSetProducts(products: ProductOnCart[]): void;
-  handleAddProductQuantityOrdered(): void;
+  handlePlusProductQuantityOrdered(productId: string): void;
+  handleMinusProductQuantityOrdered(productId: string): void;
   isCartShowing: boolean;
   setIsCartShowing(): void;
   totalProductsOnCart: number;
@@ -31,7 +32,7 @@ export const GlobalCartProvider: React.FC = ({ children }) => {
     let price = 0;
 
     while (i < products.length) {
-      price += products[i].price;
+      price += products[i].price * products[i].quantityOrdered;
       i += 1;
     }
     return price;
@@ -77,12 +78,44 @@ export const GlobalCartProvider: React.FC = ({ children }) => {
     setProducts(products);
   };
 
-  const handleAddProductQuantityOrdered = () => {
-    const updatedProducts = products.map(product => {
-      const raisedProduct = product;
-      if (raisedProduct.quantityOrdered) raisedProduct.quantityOrdered += 1;
-      return raisedProduct;
-    });
+  const handlePlusProductQuantityOrdered = (productId: string) => {
+    let i = 0;
+    let product;
+    const updatedProducts = [];
+
+    while (i < products.length) {
+      product = products[i];
+      if (products[i].id === productId) {
+        product.quantityOrdered += 1;
+        updatedProducts.push(product);
+      } else {
+        updatedProducts.push(product);
+      }
+      i += 1;
+    }
+
+    setTotalPrice(handleGetTotalPrice(updatedProducts));
+    setProducts(updatedProducts);
+  };
+
+  const handleMinusProductQuantityOrdered = (productId: string) => {
+    let i = 0;
+    let product;
+    const updatedProducts = [];
+
+    while (i < products.length) {
+      product = products[i];
+      if (products[i].id === productId) {
+        if (product.quantityOrdered !== 1) product.quantityOrdered -= 1;
+        updatedProducts.push(product);
+      } else {
+        updatedProducts.push(product);
+      }
+
+      i += 1;
+    }
+
+    setTotalPrice(handleGetTotalPrice(updatedProducts));
     setProducts(updatedProducts);
   };
 
@@ -96,7 +129,8 @@ export const GlobalCartProvider: React.FC = ({ children }) => {
         products,
         pushProduct,
         removeProduct,
-        handleAddProductQuantityOrdered,
+        handlePlusProductQuantityOrdered,
+        handleMinusProductQuantityOrdered,
         handleSetProducts,
         isCartShowing: cartIsShowing,
         setIsCartShowing: handleSetCartIsShowing,

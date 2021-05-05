@@ -34,7 +34,8 @@ const ProductCard: React.FC<ProductCardProps> = ({
   product,
 }) => {
   const { pushProduct } = useContext(GlobalCartContext);
-  const handleAddToCart = (product: ProductOnCart) => pushProduct({ product });
+  const handleAddToCart = (product: ProductOnCart) =>
+    pushProduct({ product, amountOrdered: 1 });
 
   return (
     <Wrapper>
@@ -49,7 +50,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
         </InformationList>
 
         <AddCartWrapper>
-          <AddCart onClick={() => handleAddToCart(product)}>
+          <AddCart onClick={() => handleAddToCart(product as ProductOnCart)}>
             <FaShoppingCart size={20} />
           </AddCart>
         </AddCartWrapper>

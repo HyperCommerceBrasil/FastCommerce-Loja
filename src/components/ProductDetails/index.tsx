@@ -56,7 +56,10 @@ const ProductDetails: React.FC<ProductDetailsProps> = () => {
     counterValue >= 2 ? setCounterValue(counterValue - 1) : counterValue;
 
   const handleAddToCart = () =>
-    pushProduct({ product: productData as ProductOnCart });
+    pushProduct({
+      product: productData as ProductOnCart,
+      amountOrdered: counterValue,
+    });
 
   const handleRetrieveFirstProductImage = () => {
     if (productData?.images) {
