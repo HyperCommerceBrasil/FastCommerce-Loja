@@ -17,7 +17,7 @@ export const Wrapper = styled.div`
   padding: ${short}px 0;
   /* margin: ${small}px 0; */
   /* border-radius: 16px; */
-  border-top: 2px solid ${Colors.light?.primary.main};
+  border-top: 1px solid ${Colors.light?.primary.main};
   /* border-bottom: 2px solid ${Colors.light?.primary.main}; */
   /* background-color: ${Colors.light?.primary.main}; */
   text-decoration: none;
@@ -70,7 +70,7 @@ export const HeaderCartItem = styled.div`
 `;
 
 export const Name = styled.h3`
-  color: ${Colors.light?.text.lighter};
+  color: ${Colors.light?.text.main};
 
   &:hover {
     cursor: pointer;
@@ -93,7 +93,7 @@ export const Counter = styled(CounterBase).attrs({
 
 export const Price = styled.h3`
   font-size: 1rem;
-  color: ${Colors.light?.text.lighter};
+  color: ${Colors.light?.text.main};
 `;
 
 export const TotalPrice = styled.h2`
@@ -111,7 +111,9 @@ export const DeleteWrapper = styled.div`
   padding-left: ${small}px;
 `;
 
-export const IoMdClose = styled(IoMdCloseBase)`
+export const IoMdClose = styled(IoMdCloseBase).attrs({
+  color: Colors.light?.text.main,
+})`
   &:hover {
     cursor: pointer;
   }

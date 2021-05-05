@@ -55,7 +55,6 @@ const CartItem: React.FC<CartIconProps> = ({
             </Name>
             <DeleteWrapper>
               <IoMdClose
-                color="#fff"
                 size={30}
                 onClick={() => handleRemoveProduct(product)}
               />
