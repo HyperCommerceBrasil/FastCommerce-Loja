@@ -29,4 +29,5 @@ declare type ProductOnCart = {
   pricePromotional?: string;
   details?: string;
   quantity?: number;
+  quantityOrdered?: number;
 };

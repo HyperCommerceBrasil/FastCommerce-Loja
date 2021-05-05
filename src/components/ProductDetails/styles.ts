@@ -3,7 +3,7 @@ import { ButtonMain as ButtonMainBase } from '..';
 import { Colors, Spacings, Breakpoints } from '../../utils';
 import { IMAGE } from '../../utils/enums';
 
-const { short, medium, giant, insane } = Spacings;
+const { medium, giant, insane } = Spacings;
 const { tablet, laptop, fhd } = Breakpoints;
 
 type ImgProps = {
@@ -70,7 +70,7 @@ export const TextWrapper = styled.div`
   justify-content: space-around;
 `;
 
-export const Title = styled.h3`
+export const Title = styled.h1`
   color: ${Colors.light?.text.main};
   font-size: 4rem;
   @media (max-width: ${fhd}px) {
@@ -100,7 +100,6 @@ export const Price = styled.h2`
 export const OptionsWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  /* justify-content: space-between; */
 
   @media (max-width: ${laptop}px) {
     flex-direction: column;
@@ -110,8 +109,6 @@ export const OptionsWrapper = styled.div`
 
 export const CounterWrapper = styled.div`
   display: flex;
-  flex-direction: row;
-  align-items: center;
   margin-right: ${giant}px;
 
   @media (max-width: ${laptop}px) {
@@ -123,22 +120,6 @@ export const ButtonMain = styled(ButtonMainBase)`
   @media (max-width: ${laptop}px) {
     display: none;
   }
-`;
-
-export const CounterButton = styled.button`
-  background-color: ${Colors.light?.primary.main};
-  border-radius: 8px;
-  padding: ${short}px;
-
-  &:hover {
-    cursor: pointer;
-  }
-`;
-
-export const CounterValue = styled.p`
-  color: ${Colors.light?.text.main};
-  font-size: 1.4rem;
-  margin: 0 ${medium}px;
 `;
 
 export const CustomizedDescriptionWrapper = styled.div`
@@ -155,5 +136,6 @@ export const CustomizedDescriptionWrapper = styled.div`
 
 export const CustomizedDescriptionTitle = styled.h3`
   font-size: 1.6rem;
+  font-weight: 300;
   margin: ${medium}px 0;
 `;
