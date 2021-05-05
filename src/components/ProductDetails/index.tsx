@@ -40,7 +40,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = () => {
     }
 
     getDataProducts();
-  }, []);
+  }, [id]);
 
   const handlePlusCounter = () => {
     if (productData?.quantity === counterValue) {
