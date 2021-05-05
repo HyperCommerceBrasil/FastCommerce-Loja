@@ -96,14 +96,13 @@ export const CartFooter = styled.div`
   align-items: right;
   padding: ${medium}px;
   background-color: ${Colors.light?.primary.main};
-  /* border: 1px solid ${Colors.light?.primary.main}; */
   border-radius: 16px;
   margin: ${big}px 0;
 `;
 
 export const FinalPrice = styled.h2`
-  text-align: right;
+  text-align: left;
   font-weight: 700;
-  font-size: 2rem;
+  font-size: 1rem;
   color: ${Colors.light?.text.lighter};
 `;

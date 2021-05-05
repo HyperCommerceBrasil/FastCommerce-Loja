@@ -1,9 +1,10 @@
 import styled from 'styled-components';
+import { IoMdClose as IoMdCloseBase } from 'react-icons/io';
 import { Counter as CounterBase } from '..';
 import { Colors, Spacings } from '../../utils';
 import { IMAGE } from '../../utils/enums';
 
-const { small, short } = Spacings;
+const { small, short, smaller } = Spacings;
 
 type ProductImageProps = {
   src?: string;
@@ -11,32 +12,39 @@ type ProductImageProps = {
 
 export const Wrapper = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   min-height: 100px;
-  padding: ${small}px;
-  margin: ${short}px 0;
-  border-radius: 16px;
-  background-color: ${Colors.light?.primary.main};
+  padding: ${short}px 0;
+  /* margin: ${small}px 0; */
+  /* border-radius: 16px; */
+  border-top: 2px solid ${Colors.light?.primary.main};
+  /* border-bottom: 2px solid ${Colors.light?.primary.main}; */
+  /* background-color: ${Colors.light?.primary.main}; */
   text-decoration: none;
 
   transition: 0.4s;
 
   &:hover {
-    background-color: ${Colors.light?.primary.dark};
+    /* background-color: ${Colors.light?.primary.dark}; */
   }
 `;
 
+export const ImageWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-right: ${short}px;
+`;
+
 export const ProductImage = styled.div<ProductImageProps>`
-  max-width: 100px;
-  width: 100%;
-  height: 100%;
+  width: 100px;
+  height: 100px;
   ${({ src = IMAGE.NOT_FOUND }) => `background-image: url(${src});`}
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
   background-color: ${Colors.light?.text.lighter};
   border-radius: 16px;
-  margin-right: ${short}px;
 
   &:hover {
     cursor: pointer;
@@ -51,6 +59,7 @@ export const DetailsWrapper = styled.div`
 
 export const TextDeatilsWrapper = styled.div`
   display: flex;
+  flex: 1;
   flex-direction: column;
   justify-content: space-between;
 `;
@@ -70,8 +79,8 @@ export const Name = styled.h3`
 
 export const CounterWrapper = styled.div`
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
+  justify-content: space-between;
   align-items: center;
   margin: ${small}px 0;
   border-radius: 10px;
@@ -79,7 +88,7 @@ export const CounterWrapper = styled.div`
 
 export const Counter = styled(CounterBase).attrs({
   counterValueSizeRem: 1,
-  iconSize: 20,
+  iconSize: 16,
 })``;
 
 export const Price = styled.h3`
@@ -88,6 +97,11 @@ export const Price = styled.h3`
 `;
 
 export const TotalPrice = styled.h2`
+  text-align: right;
+  background-color: ${Colors.light?.primary.main};
+  border-radius: 8px;
+  padding: ${smaller}px;
+  margin-top: ${small}px;
   color: ${Colors.light?.text.lighter};
 `;
 
@@ -95,4 +109,10 @@ export const DeleteWrapper = styled.div`
   display: flex;
   flex-direction: column;
   padding-left: ${small}px;
+`;
+
+export const IoMdClose = styled(IoMdCloseBase)`
+  &:hover {
+    cursor: pointer;
+  }
 `;
