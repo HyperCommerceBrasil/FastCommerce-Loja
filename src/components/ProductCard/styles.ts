@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { FaShoppingCart as BaseFaShoppingCart } from 'react-icons/fa';
+import { FaCartPlus as BaseFaCartPlus } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { Colors, Spacings, Breakpoints } from '../../utils';
 import { IMAGE } from '../../utils/enums';
@@ -105,9 +105,11 @@ export const AddCartWrapper = styled.div`
 `;
 
 export const AddCart = styled.button`
-  width: 50px;
-  height: 50px;
-  border-radius: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100px;
+  padding: ${short}px;
   background-color: ${Colors.light?.primary.main};
   transition: 0.2s;
 
@@ -117,6 +119,6 @@ export const AddCart = styled.button`
   }
 `;
 
-export const FaShoppingCart = styled(BaseFaShoppingCart)`
+export const FaCartPlus = styled(BaseFaCartPlus)`
   color: ${Colors.light?.text.lighter};
 `;

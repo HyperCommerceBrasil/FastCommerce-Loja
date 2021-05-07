@@ -5,7 +5,7 @@ import {
   AddCart,
   AddCartWrapper,
   Category,
-  FaShoppingCart,
+  FaCartPlus,
   ImageWrapper,
   Img,
   InformationList,
@@ -51,7 +51,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
 
         <AddCartWrapper>
           <AddCart onClick={() => handleAddToCart(product as ProductOnCart)}>
-            <FaShoppingCart size={20} />
+            <FaCartPlus size={20} />
           </AddCart>
         </AddCartWrapper>
       </InformationWrapper>
