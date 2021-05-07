@@ -14,7 +14,7 @@ declare type Product = {
   description?: string;
   pricePromotional?: string;
   details?: string;
-  quantity?: number;
+  quantity: number;
 };
 
 declare type ProductOnCart = {
@@ -28,6 +28,6 @@ declare type ProductOnCart = {
   description?: string;
   pricePromotional?: string;
   details?: string;
-  quantity?: number;
+  quantity: number;
   quantityOrdered: number;
 };
