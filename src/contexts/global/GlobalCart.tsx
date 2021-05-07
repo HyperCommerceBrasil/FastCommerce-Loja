@@ -32,6 +32,8 @@ export const GlobalCartProvider: React.FC = ({ children }) => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [cartIsShowing, setCartIsShowing] = useState(false);
 
+  const handleSetCartIsShowing = () => setCartIsShowing(!cartIsShowing);
+
   const handleGetTotalPrice = (products: ProductOnCart[]) => {
     let i = 0;
     let price = 0;
@@ -41,46 +43,6 @@ export const GlobalCartProvider: React.FC = ({ children }) => {
       i += 1;
     }
     return price;
-  };
-
-  const pushProduct = ({ amountOrdered, product }: PushProductProps): void => {
-    if (productOnCartExistsOnArray(product, products)) {
-      warning(
-        'Já existe esse produto no carrinho! Caso quiser mais unidades dele, só adicionar por lá. 😉',
-      );
-      return;
-    }
-
-    const amountOrderedProduct = product;
-    amountOrderedProduct.quantityOrdered = amountOrdered || 1;
-
-    const updatedProducts = products;
-    updatedProducts.push(amountOrderedProduct);
-
-    setTotalPrice(handleGetTotalPrice(updatedProducts));
-    setTotalProductsOnCart(updatedProducts.length);
-    setProducts(updatedProducts);
-    success(`${product.name} adicionado ao carrinho! 🛒`);
-  };
-
-  const removeProduct = (product: ProductOnCart): void => {
-    const updatedProducts = [];
-    let i = 0;
-
-    while (i < products.length) {
-      if (products[i].id !== product.id) updatedProducts.push(products[i]);
-      i += 1;
-    }
-
-    setTotalPrice(handleGetTotalPrice(updatedProducts));
-    setTotalProductsOnCart(updatedProducts.length);
-    setProducts(updatedProducts);
-  };
-
-  const handleSetProducts = (products: ProductOnCart[]) => {
-    setTotalPrice(handleGetTotalPrice(products));
-    setTotalProductsOnCart(products.length);
-    setProducts(products);
   };
 
   const handlePlusProductQuantityOrdered = (productId: string) => {
@@ -128,9 +90,45 @@ export const GlobalCartProvider: React.FC = ({ children }) => {
     setProducts(updatedProducts);
   };
 
-  // const handleAddAmount = () => {};
+  const pushProduct = ({ amountOrdered, product }: PushProductProps): void => {
+    if (productOnCartExistsOnArray(product, products)) {
+      warning(
+        'Já existe esse produto no carrinho! Caso quiser mais unidades dele, só adicionar por lá. 😉',
+      );
+      return;
+    }
 
-  const handleSetCartIsShowing = () => setCartIsShowing(!cartIsShowing);
+    const amountOrderedProduct = product;
+    amountOrderedProduct.quantityOrdered = amountOrdered || 1;
+
+    const updatedProducts = products;
+    updatedProducts.push(amountOrderedProduct);
+
+    setTotalPrice(handleGetTotalPrice(updatedProducts));
+    setTotalProductsOnCart(updatedProducts.length);
+    setProducts(updatedProducts);
+    success(`${product.name} adicionado ao carrinho! 🛒`);
+  };
+
+  const removeProduct = (product: ProductOnCart): void => {
+    const updatedProducts = [];
+    let i = 0;
+
+    while (i < products.length) {
+      if (products[i].id !== product.id) updatedProducts.push(products[i]);
+      i += 1;
+    }
+
+    setTotalPrice(handleGetTotalPrice(updatedProducts));
+    setTotalProductsOnCart(updatedProducts.length);
+    setProducts(updatedProducts);
+  };
+
+  const handleSetProducts = (products: ProductOnCart[]) => {
+    setTotalPrice(handleGetTotalPrice(products));
+    setTotalProductsOnCart(products.length);
+    setProducts(products);
+  };
 
   return (
     <GlobalCartContext.Provider
