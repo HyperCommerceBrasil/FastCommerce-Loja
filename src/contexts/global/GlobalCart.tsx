@@ -1,5 +1,10 @@
 import React, { createContext, useState } from 'react';
-import { productOnCartExistsOnArray, success, warning } from '../../utils';
+import {
+  productOnCartExistsOnArray,
+  success,
+  warning,
+  warningProductLimitReachedAmountOrdered,
+} from '../../utils';
 
 type PushProductProps = {
   amountOrdered?: number;
@@ -27,6 +32,8 @@ export const GlobalCartProvider: React.FC = ({ children }) => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [cartIsShowing, setCartIsShowing] = useState(false);
 
+  const handleSetCartIsShowing = () => setCartIsShowing(!cartIsShowing);
+
   const handleGetTotalPrice = (products: ProductOnCart[]) => {
     let i = 0;
     let price = 0;
@@ -36,6 +43,51 @@ export const GlobalCartProvider: React.FC = ({ children }) => {
       i += 1;
     }
     return price;
+  };
+
+  const handlePlusProductQuantityOrdered = (productId: string) => {
+    let i = 0;
+    let product;
+    const updatedProducts = [];
+
+    while (i < products.length) {
+      product = products[i];
+      if (products[i].id === productId) {
+        if (products[i].quantityOrdered === products[i].quantity) {
+          warningProductLimitReachedAmountOrdered(products[i].quantity);
+          return;
+        }
+        product.quantityOrdered += 1;
+        updatedProducts.push(product);
+      } else {
+        updatedProducts.push(product);
+      }
+      i += 1;
+    }
+
+    setTotalPrice(handleGetTotalPrice(updatedProducts));
+    setProducts(updatedProducts);
+  };
+
+  const handleMinusProductQuantityOrdered = (productId: string) => {
+    let i = 0;
+    let product;
+    const updatedProducts = [];
+
+    while (i < products.length) {
+      product = products[i];
+      if (products[i].id === productId) {
+        if (product.quantityOrdered !== 1) product.quantityOrdered -= 1;
+        updatedProducts.push(product);
+      } else {
+        updatedProducts.push(product);
+      }
+
+      i += 1;
+    }
+
+    setTotalPrice(handleGetTotalPrice(updatedProducts));
+    setProducts(updatedProducts);
   };
 
   const pushProduct = ({ amountOrdered, product }: PushProductProps): void => {
@@ -77,51 +129,6 @@ export const GlobalCartProvider: React.FC = ({ children }) => {
     setTotalProductsOnCart(products.length);
     setProducts(products);
   };
-
-  const handlePlusProductQuantityOrdered = (productId: string) => {
-    let i = 0;
-    let product;
-    const updatedProducts = [];
-
-    while (i < products.length) {
-      product = products[i];
-      if (products[i].id === productId) {
-        product.quantityOrdered += 1;
-        updatedProducts.push(product);
-      } else {
-        updatedProducts.push(product);
-      }
-      i += 1;
-    }
-
-    setTotalPrice(handleGetTotalPrice(updatedProducts));
-    setProducts(updatedProducts);
-  };
-
-  const handleMinusProductQuantityOrdered = (productId: string) => {
-    let i = 0;
-    let product;
-    const updatedProducts = [];
-
-    while (i < products.length) {
-      product = products[i];
-      if (products[i].id === productId) {
-        if (product.quantityOrdered !== 1) product.quantityOrdered -= 1;
-        updatedProducts.push(product);
-      } else {
-        updatedProducts.push(product);
-      }
-
-      i += 1;
-    }
-
-    setTotalPrice(handleGetTotalPrice(updatedProducts));
-    setProducts(updatedProducts);
-  };
-
-  // const handleAddAmount = () => {};
-
-  const handleSetCartIsShowing = () => setCartIsShowing(!cartIsShowing);
 
   return (
     <GlobalCartContext.Provider
