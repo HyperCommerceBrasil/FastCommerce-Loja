@@ -11,6 +11,8 @@ import {
   HeaderTitle,
   HideArrow,
   InternalWrapper,
+  ScrollableVertical,
+  ShippingWrapper,
   Wrapper,
 } from './styles';
 
@@ -34,17 +36,25 @@ const Cart: React.FC = () => {
             <HideArrow onClick={() => handleHideCart()} />
           </ArrowWrapper>
         </CartHeader>
-        <CartItemsWrapper>
-          {products.map(product => (
-            <CartItem
-              product={product}
-              key={product.id}
-              handleRemoveProduct={removeProduct}
-            />
-          ))}
-        </CartItemsWrapper>
+        <ScrollableVertical>
+          <CartItemsWrapper>
+            {products.map(product => (
+              <CartItem
+                product={product}
+                key={product.id}
+                handleRemoveProduct={removeProduct}
+              />
+            ))}
+          </CartItemsWrapper>
+          <ShippingWrapper>
+            {/* <ShippingPriceWrapper>
+              <ShippingDescription></ShippingDescription>
+              <ShippingPrice>{toLocalCurrency(20)}</ShippingPrice>
+            </ShippingPriceWrapper> */}
+          </ShippingWrapper>
+        </ScrollableVertical>
         <CartFooter>
-          <FinalPrice>Preço total</FinalPrice>
+          <FinalPrice>Valor total</FinalPrice>
           <FinalPrice>{toLocalCurrency(totalPrice)}</FinalPrice>
         </CartFooter>
       </InternalWrapper>
