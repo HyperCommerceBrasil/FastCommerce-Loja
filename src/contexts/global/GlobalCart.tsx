@@ -34,12 +34,13 @@ export const GlobalCartProvider: React.FC = ({ children }) => {
 
   const handleSetCartIsShowing = () => setCartIsShowing(!cartIsShowing);
 
-  const handleGetTotalPrice = (products: ProductOnCart[]) => {
+  const handleGetTotalPrice = (paramProducts?: ProductOnCart[]) => {
+    const functionProducts = paramProducts || products;
     let i = 0;
     let price = 0;
 
-    while (i < products.length) {
-      price += products[i].price * products[i].quantityOrdered;
+    while (i < functionProducts.length) {
+      price += functionProducts[i].price * functionProducts[i].quantityOrdered;
       i += 1;
     }
     return price;
@@ -71,13 +72,15 @@ export const GlobalCartProvider: React.FC = ({ children }) => {
 
   const handleMinusProductQuantityOrdered = (productId: string) => {
     let i = 0;
+    const LAST_POSSIBLE_VALUE = 1;
     let product;
     const updatedProducts = [];
 
     while (i < products.length) {
       product = products[i];
       if (products[i].id === productId) {
-        if (product.quantityOrdered !== 1) product.quantityOrdered -= 1;
+        if (product.quantityOrdered !== LAST_POSSIBLE_VALUE)
+          product.quantityOrdered -= LAST_POSSIBLE_VALUE;
         updatedProducts.push(product);
       } else {
         updatedProducts.push(product);
