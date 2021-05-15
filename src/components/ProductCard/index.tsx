@@ -33,9 +33,12 @@ const ProductCard: React.FC<ProductCardProps> = ({
   price,
   product,
 }) => {
+  const DEFAULT_AMOUNT_ORDERED = 1;
+
   const { pushProduct } = useContext(GlobalCartContext);
+
   const handleAddToCart = (product: ProductOnCart) =>
-    pushProduct({ product, amountOrdered: 1 });
+    pushProduct({ product, amountOrdered: DEFAULT_AMOUNT_ORDERED });
 
   return (
     <Wrapper>
