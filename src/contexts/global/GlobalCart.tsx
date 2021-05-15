@@ -1,10 +1,12 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 import {
   productOnCartExistsOnArray,
   success,
   warning,
   warningProductLimitReachedAmountOrdered,
 } from '../../utils';
+import { STORAGE_KEYS } from '../../utils/enums';
+import useLocalStorage from '../../utils/hooks/useLocalStorage';
 
 type PushProductProps = {
   amountOrdered?: number;
@@ -27,19 +29,26 @@ type CartData = {
 export const GlobalCartContext = createContext<CartData>({} as CartData);
 
 export const GlobalCartProvider: React.FC = ({ children }) => {
-  const [products, setProducts] = useState<ProductOnCart[]>([]);
+  const { saveValue, fetchValue } = useLocalStorage();
+
+  const [products, setProducts] = useState<ProductOnCart[]>(
+    (JSON.parse(
+      fetchValue(STORAGE_KEYS.CART_PRODUCTS) || '[]',
+    ) as ProductOnCart[]) || [],
+  );
   const [totalProductsOnCart, setTotalProductsOnCart] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
   const [cartIsShowing, setCartIsShowing] = useState(false);
 
   const handleSetCartIsShowing = () => setCartIsShowing(!cartIsShowing);
 
-  const handleGetTotalPrice = (products: ProductOnCart[]) => {
+  const handleGetTotalPrice = (paramProducts?: ProductOnCart[]) => {
+    const functionProducts = paramProducts || products;
     let i = 0;
     let price = 0;
 
-    while (i < products.length) {
-      price += products[i].price * products[i].quantityOrdered;
+    while (i < functionProducts.length) {
+      price += functionProducts[i].price * functionProducts[i].quantityOrdered;
       i += 1;
     }
     return price;
@@ -67,27 +76,31 @@ export const GlobalCartProvider: React.FC = ({ children }) => {
 
     setTotalPrice(handleGetTotalPrice(updatedProducts));
     setProducts(updatedProducts);
+    saveValue<ProductOnCart[]>(STORAGE_KEYS.CART_PRODUCTS, updatedProducts);
   };
 
   const handleMinusProductQuantityOrdered = (productId: string) => {
-    let i = 0;
+    let iterator = 0;
+    const LAST_POSSIBLE_VALUE = 1;
     let product;
     const updatedProducts = [];
 
-    while (i < products.length) {
-      product = products[i];
-      if (products[i].id === productId) {
-        if (product.quantityOrdered !== 1) product.quantityOrdered -= 1;
+    while (iterator < products.length) {
+      product = products[iterator];
+      if (products[iterator].id === productId) {
+        if (product.quantityOrdered !== LAST_POSSIBLE_VALUE)
+          product.quantityOrdered -= LAST_POSSIBLE_VALUE;
         updatedProducts.push(product);
       } else {
         updatedProducts.push(product);
       }
 
-      i += 1;
+      iterator += 1;
     }
 
     setTotalPrice(handleGetTotalPrice(updatedProducts));
     setProducts(updatedProducts);
+    saveValue<ProductOnCart[]>(STORAGE_KEYS.CART_PRODUCTS, updatedProducts);
   };
 
   const pushProduct = ({ amountOrdered, product }: PushProductProps): void => {
@@ -107,28 +120,37 @@ export const GlobalCartProvider: React.FC = ({ children }) => {
     setTotalPrice(handleGetTotalPrice(updatedProducts));
     setTotalProductsOnCart(updatedProducts.length);
     setProducts(updatedProducts);
+    saveValue<ProductOnCart[]>(STORAGE_KEYS.CART_PRODUCTS, updatedProducts);
     success(`${product.name} adicionado ao carrinho! 🛒`);
   };
 
   const removeProduct = (product: ProductOnCart): void => {
     const updatedProducts = [];
-    let i = 0;
+    let iterator = 0;
 
-    while (i < products.length) {
-      if (products[i].id !== product.id) updatedProducts.push(products[i]);
-      i += 1;
+    while (iterator < products.length) {
+      if (products[iterator].id !== product.id)
+        updatedProducts.push(products[iterator]);
+      iterator += 1;
     }
 
     setTotalPrice(handleGetTotalPrice(updatedProducts));
     setTotalProductsOnCart(updatedProducts.length);
     setProducts(updatedProducts);
+    saveValue<ProductOnCart[]>(STORAGE_KEYS.CART_PRODUCTS, updatedProducts);
   };
 
   const handleSetProducts = (products: ProductOnCart[]) => {
     setTotalPrice(handleGetTotalPrice(products));
     setTotalProductsOnCart(products.length);
     setProducts(products);
+    saveValue<ProductOnCart[]>(STORAGE_KEYS.CART_PRODUCTS, products);
   };
+
+  useEffect(() => {
+    setTotalPrice(handleGetTotalPrice(products));
+    setTotalProductsOnCart(products.length);
+  }, []);
 
   return (
     <GlobalCartContext.Provider

@@ -7,8 +7,10 @@ type UseLocalStorageFunctions = {
 
 const useLocalStorage = (): UseLocalStorageFunctions => {
   const saveValue = <T>(key: string, value: T) => {
-    if (typeof value === 'object')
+    if (typeof value === 'object') {
       localStorage.setItem(key, JSON.stringify(value));
+      return;
+    }
     localStorage.setItem(key, String(value));
   };
 

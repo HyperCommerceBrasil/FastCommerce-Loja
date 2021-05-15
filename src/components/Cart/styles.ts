@@ -90,6 +90,32 @@ export const CartItemsWrapper = styled.div`
   flex: 1;
 `;
 
+export const ShippingWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const ShippingPriceWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
+export const ShippingDescription = styled.h2`
+  color: ${Colors.light?.text.main};
+`;
+
+export const ShippingPrice = styled.h2`
+  color: ${Colors.light?.text.main};
+`;
+
+export const ScrollableVertical = styled.div`
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  height: 100%;
+`;
+
 export const CartFooter = styled.div`
   display: flex;
   flex-direction: column;
@@ -97,7 +123,7 @@ export const CartFooter = styled.div`
   padding: ${medium}px;
   background-color: ${Colors.light?.primary.main};
   border-radius: 16px;
-  margin: ${big}px 0;
+  /* margin: ${big}px 0; */
 `;
 
 export const FinalPrice = styled.h2`
