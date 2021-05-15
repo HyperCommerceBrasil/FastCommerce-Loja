@@ -95,6 +95,20 @@ export const ShippingWrapper = styled.div`
   flex-direction: column;
 `;
 
+export const ShippingPriceWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
+export const ShippingDescription = styled.h2`
+  color: ${Colors.light?.text.main};
+`;
+
+export const ShippingPrice = styled.h2`
+  color: ${Colors.light?.text.main};
+`;
+
 export const ScrollableVertical = styled.div`
   display: flex;
   flex-direction: column;
