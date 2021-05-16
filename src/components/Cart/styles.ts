@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { BsArrowRightShort as BsArrowRightShortBase } from 'react-icons/bs';
 import { Colors, Spacings, Breakpoints } from '../../utils';
 
-const { medium, big } = Spacings;
+const { medium } = Spacings;
 const { tablet, mobileWider } = Breakpoints;
 
 type WrapperProps = {
@@ -93,6 +93,11 @@ export const CartItemsWrapper = styled.div`
 export const ShippingWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: right;
+  padding: ${medium}px;
+  border: 2px solid ${Colors.light?.primary.main};
+  border-radius: 16px;
+  margin-top: ${medium}px;
 `;
 
 export const ShippingPriceWrapper = styled.div`
@@ -101,11 +106,19 @@ export const ShippingPriceWrapper = styled.div`
   justify-content: space-between;
 `;
 
-export const ShippingDescription = styled.h2`
+export const ShippingDescription = styled.h3`
   color: ${Colors.light?.text.main};
 `;
 
-export const ShippingPrice = styled.h2`
+export const ZipCodeInput = styled.input`
+  display: flex;
+  width: 100%;
+  background: none;
+  border-bottom: 1px solid ${Colors.light?.primary.main};
+  margin: 0 ${medium}px;
+`;
+
+export const ShippingPrice = styled.h3`
   color: ${Colors.light?.text.main};
 `;
 
@@ -118,17 +131,16 @@ export const ScrollableVertical = styled.div`
 
 export const CartFooter = styled.div`
   display: flex;
-  flex-direction: column;
   align-items: right;
+  justify-content: space-between;
   padding: ${medium}px;
   background-color: ${Colors.light?.primary.main};
   border-radius: 16px;
-  /* margin: ${big}px 0; */
+  margin-top: ${medium}px;
 `;
 
 export const FinalPrice = styled.h2`
   text-align: left;
   font-weight: 700;
-  font-size: 1rem;
   color: ${Colors.light?.text.lighter};
 `;
