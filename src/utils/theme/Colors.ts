@@ -5,7 +5,7 @@ export const Colors: DarkLightTheme = {
     success: '#47ed9a',
     info: '#478fed',
     text: {
-      darker: '#000000',
+      darker: '#050921',
       dark: '#141414',
       main: '#faf4f0',
       light: '#fffbf7',
@@ -32,7 +32,7 @@ export const Colors: DarkLightTheme = {
     success: '#47ed9a',
     info: '#478fed',
     text: {
-      darker: '#000000',
+      darker: '#050921',
       dark: '#141414',
       main: '#262625',
       light: '#faf4f0',
