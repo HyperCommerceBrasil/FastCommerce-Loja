@@ -15,17 +15,12 @@ export const Wrapper = styled.div`
   flex-direction: column;
   min-height: 100px;
   padding: ${short}px 0;
-  /* margin: ${small}px 0; */
-  /* border-radius: 16px; */
   border-top: 1px solid ${Colors.light?.primary.main};
-  /* border-bottom: 2px solid ${Colors.light?.primary.main}; */
-  /* background-color: ${Colors.light?.primary.main}; */
   text-decoration: none;
 
   transition: 0.4s;
 
   &:hover {
-    /* background-color: ${Colors.light?.primary.dark}; */
   }
 `;
 
@@ -71,6 +66,7 @@ export const HeaderCartItem = styled.div`
 
 export const Name = styled.h3`
   color: ${Colors.light?.text.main};
+  font-weight: 500;
 
   &:hover {
     cursor: pointer;
@@ -93,10 +89,11 @@ export const Counter = styled(CounterBase).attrs({
 
 export const Price = styled.h3`
   font-size: 1rem;
+  font-weight: 300;
   color: ${Colors.light?.text.main};
 `;
 
-export const TotalPrice = styled.h2`
+export const TotalPrice = styled.h3`
   text-align: right;
   background-color: ${Colors.light?.primary.main};
   border-radius: 8px;

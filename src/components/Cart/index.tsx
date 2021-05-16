@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { GlobalCartContext } from '../../contexts';
 import { toLocalCurrency } from '../../utils';
 import CartItem from '../CartItem';
@@ -12,11 +12,16 @@ import {
   HideArrow,
   InternalWrapper,
   ScrollableVertical,
+  ShippingDescription,
+  ShippingPrice,
+  ShippingPriceWrapper,
   ShippingWrapper,
   Wrapper,
+  ZipCodeInput,
 } from './styles';
 
 const Cart: React.FC = () => {
+  const [zipCode, setZipCode] = useState('');
   const {
     isCartShowing,
     setIsCartShowing,
@@ -24,6 +29,8 @@ const Cart: React.FC = () => {
     totalPrice,
     removeProduct,
   } = useContext(GlobalCartContext);
+
+  const CEP_LENGTH = 8;
 
   const handleHideCart = () => setIsCartShowing();
 
@@ -46,15 +53,22 @@ const Cart: React.FC = () => {
               />
             ))}
           </CartItemsWrapper>
-          <ShippingWrapper>
-            {/* <ShippingPriceWrapper>
-              <ShippingDescription></ShippingDescription>
-              <ShippingPrice>{toLocalCurrency(20)}</ShippingPrice>
-            </ShippingPriceWrapper> */}
-          </ShippingWrapper>
         </ScrollableVertical>
+        <ShippingWrapper>
+          <ShippingPriceWrapper>
+            <ShippingDescription>Frete</ShippingDescription>
+            <ZipCodeInput
+              maxLength={CEP_LENGTH}
+              inputMode="numeric"
+              value={zipCode}
+              onChange={({ target }) => setZipCode(target.value)}
+              placeholder="Insira o seu CEP"
+            />
+            <ShippingPrice>{toLocalCurrency(20)}</ShippingPrice>
+          </ShippingPriceWrapper>
+        </ShippingWrapper>
         <CartFooter>
-          <FinalPrice>Valor total</FinalPrice>
+          <FinalPrice>Total:</FinalPrice>
           <FinalPrice>{toLocalCurrency(totalPrice)}</FinalPrice>
         </CartFooter>
       </InternalWrapper>
