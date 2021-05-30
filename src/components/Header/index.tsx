@@ -37,10 +37,16 @@ const Header: React.FC<HeaderProps> = ({ onSearchName }) => {
     }
   };
 
+  const handleEnterPress = (code: string) => {
+    if (code === 'Enter') {
+      handleSearch();
+    }
+  };
+
   const handleCartClick = () => setIsCartShowing();
 
   return (
-    <Wrapper>
+    <Wrapper onKeyPress={({ code }) => handleEnterPress(code)}>
       <LogoWrapper to="/">
         <Logo color="#fff" height={50} width={200} />
       </LogoWrapper>
@@ -52,13 +58,13 @@ const Header: React.FC<HeaderProps> = ({ onSearchName }) => {
         <SearchButton onClick={handleSearch}>Pesquisar</SearchButton>
       </SearchWrapper>
       <OptionsWrapper>
-        <CartWrapper onClick={() => handleCartClick()}>
-          <CartIcon totalPrice={totalPrice} cartItems={totalProductsOnCart} />
-        </CartWrapper>
         <UserWrapper>
           <FaUser size={28} />
           <UserText>Minha conta</UserText>
         </UserWrapper>
+        <CartWrapper onClick={handleCartClick}>
+          <CartIcon totalPrice={totalPrice} cartItems={totalProductsOnCart} />
+        </CartWrapper>
       </OptionsWrapper>
     </Wrapper>
   );
