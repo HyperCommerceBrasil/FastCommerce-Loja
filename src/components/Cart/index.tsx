@@ -4,7 +4,7 @@ import { toLocalCurrency } from '../../utils';
 import CartItem from '../CartItem';
 import {
   ArrowWrapper,
-  CartFooter,
+  CartInfoitemWrapper,
   CartHeader,
   CartItemsWrapper,
   FinalPrice,
@@ -15,9 +15,11 @@ import {
   ShippingDescription,
   ShippingPrice,
   ShippingPriceWrapper,
-  ShippingWrapper,
+  BorderlineCartInfoitemWrapper,
   Wrapper,
   ZipCodeInput,
+  BuyText,
+  FinalPriceWrapper,
 } from './styles';
 
 const Cart: React.FC = () => {
@@ -54,7 +56,7 @@ const Cart: React.FC = () => {
             ))}
           </CartItemsWrapper>
         </ScrollableVertical>
-        <ShippingWrapper>
+        <BorderlineCartInfoitemWrapper>
           <ShippingPriceWrapper>
             <ShippingDescription>Frete</ShippingDescription>
             <ZipCodeInput
@@ -66,11 +68,16 @@ const Cart: React.FC = () => {
             />
             <ShippingPrice>{toLocalCurrency(20)}</ShippingPrice>
           </ShippingPriceWrapper>
-        </ShippingWrapper>
-        <CartFooter>
-          <FinalPrice>Total:</FinalPrice>
-          <FinalPrice>{toLocalCurrency(totalPrice)}</FinalPrice>
-        </CartFooter>
+        </BorderlineCartInfoitemWrapper>
+        <BorderlineCartInfoitemWrapper>
+          <FinalPriceWrapper>
+            <FinalPrice>Total:</FinalPrice>
+            <FinalPrice>{toLocalCurrency(totalPrice)}</FinalPrice>
+          </FinalPriceWrapper>
+        </BorderlineCartInfoitemWrapper>
+        <CartInfoitemWrapper>
+          <BuyText>Comprar</BuyText>
+        </CartInfoitemWrapper>
       </InternalWrapper>
     </Wrapper>
   );
