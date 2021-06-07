@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import './index.css';
 import 'react-toastify/dist/ReactToastify.css';
 import { GlobalProvider } from './contexts';
-import { Routes } from './components/routes';
+import { Routes } from './routes';
 
 toast.configure();
 
