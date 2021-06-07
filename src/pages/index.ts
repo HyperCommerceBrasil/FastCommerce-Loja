@@ -6,3 +6,4 @@ export { default as DetailedProduct } from './DetailedProduct';
 export { default as Page404 } from './Page404';
 
 // Private Pages
+export { default as UserArea } from './UserArea';
