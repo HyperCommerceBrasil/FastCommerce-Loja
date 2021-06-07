@@ -1,14 +1,14 @@
 export const Radius: Radius = {
-  insane: 48,
-  huge: 40,
-  giant: 32,
-  big: 26,
-  large: 20,
-  medium: 16,
-  short: 12,
-  small: 8,
-  smaller: 4,
-  meaningless: 2,
+  insaneRadius: 48,
+  hugeRadius: 40,
+  giantRadius: 32,
+  bigRadius: 26,
+  largeRadius: 20,
+  mediumRadius: 16,
+  shortRadius: 12,
+  smallRadius: 8,
+  smallerRadius: 4,
+  meaninglessRadius: 2,
 };
 
 export default Radius;

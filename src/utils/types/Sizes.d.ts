@@ -12,16 +12,16 @@ type Spacings = {
 };
 
 type Radius = {
-  insane: number;
-  huge: number;
-  giant: number;
-  big: number;
-  large: number;
-  medium: number;
-  short: number;
-  small: number;
-  smaller: number;
-  meaningless: number;
+  insaneRadius: number;
+  hugeRadius: number;
+  giantRadius: number;
+  bigRadius: number;
+  largeRadius: number;
+  mediumRadius: number;
+  shortRadius: number;
+  smallRadius: number;
+  smallerRadius: number;
+  meaninglessRadius: number;
 };
 
 type Font = {
