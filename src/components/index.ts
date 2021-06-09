@@ -17,3 +17,4 @@ export { default as InfiniteScrollStatusBar } from './InfiniteScrollStatusBar';
 export { default as Cart } from './Cart';
 export { default as CartItem } from './CartItem';
 export { default as Drawer } from './Drawer';
+export { default as CartOrderCard } from './UserAreaComponents/CartOrderCard';
