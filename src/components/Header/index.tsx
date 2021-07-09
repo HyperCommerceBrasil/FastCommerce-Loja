@@ -1,5 +1,4 @@
 import React, { useContext, useState } from 'react';
-import { FaUser } from 'react-icons/fa';
 import { useHistory } from 'react-router-dom';
 import { Logo } from '../../assets';
 import { GlobalCartContext } from '../../contexts';
@@ -7,6 +6,7 @@ import { error, isValidSearch } from '../../utils';
 import CartIcon from '../CartIcon';
 import {
   CartWrapper,
+  InternUserWrapper,
   LogoWrapper,
   OptionsWrapper,
   SearchButton,
@@ -14,6 +14,8 @@ import {
   SearchWrapper,
   UserText,
   UserWrapper,
+  LoginBox,
+  FaUser,
   Wrapper,
 } from './styles';
 
@@ -26,6 +28,7 @@ const Header: React.FC<HeaderProps> = ({ onSearchName }) => {
   const { setIsCartShowing, totalPrice, totalProductsOnCart } = useContext(
     GlobalCartContext,
   );
+  const [isLoginBoxShowing, setIsLoginBoxShowing] = useState(false);
   const [searchValue, setSearchValue] = useState('');
 
   const handleSearch = () => {
@@ -59,8 +62,13 @@ const Header: React.FC<HeaderProps> = ({ onSearchName }) => {
       </SearchWrapper>
       <OptionsWrapper>
         <UserWrapper>
-          <FaUser size={28} />
-          <UserText>Minha conta</UserText>
+          <InternUserWrapper
+            onClick={() => setIsLoginBoxShowing(!isLoginBoxShowing)}
+          >
+            <FaUser size={28} />
+            <UserText>Minha conta</UserText>
+          </InternUserWrapper>
+          <LoginBox isShowing={isLoginBoxShowing} />
         </UserWrapper>
         <CartWrapper onClick={handleCartClick}>
           <CartIcon totalPrice={totalPrice} cartItems={totalProductsOnCart} />
