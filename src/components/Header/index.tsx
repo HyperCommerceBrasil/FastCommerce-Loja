@@ -17,6 +17,7 @@ import {
   LoginBox,
   FaUser,
   Wrapper,
+  LoginBoxWrapper,
 } from './styles';
 
 type HeaderProps = {
@@ -28,7 +29,7 @@ const Header: React.FC<HeaderProps> = ({ onSearchName }) => {
   const { setIsCartShowing, totalPrice, totalProductsOnCart } = useContext(
     GlobalCartContext,
   );
-  const [isLoginBoxShowing, setIsLoginBoxShowing] = useState(false);
+  const [isLoginBoxOpened, setIsLoginBoxOpened] = useState(false);
   const [searchValue, setSearchValue] = useState('');
 
   const handleSearch = () => {
@@ -63,16 +64,18 @@ const Header: React.FC<HeaderProps> = ({ onSearchName }) => {
       <OptionsWrapper>
         <UserWrapper>
           <InternUserWrapper
-            onClick={() => setIsLoginBoxShowing(!isLoginBoxShowing)}
+            onClick={() => setIsLoginBoxOpened(!isLoginBoxOpened)}
           >
             <FaUser size={28} />
             <UserText>Minha conta</UserText>
           </InternUserWrapper>
-          <LoginBox isShowing={isLoginBoxShowing} />
         </UserWrapper>
         <CartWrapper onClick={handleCartClick}>
           <CartIcon totalPrice={totalPrice} cartItems={totalProductsOnCart} />
         </CartWrapper>
+        <LoginBoxWrapper>
+          <LoginBox isShowing={isLoginBoxOpened} />
+        </LoginBoxWrapper>
       </OptionsWrapper>
     </Wrapper>
   );

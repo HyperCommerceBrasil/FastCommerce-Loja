@@ -39,6 +39,7 @@ export const SearchWrapper = styled.div`
 `;
 
 export const OptionsWrapper = styled.div`
+  position: relative;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -95,7 +96,6 @@ export const CartWrapper = styled.button`
 export const CartIcon = styled.div``;
 
 export const UserWrapper = styled.div`
-  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -116,6 +116,22 @@ export const InternUserWrapper = styled.button`
 
   &:hover {
     cursor: pointer;
+  }
+`;
+
+export const LoginBoxWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  position: absolute;
+  bottom: -350px;
+
+  @media (max-width: ${laptop}px) {
+    left: unset;
+  }
+
+  @media (max-width: ${tablet}px) {
+    flex-direction: row;
+    justify-content: center;
   }
 `;
 

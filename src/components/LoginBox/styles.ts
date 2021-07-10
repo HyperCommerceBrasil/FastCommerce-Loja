@@ -10,10 +10,8 @@ type WrapperProps = {
 };
 
 export const Wrapper = styled.div<WrapperProps>`
-  z-index: 10;
   top: ${huge}px;
   width: 300px;
-  position: absolute;
 
   display: ${({ isShowing }) => (isShowing ? 'flex' : 'none')};
   flex-direction: column;
