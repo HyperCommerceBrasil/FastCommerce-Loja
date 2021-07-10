@@ -120,6 +120,7 @@ export const InternUserWrapper = styled.button`
 `;
 
 export const LoginBoxWrapper = styled.div`
+  z-index: 10;
   display: flex;
   width: 100%;
   position: absolute;
