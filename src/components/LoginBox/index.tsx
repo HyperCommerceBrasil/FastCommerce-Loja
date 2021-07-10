@@ -1,7 +1,5 @@
 import { TextField } from '@material-ui/core';
 import React from 'react';
-// import { AirDots } from '../../assets';
-// import ButtonMain from '../ButtonMain';
 import {
   LoginBoxLink,
   Header,
