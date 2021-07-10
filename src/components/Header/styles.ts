@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { FaUser as FaUserBase } from 'react-icons/fa';
+import { default as LoginBoxBase } from '../LoginBox';
 import { Colors, Spacings, Breakpoints } from '../../utils';
 
 const { small, large, medium } = Spacings;
@@ -37,6 +39,7 @@ export const SearchWrapper = styled.div`
 `;
 
 export const OptionsWrapper = styled.div`
+  position: relative;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -94,12 +97,50 @@ export const CartIcon = styled.div``;
 
 export const UserWrapper = styled.div`
   display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+export const FaUser = styled(FaUserBase).attrs({
+  color: '#fff',
+})`
+  color: ${Colors.light?.text.lighter};
+`;
+
+export const InternUserWrapper = styled.button`
+  display: flex;
   flex-direction: row;
   align-items: center;
+
+  background-color: transparent;
+
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+export const LoginBoxWrapper = styled.div`
+  z-index: 10;
+  display: flex;
+  width: 100%;
+  position: absolute;
+  bottom: -350px;
+
+  @media (max-width: ${laptop}px) {
+    left: unset;
+  }
+
+  @media (max-width: ${tablet}px) {
+    flex-direction: row;
+    justify-content: center;
+  }
 `;
 
 export const UserIcon = styled.div``;
 
 export const UserText = styled.p`
   margin-left: ${medium}px;
+  color: ${Colors.light?.text.lighter};
 `;
+
+export const LoginBox = styled(LoginBoxBase)``;

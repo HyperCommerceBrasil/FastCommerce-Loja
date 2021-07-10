@@ -20,7 +20,7 @@ export const Wrapper = styled.div<WrapperProps>`
   width: 500px;
   height: 100%;
   z-index: 20;
-  box-shadow: 0 0 24px #cccccc;
+  box-shadow: 3px 4px 13px rgba(0, 0, 0, 0.19);
   position: fixed;
   background-color: ${Colors.light?.environment.main};
   right: ${({ isShowing }) => (isShowing ? 0 : -550)}px;
