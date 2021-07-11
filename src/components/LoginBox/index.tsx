@@ -20,7 +20,7 @@ const LoginBox: React.FC<Props> = ({ isShowing = false }) => (
   <Wrapper isShowing={isShowing}>
     <Header>
       <HeaderTitle>Login</HeaderTitle>
-      <LoginBoxLink to="yeeesss">Criar conta</LoginBoxLink>
+      <LoginBoxLink to="/signup">Criar conta</LoginBoxLink>
     </Header>
     <FormWrapper>
       <InputWrapper>
@@ -34,7 +34,7 @@ const LoginBox: React.FC<Props> = ({ isShowing = false }) => (
     </FormWrapper>
     <ButtonMain>Acessar</ButtonMain>
     <LinkWrapper>
-      <LoginBoxLink to="yeeesss">Esqueceu sua senha?</LoginBoxLink>
+      <LoginBoxLink to="/forgot-password">Esqueceu sua senha?</LoginBoxLink>
     </LinkWrapper>
   </Wrapper>
 );
