@@ -5,6 +5,7 @@ import './index.css';
 import 'react-toastify/dist/ReactToastify.css';
 import { GlobalProvider } from './contexts';
 import { Routes } from './components/routes';
+import './utils/config/reactotron.config.js';
 
 toast.configure();
 
