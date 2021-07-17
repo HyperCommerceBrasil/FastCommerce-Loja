@@ -1,6 +1,7 @@
-import React, { useContext } from 'react';
-import { GlobalCartContext } from '../../../contexts';
-import { toLocalCurrency } from '../../../utils';
+import React from 'react';
+// import React, { useContext } from 'react';
+// import { GlobalCartContext } from '../../../contexts';
+// import { toLocalCurrency } from '../../../utils';
 import { Wrapper } from './styles';
 
 type Props = {
@@ -8,12 +9,12 @@ type Props = {
 };
 
 const CartOrderCard: React.FC<Props> = ({ text }) => {
-  const DEFAULT_AMOUNT_ORDERED = 1;
+  // const DEFAULT_AMOUNT_ORDERED = 1;
 
-  const { pushProduct } = useContext(GlobalCartContext);
+  // const { pushProduct } = useContext(GlobalCartContext);
 
-  const handleAddToCart = (product: ProductOnCart) =>
-    pushProduct({ product, amountOrdered: DEFAULT_AMOUNT_ORDERED });
+  // const handleAddToCart = (product: ProductOnCart) =>
+  //   pushProduct({ product, amountOrdered: DEFAULT_AMOUNT_ORDERED });
 
   return <Wrapper>{text}</Wrapper>;
 };
