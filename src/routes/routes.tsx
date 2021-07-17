@@ -6,8 +6,9 @@ import {
   DetailedProduct,
   ProductSearchContainer,
   Page404,
+  UserArea,
   ForgotPassword,
-} from '../../pages';
+} from '../pages';
 
 const Routes: React.FC = () => (
   <BrowserRouter>
@@ -16,6 +17,7 @@ const Routes: React.FC = () => (
       <Route path="/signup" component={SignUp} />
       <Route path="/product/:id" component={DetailedProduct} />
       <Route path="/search" component={ProductSearchContainer} />
+      <Route path="/user" component={UserArea} />
       <Route path="/forgot-password" component={ForgotPassword} />
       <Route component={Page404} />
     </Switch>
