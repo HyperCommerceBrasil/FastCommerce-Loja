@@ -18,7 +18,7 @@ export const Wrapper = styled.div`
   border-radius: 16px;
   width: 18vw;
   height: 300px;
-  box-shadow: 0 0 24px #cccccc;
+  box-shadow: 3px 4px 13px rgba(0, 0, 0, 0.19);
   transition: 0.4s;
   &:hover {
     cursor: pointer;
