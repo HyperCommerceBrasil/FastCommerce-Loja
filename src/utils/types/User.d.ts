@@ -9,7 +9,20 @@ declare type LoggedUser = {
   email: string;
 };
 
-declare type UserCredentials = {
+declare type CreatedUserResponse = {
+  id: string;
+  name: string;
+  password: string;
+  email: string;
+};
+
+declare type UserLoginCredentials = {
+  password: string;
+  email: string;
+};
+
+declare type UserSignupCredentials = {
+  name: string;
   password: string;
   email: string;
 };
