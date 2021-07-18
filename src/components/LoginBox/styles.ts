@@ -66,6 +66,13 @@ export const ButtonMain = styled(ButtonMainBase)`
   }
 `;
 
+export const ButtonLink = styled.button`
+  font-size: 1rem;
+  color: ${Colors.light?.primary.main};
+  text-decoration: underline;
+  background-color: transparent;
+`;
+
 export const LoginBoxLink = styled(Link)`
   color: ${Colors.light?.primary.main};
 
