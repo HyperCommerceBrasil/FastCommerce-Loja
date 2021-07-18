@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Helmet } from 'react-helmet';
 import {
   Banner,
   Categories,
@@ -23,6 +24,12 @@ const Home: React.FC = () => {
   }, []);
   return (
     <Wrapper>
+      <Helmet title="Home">
+        <meta
+          name="description"
+          content="Venha conferir vários produtos de maneira rápida e eficiente"
+        />
+      </Helmet>
       <Header />
       <Categories />
       <Banner />
