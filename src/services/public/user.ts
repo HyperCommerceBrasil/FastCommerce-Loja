@@ -2,6 +2,8 @@ import { AxiosRequestConfig } from 'axios';
 import ResponseErrorHandler from '../../utils/api/error';
 import api from '../api';
 
+const customerURL = '/customers';
+
 const requestConfig: AxiosRequestConfig = {
   headers: {
     'Content-Type': 'application/json',
@@ -14,7 +16,7 @@ export const login = async ({
 }: Partial<UserLoginCredentials>): Promise<LoggedUserResponse> => {
   try {
     const { data } = await api.post<LoggedUserResponse>(
-      `/auth`,
+      `${customerURL}/auth`,
       {
         email,
         password,
@@ -35,7 +37,7 @@ export const createUser = async ({
 }: Partial<UserSignupCredentials>): Promise<CreatedUserResponse> => {
   try {
     const { data } = await api.post<CreatedUserResponse>(
-      `/users`,
+      `${customerURL}`,
       {
         name,
         email,
