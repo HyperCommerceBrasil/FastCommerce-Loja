@@ -4,4 +4,5 @@
  */
 export enum STORAGE_KEYS {
   CART_PRODUCTS = 'CART_PRODUCTS',
+  USER_TOKEN = 'USER_TOKEN',
 }

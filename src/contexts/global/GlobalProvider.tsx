@@ -1,11 +1,17 @@
 import React from 'react';
-import { GlobalCategoriesProvider, GlobalCartProvider } from './index';
+import {
+  GlobalCategoriesProvider,
+  GlobalCartProvider,
+  GlobalUserProvider,
+} from './index';
 
 const GlobalProvider: React.FC = ({ children }) => {
   return (
-    <GlobalCategoriesProvider>
-      <GlobalCartProvider>{children}</GlobalCartProvider>
-    </GlobalCategoriesProvider>
+    <GlobalUserProvider>
+      <GlobalCategoriesProvider>
+        <GlobalCartProvider>{children}</GlobalCartProvider>
+      </GlobalCategoriesProvider>
+    </GlobalUserProvider>
   );
 };
 
