@@ -124,7 +124,7 @@ export const LoginBoxWrapper = styled.div`
   display: flex;
   width: 100%;
   position: absolute;
-  bottom: -350px;
+  top: 50px;
 
   @media (max-width: ${laptop}px) {
     left: unset;
