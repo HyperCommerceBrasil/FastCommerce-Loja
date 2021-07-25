@@ -3,6 +3,16 @@
  * If there isn't any key for your data, create your key here :)
  */
 export enum STORAGE_KEYS {
+  /**
+   * Cart products (temporarily)
+   */
   CART_PRODUCTS = 'CART_PRODUCTS',
-  USER_TOKEN = 'USER_TOKEN',
+  /**
+   * User object containing token login and useId
+   */
+  USER = 'USER',
+  /**
+   * Token of reset password challenge api
+   */
+  RESET_PASSWORD_CHALLENGE = 'RESET_PASSWORD_CHALLENGE',
 }

@@ -51,3 +51,40 @@ export const createUser = async ({
     throw new ResponseErrorHandler(err);
   }
 };
+
+export const resetUserPasswordChallenge = async (
+  email: string,
+): Promise<ResetPasswordCredentialsChallengeResponse> => {
+  try {
+    const { data } = await api.post<ResetPasswordCredentialsChallengeResponse>(
+      `${customerURL}/sendlink_resetpassword`,
+      {
+        email,
+      },
+      requestConfig,
+    );
+
+    return data;
+  } catch (err) {
+    throw new ResponseErrorHandler(err);
+  }
+};
+
+export const resetUserPassword = async ({
+  password,
+  token,
+}: Partial<ResetPassword>): Promise<ResetPasswordResponse> => {
+  try {
+    const { data } = await api.post<ResetPasswordResponse>(
+      `${customerURL}/reset_password?token=${token}`,
+      {
+        password,
+      },
+      requestConfig,
+    );
+
+    return data;
+  } catch (err) {
+    throw new ResponseErrorHandler(err);
+  }
+};
