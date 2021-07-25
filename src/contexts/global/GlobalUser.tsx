@@ -5,9 +5,12 @@ import {
   resetUserPasswordChallenge,
   resetUserPassword,
 } from '../../services';
-import { getFirstName, welcomeBack, welcomeToFastCommerce } from '../../utils';
-import { STORAGE_KEYS } from '../../utils/enums';
-import useLocalStorage from '../../utils/hooks/useLocalStorage';
+import {
+  getFirstName,
+  useQuery,
+  welcomeBack,
+  welcomeToFastCommerce,
+} from '../../utils';
 
 type UserData = {
   token?: string;
@@ -17,7 +20,6 @@ type UserData = {
     userCredentials: Partial<UserSignupCredentials>,
     shouldLogin?: boolean,
   ): Promise<void>;
-  resetPasswordMail?: string;
   forgotPasswordChallenge(email: string): Promise<void>;
   forgotPasswordReset(password: string): Promise<void>;
 };
@@ -25,9 +27,8 @@ type UserData = {
 export const GlobalUserContext = createContext<UserData>({} as UserData);
 
 export const GlobalUserProvider: React.FC = ({ children }) => {
-  const { saveValue, deleteValue, fetchValue } = useLocalStorage();
+  const { getURLQueryParam } = useQuery();
   const [token, setToken] = useState<string>();
-  const [resetPasswordMail, setResetPasswordMail] = useState<string>();
   const [user, setUser] = useState<LoggedUser>();
 
   const createUser = async (
@@ -56,19 +57,13 @@ export const GlobalUserProvider: React.FC = ({ children }) => {
   };
 
   const forgotPasswordChallenge = async (emailToReset: string) => {
-    const { token, email } = await resetUserPasswordChallenge(emailToReset);
-
-    saveValue(STORAGE_KEYS.RESET_PASSWORD_CHALLENGE, token);
-
-    setResetPasswordMail(email);
+    await resetUserPasswordChallenge(emailToReset);
   };
 
   const forgotPasswordReset = async (password: string) => {
-    const token = fetchValue(STORAGE_KEYS.RESET_PASSWORD_CHALLENGE);
+    const token = getURLQueryParam('token');
 
     const { email } = await resetUserPassword({ password, token });
-
-    deleteValue(STORAGE_KEYS.RESET_PASSWORD_CHALLENGE);
 
     await login({ email, password });
   };
@@ -81,7 +76,6 @@ export const GlobalUserProvider: React.FC = ({ children }) => {
         login,
         createUser,
         forgotPasswordChallenge,
-        resetPasswordMail,
         forgotPasswordReset,
       }}
     >
