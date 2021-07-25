@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { BiMailSend as BiMailSendBase } from 'react-icons/bi';
+import { FaCheck as FaCheckBase } from 'react-icons/fa';
 import { ButtonMain as ButtonMainBase } from '../../components';
 import { Colors, Spacings } from '../../utils';
 
@@ -37,16 +37,6 @@ export const Title = styled.h2`
   text-align: center;
 `;
 
-export const IconWrapper = styled.div`
-  margin: ${large}px 0;
-`;
-
-export const BiMailSend = styled(BiMailSendBase).attrs({
-  size: 50,
-})`
-  color: ${Colors.light?.success};
-`;
-
 export const InstructionsWrapper = styled.div`
   display: flex;
   margin-top: ${large}px;
@@ -57,22 +47,23 @@ export const Text = styled.p`
   text-align: center;
 `;
 
-export const BoldText = styled.p`
-  font-weight: 700;
-  text-align: center;
-`;
-
-export const EmailInputWrapper = styled.div`
+export const InputWrapper = styled.div`
   margin-top: ${insane}px;
 `;
 
-export const EmailTitleWrapper = styled.div`
-  display: flex;
-  margin-bottom: ${short}px;
+export const IconWrapper = styled.div`
+  margin: ${large}px 0;
+`;
+
+export const FaCheck = styled(FaCheckBase).attrs({
+  size: 40,
+})`
+  color: ${Colors.light?.success};
 `;
 
 export const TextFieldWrapper = styled.div`
   display: flex;
+  margin: ${short}px 0;
 `;
 
 export const ButtonWrapper = styled.div`

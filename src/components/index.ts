@@ -19,3 +19,4 @@ export { default as CartItem } from './CartItem';
 export { default as Drawer } from './Drawer';
 export { default as CartOrderCard } from './UserAreaComponents/CartOrderCard';
 export { default as LoginBox } from './LoginBox';
+export { default as Paper } from './Paper';

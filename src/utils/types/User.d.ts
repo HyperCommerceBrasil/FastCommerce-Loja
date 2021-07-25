@@ -26,3 +26,18 @@ declare type UserSignupCredentials = {
   password: string;
   email: string;
 };
+
+declare type ResetPasswordCredentialsChallengeResponse = {
+  token: string;
+  email: string;
+};
+
+declare type ResetPassword = {
+  token?: string | null;
+  password: string;
+};
+
+declare type ResetPasswordResponse = {
+  id: string;
+  email: string;
+};
