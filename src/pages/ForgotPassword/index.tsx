@@ -16,7 +16,7 @@ import {
   BoldText,
 } from './styles';
 import { Paper } from '../../components';
-import { error, replacePartOfString } from '../../utils';
+import { error } from '../../utils';
 import { GlobalUserContext } from '../../contexts';
 
 const ForgotPassword: React.FC = () => {
