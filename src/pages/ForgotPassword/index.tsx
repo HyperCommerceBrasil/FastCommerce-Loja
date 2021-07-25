@@ -13,16 +13,13 @@ import {
   TextFieldWrapper,
   BiMailSend,
   IconWrapper,
-  BoldText,
 } from './styles';
 import { Paper } from '../../components';
 import { error } from '../../utils';
 import { GlobalUserContext } from '../../contexts';
 
 const ForgotPassword: React.FC = () => {
-  const { resetPasswordMail, forgotPasswordChallenge } = useContext(
-    GlobalUserContext,
-  );
+  const { forgotPasswordChallenge } = useContext(GlobalUserContext);
   const [successfulEmailSent, setSuccessfulEmailSent] = useState(false);
   const [isSending, setIsSending] = useState(false);
   const [email, setEmail] = useState('');
@@ -59,9 +56,7 @@ const ForgotPassword: React.FC = () => {
             <Text>
               Verifique sua caixa de entrada ou spam!
               <br />
-              Lá você encontrará o email que enviamos para
-              <BoldText>{resetPasswordMail}</BoldText>
-              com o link para redefinir sua senha!
+              Lá você encontrará o email que enviamos para redefinir sua senha!
             </Text>
           </InstructionsWrapper>
         </Paper>
