@@ -11,8 +11,4 @@ export enum STORAGE_KEYS {
    * User object containing token login and useId
    */
   USER = 'USER',
-  /**
-   * Token of reset password challenge api
-   */
-  RESET_PASSWORD_CHALLENGE = 'RESET_PASSWORD_CHALLENGE',
 }

@@ -20,7 +20,7 @@ const Routes: React.FC = () => (
       <Route path="/search" component={ProductSearchContainer} />
       <Route path="/user/:id" component={UserArea} />
       <Route path="/forgot-password" component={ForgotPassword} />
-      <Route path="/reset_password" component={ResetPassword} />
+      <Route path="/reset-password" component={ResetPassword} />
       <Route component={Page404} />
     </Switch>
   </BrowserRouter>

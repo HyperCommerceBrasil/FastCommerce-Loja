@@ -57,11 +57,6 @@ export const Text = styled.p`
   text-align: center;
 `;
 
-export const BoldText = styled.p`
-  font-weight: 700;
-  text-align: center;
-`;
-
 export const EmailInputWrapper = styled.div`
   margin-top: ${insane}px;
 `;
