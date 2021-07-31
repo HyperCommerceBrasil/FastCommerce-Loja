@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 import {
   login as loginApi,
   createUser as createUserAPI,
@@ -11,6 +11,8 @@ import {
   welcomeBack,
   welcomeToFastCommerce,
 } from '../../utils';
+import { STORAGE_KEYS } from '../../utils/enums';
+import useLocalStorage from '../../utils/hooks/useLocalStorage';
 
 type UserData = {
   token?: string;
@@ -27,6 +29,7 @@ type UserData = {
 export const GlobalUserContext = createContext<UserData>({} as UserData);
 
 export const GlobalUserProvider: React.FC = ({ children }) => {
+  const { saveValue, fetchValue } = useLocalStorage();
   const { getURLQueryParam } = useQuery();
   const [token, setToken] = useState<string>();
   const [user, setUser] = useState<LoggedUser>();
@@ -47,11 +50,28 @@ export const GlobalUserProvider: React.FC = ({ children }) => {
     }
   };
 
+  const loginFromStorageData = () => {
+    const storageUserContent = fetchValue(STORAGE_KEYS.USER);
+
+    if (storageUserContent) {
+      const { token, user }: LoggedUserResponse = JSON.parse(
+        storageUserContent,
+      );
+
+      setToken(token);
+      setUser(user);
+
+      welcomeBack(getFirstName(user.name) || '');
+    }
+  };
+
   const login = async ({ email, password }: Partial<UserLoginCredentials>) => {
     const { token, user } = await loginApi({ email, password });
 
     setToken(token);
     setUser(user);
+
+    saveValue(STORAGE_KEYS.USER, JSON.stringify({ token, user }));
 
     welcomeBack(getFirstName(user.name) || '');
   };
@@ -67,6 +87,10 @@ export const GlobalUserProvider: React.FC = ({ children }) => {
 
     await login({ email, password });
   };
+
+  useEffect(() => {
+    loginFromStorageData();
+  }, []);
 
   return (
     <GlobalUserContext.Provider
