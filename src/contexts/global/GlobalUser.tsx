@@ -10,9 +10,9 @@ import {
   useQuery,
   welcomeBack,
   welcomeToFastCommerce,
+  useLocalStorage,
+  STORAGE_KEYS,
 } from '../../utils';
-import { STORAGE_KEYS } from '../../utils/enums';
-import useLocalStorage from '../../utils/hooks/useLocalStorage';
 
 type UserData = {
   token?: string;
@@ -60,8 +60,6 @@ export const GlobalUserProvider: React.FC = ({ children }) => {
 
       setToken(token);
       setUser(user);
-
-      welcomeBack(getFirstName(user.name) || '');
     }
   };
 
