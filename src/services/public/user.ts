@@ -88,3 +88,13 @@ export const resetUserPassword = async ({
     throw new ResponseErrorHandler(err);
   }
 };
+
+export const getUserData = async (): Promise<UserData> => {
+  try {
+    const { data } = await api.get<UserData>(customerURL);
+
+    return data;
+  } catch (err) {
+    throw new ResponseErrorHandler(err);
+  }
+};

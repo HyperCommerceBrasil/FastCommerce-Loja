@@ -10,5 +10,5 @@ export enum STORAGE_KEYS {
   /**
    * User object containing token login and useId
    */
-  USER = '@FASTCOMMERCE_STORE_USER',
+  USER_TOKEN = '@FASTCOMMERCE_STORE_USER_TOKEN',
 }
