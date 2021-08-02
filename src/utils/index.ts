@@ -5,3 +5,4 @@ export * from './string';
 export * from './array';
 export * from './hooks';
 export * from './api';
+export * from './enums';

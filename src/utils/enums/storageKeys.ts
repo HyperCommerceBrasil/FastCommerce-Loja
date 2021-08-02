@@ -6,9 +6,9 @@ export enum STORAGE_KEYS {
   /**
    * Cart products (temporarily)
    */
-  CART_PRODUCTS = 'CART_PRODUCTS',
+  CART_PRODUCTS = '@FASTCOMMERCE_STORE_CART_PRODUCTS',
   /**
    * User object containing token login and useId
    */
-  USER = 'USER',
+  USER_TOKEN = '@FASTCOMMERCE_STORE_USER_TOKEN',
 }

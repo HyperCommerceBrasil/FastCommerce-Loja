@@ -4,15 +4,17 @@ import {
   createUser as createUserAPI,
   resetUserPasswordChallenge,
   resetUserPassword,
+  getUserData,
 } from '../../services';
+import api from '../../services/api';
 import {
   getFirstName,
   useQuery,
   welcomeBack,
   welcomeToFastCommerce,
+  useLocalStorage,
+  STORAGE_KEYS,
 } from '../../utils';
-import { STORAGE_KEYS } from '../../utils/enums';
-import useLocalStorage from '../../utils/hooks/useLocalStorage';
 
 type UserData = {
   token?: string;
@@ -29,7 +31,7 @@ type UserData = {
 export const GlobalUserContext = createContext<UserData>({} as UserData);
 
 export const GlobalUserProvider: React.FC = ({ children }) => {
-  const { saveValue, fetchValue } = useLocalStorage();
+  const { saveValue, fetchValue, deleteValue } = useLocalStorage();
   const { getURLQueryParam } = useQuery();
   const [token, setToken] = useState<string>();
   const [user, setUser] = useState<LoggedUser>();
@@ -50,28 +52,36 @@ export const GlobalUserProvider: React.FC = ({ children }) => {
     }
   };
 
-  const loginFromStorageData = () => {
-    const storageUserContent = fetchValue(STORAGE_KEYS.USER);
+  const loginFromStorageData = async () => {
+    const storageUserContent = fetchValue(STORAGE_KEYS.USER_TOKEN);
 
     if (storageUserContent) {
-      const { token, user }: LoggedUserResponse = JSON.parse(
-        storageUserContent,
-      );
+      try {
+        const { token } = JSON.parse(storageUserContent);
 
-      setToken(token);
-      setUser(user);
+        api.defaults.headers.authorization = `Bearer ${token}`;
 
-      welcomeBack(getFirstName(user.name) || '');
+        const user = await getUserData();
+
+        setToken(token);
+        setUser(user);
+      } catch (err) {
+        deleteValue(STORAGE_KEYS.USER_TOKEN);
+      }
     }
   };
 
   const login = async ({ email, password }: Partial<UserLoginCredentials>) => {
-    const { token, user } = await loginApi({ email, password });
+    const { token } = await loginApi({ email, password });
+
+    api.defaults.headers.authorization = `Bearer ${token}`;
+
+    const user = await getUserData();
 
     setToken(token);
     setUser(user);
 
-    saveValue(STORAGE_KEYS.USER, JSON.stringify({ token, user }));
+    saveValue(STORAGE_KEYS.USER_TOKEN, JSON.stringify({ token }));
 
     welcomeBack(getFirstName(user.name) || '');
   };

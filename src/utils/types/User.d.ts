@@ -41,3 +41,26 @@ declare type ResetPasswordResponse = {
   id: string;
   email: string;
 };
+
+declare type UserData = {
+  id: string;
+  name: string;
+  password: string;
+  adresses: UserAddress[];
+  email: string;
+  cpf: string;
+  birthdate: string;
+};
+
+declare type UserAddress = {
+  id: string;
+  name: string;
+  customerId: string;
+  cep: string;
+  uf: string;
+  city: string;
+  street: string;
+  district: string;
+  number: string;
+  addressDefault: boolean;
+};

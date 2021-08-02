@@ -10,6 +10,7 @@ import {
   ForgotPassword,
   ResetPassword,
 } from '../pages';
+import PrivateRoute from './Private';
 
 const Routes: React.FC = () => (
   <BrowserRouter>
@@ -18,9 +19,11 @@ const Routes: React.FC = () => (
       <Route path="/signup" component={SignUp} />
       <Route path="/product/:id" component={DetailedProduct} />
       <Route path="/search" component={ProductSearchContainer} />
-      <Route path="/user/:id" component={UserArea} />
       <Route path="/forgot-password" component={ForgotPassword} />
       <Route path="/reset-password" component={ResetPassword} />
+
+      <PrivateRoute path="/user/:id" component={UserArea} />
+
       <Route component={Page404} />
     </Switch>
   </BrowserRouter>
