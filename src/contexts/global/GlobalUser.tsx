@@ -16,9 +16,9 @@ import {
   STORAGE_KEYS,
 } from '../../utils';
 
-type UserData = {
+type ContextUserData = {
   token?: string;
-  user?: LoggedUser;
+  user?: UserData;
   login(userCredentials: Partial<UserLoginCredentials>): Promise<void>;
   createUser(
     userCredentials: Partial<UserSignupCredentials>,
@@ -28,13 +28,15 @@ type UserData = {
   forgotPasswordReset(password: string): Promise<void>;
 };
 
-export const GlobalUserContext = createContext<UserData>({} as UserData);
+export const GlobalUserContext = createContext<ContextUserData>(
+  {} as ContextUserData,
+);
 
 export const GlobalUserProvider: React.FC = ({ children }) => {
   const { saveValue, fetchValue, deleteValue } = useLocalStorage();
   const { getURLQueryParam } = useQuery();
   const [token, setToken] = useState<string>();
-  const [user, setUser] = useState<LoggedUser>();
+  const [user, setUser] = useState<UserData>();
 
   const createUser = async (
     { email, name, password }: Partial<UserSignupCredentials>,
@@ -43,7 +45,11 @@ export const GlobalUserProvider: React.FC = ({ children }) => {
     await createUserAPI({ email, name, password });
 
     if (shouldLogin) {
-      const { token, user } = await loginApi({ email, password });
+      const { token } = await loginApi({ email, password });
+
+      api.defaults.headers.authorization = `Bearer ${token}`;
+
+      const user = await getUserData();
 
       setToken(token);
       setUser(user);
