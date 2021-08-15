@@ -15,8 +15,8 @@ export const Colors: DarkLightTheme = {
       darker: '#cf5711',
       dark: '#de631b',
       main: '#EE6D20',
-      light: '#ed7934',
-      lighter: '#eb8142',
+      light: '#ff9555',
+      lighter: '#ffccad',
     },
     environment: {
       darker: '#111211',
@@ -42,8 +42,8 @@ export const Colors: DarkLightTheme = {
       darker: '#cf5711',
       dark: '#de631b',
       main: '#EE6D20',
-      light: '#ed7934',
-      lighter: '#eb8142',
+      light: '#ff9555',
+      lighter: '#ffccad',
     },
     environment: {
       darker: '#e9d0c5',
