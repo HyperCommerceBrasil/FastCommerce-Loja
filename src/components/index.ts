@@ -20,3 +20,4 @@ export { default as Drawer } from './Drawer';
 export { default as CartOrderCard } from './UserAreaComponents/CartOrderCard';
 export { default as LoginBox } from './LoginBox';
 export { default as Paper } from './Paper';
+export { default as AddressCard } from './UserAreaComponents/Components/AddressCard';
