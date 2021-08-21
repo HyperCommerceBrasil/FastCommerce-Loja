@@ -59,14 +59,3 @@ const AddressCard: React.FC<Props> = ({
 );
 
 export default AddressCard;
-
-// "id": "a69a9771-37a9-4ce9-9805-73561cb0f8df",
-// "name": "Minha Casa 1",
-// "customerId": "e1aabe93-8586-4151-8119-0a793e81d7a2",
-// "cep": "978000000",
-// "uf": "RS",
-// "city": "São  Luiz Gonzaga",
-// "street": "Rua Ernestp Alves",
-// "district": "Monsenhor Wolski",
-// "number": "1431",
-// "addressDefault": false,

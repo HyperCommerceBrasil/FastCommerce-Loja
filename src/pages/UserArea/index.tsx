@@ -30,13 +30,8 @@ const UserArea: React.FC = () => {
   const addressesComponent = () => (
     <AddressComponentWrapper>
       <AddressCard key={0} isNew onNewPress={handleNewPress} />
-      {user?.adresses.map((address, idx) => (
-        <AddressCard
-          address={address}
-          key={address.id || 0}
-          isNew={idx === 0}
-          onNewPress={idx === 0 ? handleNewPress : undefined}
-        />
+      {user?.adresses?.map(address => (
+        <AddressCard address={address} key={address.id || 0} />
       ))}
     </AddressComponentWrapper>
   );
