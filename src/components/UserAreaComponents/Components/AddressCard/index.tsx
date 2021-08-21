@@ -48,9 +48,9 @@ const AddressCard: React.FC<Props> = ({
           <Link href="/user/5t334">Editar</Link>
           <Link href="/user/5t334">Excluir</Link>
           {address?.addressDefault ? (
-            <Link href="/user/5t334">Definir como padrão</Link>
-          ) : (
             ''
+          ) : (
+            <Link href="/user/5t334">Definir como padrão</Link>
           )}
         </OptionsWrapper>
       </Wrapper>
