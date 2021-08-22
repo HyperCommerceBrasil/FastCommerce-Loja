@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 import { RiAddCircleLine as RiAddCircleLineBase } from 'react-icons/ri';
-import { Colors, Spacings, Radius } from '../../../../utils';
+import { Colors, Spacings, Radius, Breakpoints } from '../../../../utils';
 
 const { medium, small } = Spacings;
 const { mediumRadius } = Radius;
+const { tablet } = Breakpoints;
 
 type WrapperProps = {
   isDefault?: boolean;
@@ -30,6 +31,11 @@ export const Wrapper = styled.div<WrapperProps>`
   transition: 0.3s;
 
   border-radius: ${mediumRadius}px;
+
+  @media (max-width: ${tablet}px) {
+    width: 100%;
+    /* height: ${defaultCardHeight}; */
+  }
 `;
 
 export const NewAddressWrapper = styled.div`
@@ -49,6 +55,11 @@ export const NewAddressWrapper = styled.div`
     cursor: pointer;
     color: ${Colors.light?.primary.main};
     border: 2px dashed ${Colors.light?.primary.main};
+  }
+
+  @media (max-width: ${tablet}px) {
+    width: 100%;
+    /* height: ${defaultCardHeight}; */
   }
 `;
 

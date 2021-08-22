@@ -4,10 +4,11 @@ import {
   FaInfo as FaInfoBase,
 } from 'react-icons/fa';
 import { IoLocation as IoLocationBase } from 'react-icons/io5';
-import { Colors, Spacings, Radius } from '../../utils';
+import { Colors, Spacings, Radius, Breakpoints } from '../../utils';
 
 const { smaller, small } = Spacings;
 const { smallRadius } = Radius;
+const { tablet } = Breakpoints;
 
 type OptionProps = {
   isActive: boolean;
@@ -18,12 +19,21 @@ export const Wrapper = styled.div`
   flex-direction: column;
   padding: ${smaller}px ${small}px;
   width: 170px;
+
+  /* background-color: #1f6; */
+  @media (max-width: ${tablet}px) {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    overflow-x: scroll;
+  }
 `;
 
 export const OptionWrapper = styled.button<OptionProps>`
   display: flex;
   flex-direction: row;
   align-items: center;
+  min-width: 140px;
   padding: ${smaller}px;
   border-radius: ${smallRadius}px;
   margin: ${smaller}px 0;
@@ -37,6 +47,10 @@ export const OptionWrapper = styled.button<OptionProps>`
     color: ${Colors.light?.text.lighter};
     background-color: ${Colors.light?.primary.darker};
     cursor: pointer;
+  }
+
+  @media (max-width: ${tablet}px) {
+    margin: 0 ${smaller}px;
   }
 `;
 
