@@ -29,14 +29,14 @@ const defaultDrawer: DrawerState[] = [
     id: '4f1h80734y50t870387gt1308t710374134',
     isActive: false,
     label: 'Endereços',
-    icon: <FaInfo />,
+    icon: <IoLocation />,
     value: DRAWER_VALUES.ADRESSES,
   },
   {
     id: '348712y340873489677fw9e76rfg97e46tg',
     isActive: false,
     label: 'Informações da Conta',
-    icon: <IoLocation />,
+    icon: <FaInfo />,
     value: DRAWER_VALUES.ACCOUNT_INFORMATION,
   },
 ];
