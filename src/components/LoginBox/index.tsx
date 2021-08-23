@@ -1,5 +1,6 @@
 import { TextField } from '@material-ui/core';
 import React from 'react';
+import { If } from '../lib';
 import {
   LoginBoxLink,
   Header,
@@ -57,7 +58,7 @@ const LoginBox: React.FC<Props> = ({
         </ButtonLink>
       </Header>
       <FormWrapper>
-        {isCreatingAccount && (
+        <If condition={isCreatingAccount}>
           <InputWrapper>
             <TextFieldLabel>Nome Completo</TextFieldLabel>
             <TextField
@@ -68,7 +69,7 @@ const LoginBox: React.FC<Props> = ({
               onChange={({ target }) => onNameChange(target.value)}
             />
           </InputWrapper>
-        )}
+        </If>
         <InputWrapper>
           <TextFieldLabel>E-mail</TextFieldLabel>
           <TextField
