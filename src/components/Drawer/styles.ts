@@ -20,7 +20,6 @@ export const Wrapper = styled.div`
   padding: ${smaller}px ${small}px;
   width: 170px;
 
-  /* background-color: #1f6; */
   @media (max-width: ${tablet}px) {
     width: 100%;
     flex-direction: row;
@@ -36,6 +35,9 @@ export const OptionWrapper = styled.button<OptionProps>`
   min-width: 140px;
   padding: ${smaller}px;
   border-radius: ${smallRadius}px;
+  border: 1px solid;
+  border-color: ${({ isActive }) =>
+    isActive ? Colors.light?.primary.main : Colors.light?.text.main};
   margin: ${smaller}px 0;
   color: ${({ isActive }) =>
     isActive ? Colors.light?.text.lighter : Colors.light?.text.main};
@@ -50,7 +52,7 @@ export const OptionWrapper = styled.button<OptionProps>`
   }
 
   @media (max-width: ${tablet}px) {
-    margin: 0 ${smaller}px;
+    margin: ${small}px ${small}px;
   }
 `;
 

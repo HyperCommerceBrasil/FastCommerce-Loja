@@ -1,6 +1,6 @@
 import { AxiosRequestConfig } from 'axios';
-import ResponseErrorHandler from '../../utils/api/error';
-import api from '../api';
+import ResponseErrorHandler from '../utils/api/error';
+import api from './api';
 
 const customerURL = '/customers';
 
@@ -94,6 +94,16 @@ export const getUserData = async (): Promise<UserData> => {
     const { data } = await api.get<UserData>(customerURL);
 
     return data;
+  } catch (err) {
+    throw new ResponseErrorHandler(err);
+  }
+};
+
+export const createUserAddress = async (
+  address: CreateUserAddress,
+): Promise<void> => {
+  try {
+    await api.post<void>(`${customerURL}/address`, address);
   } catch (err) {
     throw new ResponseErrorHandler(err);
   }

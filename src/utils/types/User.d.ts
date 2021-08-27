@@ -64,3 +64,14 @@ declare type UserAddress = {
   number: string;
   addressDefault: boolean;
 };
+
+declare type CreateUserAddress = {
+  street: string;
+  district: string;
+  city: string;
+  cep: string;
+  number: string;
+  uf: string;
+  defaultAddress: boolean;
+  name: string;
+};

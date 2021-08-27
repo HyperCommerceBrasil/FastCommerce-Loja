@@ -106,6 +106,10 @@ export const DeleteWrapper = styled.div`
   display: flex;
   flex-direction: column;
   padding-left: ${small}px;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export const IoMdClose = styled(IoMdCloseBase).attrs({

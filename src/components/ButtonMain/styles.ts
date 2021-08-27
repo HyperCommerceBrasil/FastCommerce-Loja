@@ -1,13 +1,14 @@
 import styled from 'styled-components';
-import { Colors, Spacings, Breakpoints } from '../../utils';
+import { Colors, Spacings, Breakpoints, Radius } from '../../utils';
 
 const { large } = Spacings;
 const { tablet, laptop } = Breakpoints;
+const { smallRadius } = Radius;
 
 export const ThemedButton = styled.button`
   padding: ${large}px;
   background-color: ${Colors.light?.primary.main};
-  border-radius: 5px;
+  border-radius: ${smallRadius}px;
 
   &:hover {
     cursor: pointer;

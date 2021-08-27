@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { RiAddCircleLine as RiAddCircleLineBase } from 'react-icons/ri';
 import { Colors, Spacings, Radius, Breakpoints } from '../../../../utils';
 
-const { medium, small } = Spacings;
+const { medium, small, smaller } = Spacings;
 const { mediumRadius } = Radius;
 const { tablet } = Breakpoints;
 
@@ -34,7 +34,6 @@ export const Wrapper = styled.div<WrapperProps>`
 
   @media (max-width: ${tablet}px) {
     width: 100%;
-    /* height: ${defaultCardHeight}; */
   }
 `;
 
@@ -75,11 +74,18 @@ export const ContentWrapper = styled.div`
   color: ${Colors.light?.text.main};
 `;
 
-export const Title = styled.h3``;
+export const Title = styled.h3`
+  margin-bottom: ${smaller}px;
+`;
 
 export const Description = styled.p``;
 
 export const OptionsWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`;
+
+export const OptionsSubWrapper = styled.div`
   display: flex;
 `;
 

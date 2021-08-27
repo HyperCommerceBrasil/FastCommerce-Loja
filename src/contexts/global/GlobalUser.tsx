@@ -5,6 +5,8 @@ import {
   resetUserPasswordChallenge,
   resetUserPassword,
   getUserData,
+  fetchZipCodeData,
+  createUserAddress,
 } from '../../services';
 import api from '../../services/api';
 import {
@@ -26,6 +28,8 @@ type ContextUserData = {
   ): Promise<void>;
   forgotPasswordChallenge(email: string): Promise<void>;
   forgotPasswordReset(password: string): Promise<void>;
+  fetchZipCode(zipCode: string): Promise<ViacepResponse>;
+  createNewAddress(address: CreateUserAddress): Promise<void>;
 };
 
 export const GlobalUserContext = createContext<ContextUserData>(
@@ -37,6 +41,16 @@ export const GlobalUserProvider: React.FC = ({ children }) => {
   const { getURLQueryParam } = useQuery();
   const [token, setToken] = useState<string>();
   const [user, setUser] = useState<UserData>();
+
+  const fetchZipCode = async (zipCode: string) => {
+    const { data } = await fetchZipCodeData(zipCode);
+
+    return data;
+  };
+
+  const createNewAddress = async (address: CreateUserAddress) => {
+    await createUserAddress(address);
+  };
 
   const createUser = async (
     { email, name, password }: Partial<UserSignupCredentials>,
@@ -117,6 +131,8 @@ export const GlobalUserProvider: React.FC = ({ children }) => {
         createUser,
         forgotPasswordChallenge,
         forgotPasswordReset,
+        fetchZipCode,
+        createNewAddress,
       }}
     >
       {children}
