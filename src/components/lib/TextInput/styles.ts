@@ -1,10 +1,18 @@
 import styled from 'styled-components';
-import { Colors, Spacings } from '../../../utils';
+import { Colors, Radius, Spacings } from '../../../utils';
 
-const { short, meaningless } = Spacings;
+const { short, meaningless, small } = Spacings;
+const { smallRadius } = Radius;
 
-export const InputWrapper = styled.div`
+type InputWrapperProps = {
+  fullWidth?: boolean;
+};
+
+export const InputWrapper = styled.div<InputWrapperProps>`
+  display: flex;
+  flex-direction: column;
   margin: ${short}px 0;
+  width: ${({ fullWidth }) => (fullWidth ? '100%' : 'auto')};
 `;
 
 export const TextFieldLabel = styled.h4`
@@ -14,6 +22,26 @@ export const TextFieldLabel = styled.h4`
   color: ${Colors.light?.text.main};
 `;
 
-export const TextField = styled.input``;
+export const TextField = styled.input`
+  color: ${Colors.light?.text.main};
+  padding: ${small}px ${short}px;
+  border: 1px solid ${Colors.light?.text.main};
+  border-radius: ${smallRadius}px;
 
-export const Error = styled.p``;
+  font-size: 1.2rem;
+
+  transition: 0.3s;
+
+  &:hover {
+    border: 1px solid ${Colors.light?.primary.lighter};
+  }
+
+  &:focus {
+    border: 1px solid ${Colors.light?.primary.main};
+  }
+`;
+
+export const Error = styled.p`
+  color: ${Colors.light?.error};
+  font-size: 0.8rem;
+`;
