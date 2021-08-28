@@ -3,6 +3,7 @@ import { useParams } from 'react-router';
 import parse from 'html-react-parser';
 import { Helmet } from 'react-helmet';
 import { fetchSingleProduct } from '../../services';
+import ImageCarousel from '../ImageCarousel';
 import {
   ContentWrapper,
   ImageWrapper,
@@ -80,7 +81,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = () => {
       </Helmet>
       <DefaultDescriptionWrapper>
         <ImageWrapper>
-          <Image alt="product-image" src={handleRetrieveFirstProductImage()} />
+          <ImageCarousel images={productData?.images || []} />
         </ImageWrapper>
         <ContentWrapper>
           <TextWrapper>
