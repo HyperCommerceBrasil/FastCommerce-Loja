@@ -11,8 +11,6 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images }) => {
   useEffect(() => {
     if (images[0]) {
       setImageSelected(images[0].image);
-    } else {
-      console.log(images);
     }
   }, [images]);
 
