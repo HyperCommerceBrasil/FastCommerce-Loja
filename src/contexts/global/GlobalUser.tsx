@@ -7,6 +7,8 @@ import {
   getUserData,
   fetchZipCodeData,
   createUserAddress,
+  updateUserAddress,
+  deleteUserAddress,
 } from '../../services';
 import api from '../../services/api';
 import {
@@ -26,10 +28,16 @@ type ContextUserData = {
     userCredentials: Partial<UserSignupCredentials>,
     shouldLogin?: boolean,
   ): Promise<void>;
+  fetchUserData(): Promise<void>;
   forgotPasswordChallenge(email: string): Promise<void>;
   forgotPasswordReset(password: string): Promise<void>;
   fetchZipCode(zipCode: string): Promise<ViacepResponse>;
   createNewAddress(address: CreateUserAddress): Promise<void>;
+  updateAddress(
+    address: Partial<CreateUserAddress>,
+    addressId: string,
+  ): Promise<void>;
+  deleteAddress(addressId: string): Promise<void>;
 };
 
 export const GlobalUserContext = createContext<ContextUserData>(
@@ -46,6 +54,17 @@ export const GlobalUserProvider: React.FC = ({ children }) => {
     const data = await fetchZipCodeData(zipCode);
 
     return data;
+  };
+
+  const updateAddress = async (
+    address: Partial<CreateUserAddress>,
+    addressId: string,
+  ) => {
+    await updateUserAddress(address, addressId);
+  };
+
+  const deleteAddress = async (addressId: string) => {
+    await deleteUserAddress(addressId);
   };
 
   const createNewAddress = async (address: CreateUserAddress) => {
@@ -118,6 +137,12 @@ export const GlobalUserProvider: React.FC = ({ children }) => {
     await login({ email, password });
   };
 
+  const fetchUserData = async () => {
+    const user = await getUserData();
+
+    setUser(user);
+  };
+
   useEffect(() => {
     loginFromStorageData();
   }, []);
@@ -133,6 +158,9 @@ export const GlobalUserProvider: React.FC = ({ children }) => {
         forgotPasswordReset,
         fetchZipCode,
         createNewAddress,
+        updateAddress,
+        deleteAddress,
+        fetchUserData,
       }}
     >
       {children}

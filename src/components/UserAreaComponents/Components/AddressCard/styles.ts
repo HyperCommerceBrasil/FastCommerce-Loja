@@ -11,7 +11,7 @@ type WrapperProps = {
 };
 
 const defaultCardWidth = '330px';
-const defaultCardHeight = '200px';
+const defaultCardHeight = '210px';
 
 const handleIsDefaultBorder = (isDefault?: boolean) =>
   isDefault ? Colors.light?.primary.main : Colors.light?.environment.dark;
@@ -34,6 +34,7 @@ export const Wrapper = styled.div<WrapperProps>`
 
   @media (max-width: ${tablet}px) {
     width: 100%;
+    height: auto;
   }
 `;
 
@@ -89,9 +90,18 @@ export const OptionsSubWrapper = styled.div`
   display: flex;
 `;
 
-export const Link = styled.a`
+export const Linker = styled.button`
+  background-color: unset;
+  font-size: 1rem;
+  border: 1px solid ${Colors.light?.primary.main};
+  border-radius: ${mediumRadius}px;
+  padding: 0px ${small}px;
   color: ${Colors.light?.primary.main};
-  margin-right: ${small}px;
+  margin: ${small}px ${small}px 0 0;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export const NewWrapper = styled.div`

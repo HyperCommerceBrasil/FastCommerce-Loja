@@ -1,0 +1,5 @@
+export enum ADDRESS_EDITING_STATUS {
+  UPDATE = 'UPDATE',
+  CREATE = 'CREATE',
+  DELETE = 'DELETE',
+}
