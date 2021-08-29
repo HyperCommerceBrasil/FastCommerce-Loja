@@ -128,10 +128,6 @@ export const CustomizedDescriptionWrapper = styled.div`
   align-items: center;
   z-index: 5;
   color: ${Colors.light?.text.main};
-
-  img {
-    width: 100%;
-  }
 `;
 
 export const CustomizedDescriptionTitle = styled.h3`
