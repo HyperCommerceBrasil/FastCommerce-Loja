@@ -9,4 +9,5 @@ declare type ViacepResponse = {
   gia: string;
   ddd: string;
   siafi: string;
+  erro?: boolean;
 };
