@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { IoMdClose as IoMdCloseBase } from 'react-icons/io';
 import { Breakpoints, Colors, Radius, Spacings } from '../../utils';
 
-const { big, short, small, meaningless } = Spacings;
+const { big, short, small, medium, meaningless } = Spacings;
 const { smallRadius } = Radius;
 const { tablet } = Breakpoints;
 
@@ -24,7 +24,6 @@ export const InternWrapper = styled.div`
 
   @media (max-width: ${tablet}px) {
     padding: 0;
-    /* align-items: center; */
     flex-direction: column;
   }
 `;
@@ -39,11 +38,11 @@ export const DrawerWrapper = styled.div`
 
 export const DrawerSelectedWrapper = styled.div`
   display: flex;
+  flex: 1;
   align-items: flex-start;
   flex-direction: row;
   flex-wrap: wrap;
   min-height: 60vh;
-  /* background-color: #f13; */
 
   @media (max-width: ${tablet}px) {
     align-items: center;
@@ -53,51 +52,44 @@ export const DrawerSelectedWrapper = styled.div`
 
 export const AddressesWrapper = styled.div`
   display: flex;
-
-  @media (max-width: ${tablet}px) {
-    flex-direction: column;
-  }
+  width: 100%;
+  flex-direction: column;
 `;
 
 export const AddressCardsWrapper = styled.div`
-  /* background-color: #1f6; */
   display: flex;
+  flex: 1;
   flex-direction: row;
   flex-wrap: wrap;
 `;
 
-// export const NewAddressFormWrapper = styled.div<NewAddressFormWrapperProps>`
-//   opacity: ${({ openState }) =>
-//     openState === 'closed' || openState === 'none' ? '0' : '1'};
-//   width: ${({ openState }) =>
-//     openState === 'closed' || openState === 'none' ? '0' : '400px'};
-//   animation-name: ${({ openState }) =>
-//     openState ? NewAddressFormAnimations[openState] : ''};
-//   animation-duration: 0.8s;
-//   animation-timing-function: ease-in-out;
-// `;
-
 export const NewAddressFormWrapper = styled.div<NewAddressFormWrapperProps>`
-  display: ${({ openState }) => (openState === 'closed' ? 'none' : 'unset')};
+  display: ${({ openState }) => (openState === 'closed' ? 'none' : 'flex')};
+  justify-content: center;
+  margin-bottom: ${medium}px;
+
+  @media (max-width: ${tablet}px) {
+    display: ${({ openState }) => (openState === 'closed' ? 'none' : 'unset')};
+    justify-content: unset;
+  }
 `;
 
 export const NewAddressOutsideFormWrapper = styled.div<NewAddressFormWrapperProps>`
   display: flex;
-  width: 100%;
   flex-direction: column;
-  /* align-items: center; */
-  /* background-color: #f16; */
   padding: ${short}px;
 
   border: 2px solid ${Colors.light?.primary.main};
   border-style: dashed;
   border-radius: ${smallRadius}px;
   opacity: ${({ openState }) => (openState === 'closed' ? '0' : '1')};
-  width: ${({ openState }) => (openState === 'closed' ? '0' : '300px')};
+  width: ${({ openState }) => (openState === 'closed' ? '0' : '100%')};
+  max-width: 600px;
   height: ${({ openState }) => (openState === 'closed' ? '0' : 'auto')};
 
   @media (max-width: ${tablet}px) {
     width: ${({ openState }) => (openState === 'closed' ? '0' : 'auto')};
+    max-width: unset;
     margin: ${small}px;
   }
 `;
@@ -128,7 +120,8 @@ export const IoMdClose = styled(IoMdCloseBase).attrs({
 export const NewAddressInternFormWrapper = styled.div`
   width: 100%;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
   align-items: center;
 `;
 
