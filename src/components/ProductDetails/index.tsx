@@ -3,7 +3,6 @@ import { useParams } from 'react-router';
 import parse from 'html-react-parser';
 import { Helmet } from 'react-helmet';
 import { fetchSingleProduct } from '../../services';
-import ImageCarousel from '../ImageCarousel';
 import {
   ContentWrapper,
   ImageWrapper,
@@ -12,6 +11,7 @@ import {
   DefaultDescriptionWrapper,
   TextWrapper,
   OptionsWrapper,
+  Image,
   Wrapper,
   CustomizedDescriptionWrapper,
   Price,
@@ -62,6 +62,17 @@ const ProductDetails: React.FC<ProductDetailsProps> = () => {
       amountOrdered: counterValue,
     });
 
+  const handleRetrieveFirstProductImage = () => {
+    if (productData?.images) {
+      try {
+        return productData.images[0].image;
+      } catch (err) {
+        return undefined;
+      }
+    }
+    return undefined;
+  };
+
   return (
     <Wrapper>
       <Helmet title={productData?.name}>
@@ -69,7 +80,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = () => {
       </Helmet>
       <DefaultDescriptionWrapper>
         <ImageWrapper>
-          <ImageCarousel images={productData?.images || []} />
+          <Image alt="product-image" src={handleRetrieveFirstProductImage()} />
         </ImageWrapper>
         <ContentWrapper>
           <TextWrapper>
