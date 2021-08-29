@@ -1,11 +1,15 @@
-import { AxiosResponse, default as api } from 'axios';
+import { default as api } from 'axios';
 import ResponseErrorHandler from '../utils/api/error';
 
 export const fetchZipCodeData = async (
   cep: string,
-): Promise<AxiosResponse<ViacepResponse>> => {
+): Promise<ViacepResponse> => {
   try {
-    return api.get(`https://viacep.com.br/ws/${cep}/json/`);
+    const response = await api.get<ViacepResponse>(
+      `https://viacep.com.br/ws/${cep}/json/`,
+    );
+
+    return response.data;
   } catch (err) {
     throw new ResponseErrorHandler(err);
   }
