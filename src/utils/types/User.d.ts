@@ -75,3 +75,5 @@ declare type CreateUserAddress = {
   defaultAddress: boolean;
   name: string;
 };
+
+declare type AddressEditingStatus = 'CREATE' | 'UPDATE';

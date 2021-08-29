@@ -108,3 +108,22 @@ export const createUserAddress = async (
     throw new ResponseErrorHandler(err);
   }
 };
+
+export const updateUserAddress = async (
+  address: Partial<CreateUserAddress>,
+  addressId: string,
+): Promise<void> => {
+  try {
+    await api.put<void>(`${customerURL}/address`, { ...address, addressId });
+  } catch (err) {
+    throw new ResponseErrorHandler(err);
+  }
+};
+
+export const deleteUserAddress = async (addressId: string): Promise<void> => {
+  try {
+    await api.delete<void>(`${customerURL}/address/${addressId}`);
+  } catch (err) {
+    throw new ResponseErrorHandler(err);
+  }
+};

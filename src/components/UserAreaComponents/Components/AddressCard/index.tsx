@@ -1,8 +1,9 @@
 import React from 'react';
+import { If } from '../../../lib';
 import {
   ContentWrapper,
   Description,
-  Link,
+  Linker,
   NewAddressWrapper,
   NewWrapper,
   OptionsWrapper,
@@ -14,12 +15,18 @@ import {
 type Props = {
   isNew?: boolean;
   onNewPress?(): void;
-  address?: Partial<UserAddress>;
+  onEditPress?(address?: UserAddress): void;
+  onDeletePress?(): Promise<void>;
+  onDefineDefaultPress?(): void;
+  address?: UserAddress;
 };
 
 const AddressCard: React.FC<Props> = ({
   isNew = false,
-  onNewPress,
+  onNewPress = () => ({}),
+  onEditPress,
+  onDeletePress,
+  onDefineDefaultPress,
   address,
 }) => (
   <>
@@ -45,13 +52,13 @@ const AddressCard: React.FC<Props> = ({
           <Description>Cidade: {address?.city}</Description>
         </ContentWrapper>
         <OptionsWrapper>
-          <Link href="/user/5t334">Editar</Link>
-          <Link href="/user/5t334">Excluir</Link>
-          {address?.addressDefault ? (
-            ''
-          ) : (
-            <Link href="/user/5t334">Definir como padrão</Link>
-          )}
+          <Linker onClick={() => (onEditPress ? onEditPress(address) : {})}>
+            Editar
+          </Linker>
+          <Linker onClick={onDeletePress}>Excluir</Linker>
+          <If condition={!address?.addressDefault}>
+            <Linker onClick={onDefineDefaultPress}>Definir como padrão</Linker>
+          </If>
         </OptionsWrapper>
       </Wrapper>
     )}

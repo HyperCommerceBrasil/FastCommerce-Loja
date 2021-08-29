@@ -11,10 +11,20 @@ import {
   AddressCard,
   TextInput,
   ButtonMain,
+  CheckBox,
 } from '../../components';
 import { GlobalUserContext } from '../../contexts';
-import { addressCreated, error, ZipCodeMask } from '../../utils';
-import { DRAWER_VALUES } from '../../utils/enums';
+import {
+  addressCreatedSentence,
+  addressDeletedSentence,
+  addressUpdatedSentence,
+  error,
+  ZipCodeMask,
+  ADDRESS_EDITING_STATUS_MESSAGE,
+  ADDRESS_EDITING_STATUS,
+  DRAWER_VALUES,
+  ADDRESS_EDITING_STATUS_MESSAGE_BUTTON,
+} from '../../utils';
 import { initialFormErrors, initialFormValues } from './form';
 import {
   AddressCardsWrapper,
@@ -33,24 +43,73 @@ import {
 } from './styles';
 
 const UserArea: React.FC = () => {
-  const { user, fetchZipCode, createNewAddress } = useContext(
-    GlobalUserContext,
-  );
+  const {
+    user,
+    fetchZipCode,
+    createNewAddress,
+    updateAddress,
+    deleteAddress,
+    fetchUserData,
+  } = useContext(GlobalUserContext);
   const [showForm, setShowForm] = useState<'opened' | 'closed'>('closed');
+  const [
+    formEditingState,
+    setFormEditingState,
+  ] = useState<AddressEditingStatus>('CREATE');
   const [formValues, setFormValues] = useState<CreateUserAddress>(
     initialFormValues,
   );
+  const [addresIDToEdit, setAddresIDToEdit] = useState('');
   const [formErrors, setFormErrors] = useState(initialFormErrors);
 
   const [activeState, setActiveState] = useState<DrawerOptions>(
     'ACCOUNT_INFORMATION',
   );
 
+  const onCheckboxClick = () => {
+    setFormValues(oldFormValues => ({
+      ...oldFormValues,
+      defaultAddress: !oldFormValues.defaultAddress,
+    }));
+  };
+
   const handleCreateNewAddress = async () => {
     try {
       await createNewAddress(formValues);
 
-      addressCreated(formValues.name);
+      addressCreatedSentence(formValues.name);
+
+      setFormValues(initialFormValues);
+
+      await fetchUserData();
+
+      setShowForm('closed');
+    } catch (err) {
+      error(err.message);
+    }
+  };
+
+  const handleUpdateAddress = async (addressId: string) => {
+    try {
+      await updateAddress(formValues, addressId);
+
+      addressUpdatedSentence(formValues.name);
+
+      setFormValues(initialFormValues);
+
+      await fetchUserData();
+
+      setShowForm('closed');
+    } catch (err) {
+      error(err.message);
+    }
+  };
+
+  const handleDeleteAddress = async (addressId: string): Promise<void> => {
+    try {
+      await deleteAddress(addressId);
+
+      addressDeletedSentence(formValues.name);
 
       setFormValues(initialFormValues);
     } catch (err) {
@@ -58,8 +117,74 @@ const UserArea: React.FC = () => {
     }
   };
 
+  const ADDRESS_EDITING_STATUS_FUNCTION = {
+    [ADDRESS_EDITING_STATUS.CREATE]: () => handleCreateNewAddress(),
+    [ADDRESS_EDITING_STATUS.UPDATE]: () => handleUpdateAddress(addresIDToEdit),
+  };
+
   const handleShowForm = () =>
     showForm === 'closed' ? setShowForm('opened') : setShowForm('closed');
+
+  const onNewPress = () => {
+    setFormValues(initialFormValues);
+    setFormErrors(initialFormErrors);
+
+    setFormEditingState('CREATE');
+
+    handleShowForm();
+  };
+
+  const onEditPress = (address: UserAddress): void => {
+    setAddresIDToEdit(address.id);
+    setFormEditingState('UPDATE');
+
+    const {
+      cep,
+      city,
+      name,
+      district,
+      uf,
+      number,
+      street,
+      addressDefault,
+    } = address;
+
+    setFormValues({
+      cep,
+      city,
+      uf,
+      street,
+      district,
+      name,
+      number,
+      defaultAddress: addressDefault,
+    });
+
+    handleShowForm();
+  };
+
+  const onDefineDefaultPress = async (
+    address: UserAddress,
+    addressId: string,
+  ) => {
+    try {
+      await updateAddress({ ...address, defaultAddress: true }, addressId);
+
+      addressUpdatedSentence(formValues.name);
+
+      setFormValues(initialFormValues);
+
+      await fetchUserData();
+
+      setShowForm('closed');
+    } catch (err) {
+      error(err.message);
+    }
+  };
+
+  // const onDeletePress = () => {};
+
+  // const onDefineDefaultPress = () => {};
 
   const fetchZipCodeLocal = async (zipCode: string) => {
     try {
@@ -111,7 +236,10 @@ const UserArea: React.FC = () => {
       <NewAddressFormWrapper openState={showForm}>
         <NewAddressOutsideFormWrapper>
           <FormHeader>
-            <NewAddressTitle>Novo endereço</NewAddressTitle>
+            <NewAddressTitle>
+              {ADDRESS_EDITING_STATUS_MESSAGE[formEditingState] ||
+                'Novo endereço'}
+            </NewAddressTitle>
             <DeleteWrapper>
               <IoMdClose size={30} onClick={handleShowForm} />
             </DeleteWrapper>
@@ -192,14 +320,33 @@ const UserArea: React.FC = () => {
               error={formErrors.city}
               fullWidth
             />
+            <CheckBox
+              label="Endereço padrão?"
+              checkBoxProps={{
+                checked: formValues.defaultAddress,
+                onClick: onCheckboxClick,
+              }}
+            />
           </NewAddressInternFormWrapper>
-          <ButtonMain onClick={handleCreateNewAddress}>Criar</ButtonMain>
+          <ButtonMain
+            onClick={ADDRESS_EDITING_STATUS_FUNCTION[formEditingState]}
+          >
+            {ADDRESS_EDITING_STATUS_MESSAGE_BUTTON[formEditingState]}
+          </ButtonMain>
         </NewAddressOutsideFormWrapper>
       </NewAddressFormWrapper>
       <AddressCardsWrapper>
-        <AddressCard key={0} isNew onNewPress={handleShowForm} />
+        <AddressCard key={0} isNew onNewPress={onNewPress} />
         {user?.adresses.map(address => (
-          <AddressCard address={address} key={address.id || 0} />
+          <AddressCard
+            address={address}
+            key={address.id || 0}
+            onEditPress={onEditPress}
+            onDeletePress={() => handleDeleteAddress(address.id)}
+            onDefineDefaultPress={() =>
+              onDefineDefaultPress(address, address.id)
+            }
+          />
         ))}
       </AddressCardsWrapper>
     </AddressesWrapper>
