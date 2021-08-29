@@ -12,7 +12,6 @@ import {
   DefaultDescriptionWrapper,
   TextWrapper,
   OptionsWrapper,
-  Image,
   Wrapper,
   CustomizedDescriptionWrapper,
   Price,
@@ -62,17 +61,6 @@ const ProductDetails: React.FC<ProductDetailsProps> = () => {
       product: productData as ProductOnCart,
       amountOrdered: counterValue,
     });
-
-  const handleRetrieveFirstProductImage = () => {
-    if (productData?.images) {
-      try {
-        return productData.images[0].image;
-      } catch (err) {
-        return undefined;
-      }
-    }
-    return undefined;
-  };
 
   return (
     <Wrapper>
