@@ -111,7 +111,7 @@ const UserArea: React.FC = () => {
 
       addressDeletedSentence(formValues.name);
 
-      setFormValues(initialFormValues);
+      await fetchUserData();
     } catch (err) {
       error(err.message);
     }
