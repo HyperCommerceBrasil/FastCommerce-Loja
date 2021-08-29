@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Colors, Radius, Spacings } from '../../../utils';
 
-const { short, meaningless, small } = Spacings;
+const { short, meaningless, small, smaller } = Spacings;
 const { smallRadius } = Radius;
 
 type InputWrapperProps = {
@@ -23,6 +23,7 @@ export const TextFieldLabel = styled.h4`
 `;
 
 export const TextField = styled.input`
+  background-color: transparent;
   color: ${Colors.light?.text.main};
   padding: ${small}px ${short}px;
   border: 1px solid ${Colors.light?.text.main};
@@ -42,6 +43,7 @@ export const TextField = styled.input`
 `;
 
 export const Error = styled.p`
+  margin-top: ${smaller}px;
   color: ${Colors.light?.error};
   font-size: 0.8rem;
 `;

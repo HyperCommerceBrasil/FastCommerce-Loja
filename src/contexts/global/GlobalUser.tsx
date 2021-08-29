@@ -43,7 +43,7 @@ export const GlobalUserProvider: React.FC = ({ children }) => {
   const [user, setUser] = useState<UserData>();
 
   const fetchZipCode = async (zipCode: string) => {
-    const { data } = await fetchZipCodeData(zipCode);
+    const data = await fetchZipCodeData(zipCode);
 
     return data;
   };
