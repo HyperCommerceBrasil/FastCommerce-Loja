@@ -15,6 +15,7 @@ import {
 import { GlobalUserContext } from '../../contexts';
 import { addressCreated, error, ZipCodeMask } from '../../utils';
 import { DRAWER_VALUES } from '../../utils/enums';
+import { initialFormErrors, initialFormValues } from './form';
 import {
   AddressCardsWrapper,
   AddressesWrapper,
@@ -31,17 +32,6 @@ import {
   Wrapper,
 } from './styles';
 
-const initialFormValues: CreateUserAddress = {
-  cep: '',
-  city: '',
-  defaultAddress: true,
-  district: '',
-  number: '',
-  name: '',
-  street: '',
-  uf: '',
-};
-
 const UserArea: React.FC = () => {
   const { user, fetchZipCode, createNewAddress } = useContext(
     GlobalUserContext,
@@ -50,6 +40,7 @@ const UserArea: React.FC = () => {
   const [formValues, setFormValues] = useState<CreateUserAddress>(
     initialFormValues,
   );
+  const [formErrors, setFormErrors] = useState(initialFormErrors);
 
   const [activeState, setActiveState] = useState<DrawerOptions>(
     'ACCOUNT_INFORMATION',
@@ -72,9 +63,22 @@ const UserArea: React.FC = () => {
 
   const fetchZipCodeLocal = async (zipCode: string) => {
     try {
-      const { bairro, logradouro, localidade, uf } = await fetchZipCode(
+      const { bairro, logradouro, localidade, uf, erro } = await fetchZipCode(
         zipCode,
       );
+
+      if (erro) {
+        setFormErrors(oldFormErrors => ({
+          ...oldFormErrors,
+          cep: 'CEP inválido!',
+        }));
+        return;
+      }
+
+      setFormErrors(oldFormErrors => ({
+        ...oldFormErrors,
+        cep: '',
+      }));
 
       setFormValues(oldFormValues => ({
         ...oldFormValues,
@@ -91,7 +95,8 @@ const UserArea: React.FC = () => {
   const handleZipCodeChange = (target: EventTarget & HTMLInputElement) => {
     const treatedCep = ZipCodeMask(target.value);
     if (treatedCep.length === 9) fetchZipCodeLocal(treatedCep);
-    setFormValues(oldFormValues => ({ ...oldFormValues, cep: treatedCep }));
+    if (treatedCep.length <= 9)
+      setFormValues(oldFormValues => ({ ...oldFormValues, cep: treatedCep }));
   };
 
   const genericFormChange = (
@@ -119,6 +124,7 @@ const UserArea: React.FC = () => {
                 value: formValues.name,
                 onChange: ({ target }) => genericFormChange(target, 'name'),
               }}
+              error={formErrors.name}
               fullWidth
             />
             <TextInput
@@ -130,6 +136,7 @@ const UserArea: React.FC = () => {
                 maxLength: 9,
                 onChange: ({ target }) => handleZipCodeChange(target),
               }}
+              error={formErrors.cep}
               fullWidth
             />
             <TextInput
@@ -139,6 +146,7 @@ const UserArea: React.FC = () => {
                 value: formValues.street,
                 onChange: ({ target }) => genericFormChange(target, 'street'),
               }}
+              error={formErrors.street}
               fullWidth
             />
             <TextInput
@@ -150,6 +158,7 @@ const UserArea: React.FC = () => {
                 value: formValues.number,
                 onChange: ({ target }) => genericFormChange(target, 'number'),
               }}
+              error={formErrors.number}
               fullWidth
             />
             <TextInput
@@ -159,6 +168,7 @@ const UserArea: React.FC = () => {
                 value: formValues.district,
                 onChange: ({ target }) => genericFormChange(target, 'district'),
               }}
+              error={formErrors.district}
               fullWidth
             />
             <TextInput
@@ -169,6 +179,7 @@ const UserArea: React.FC = () => {
                 value: formValues.uf,
                 onChange: ({ target }) => genericFormChange(target, 'uf'),
               }}
+              error={formErrors.uf}
               fullWidth
             />
             <TextInput
@@ -178,6 +189,7 @@ const UserArea: React.FC = () => {
                 value: formValues.city,
                 onChange: ({ target }) => genericFormChange(target, 'city'),
               }}
+              error={formErrors.city}
               fullWidth
             />
           </NewAddressInternFormWrapper>
