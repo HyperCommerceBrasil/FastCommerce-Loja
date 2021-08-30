@@ -42,7 +42,7 @@ const AddressCard: React.FC<Props> = ({
         key={address?.id || '0'}
         isDefault={address?.addressDefault || false}
       >
-        <ContentWrapper>
+        <ContentWrapper isDefault={address?.addressDefault}>
           <Title>{address?.name}</Title>
           <Description>Rua: {address?.street}</Description>
           <Description>Número: {address?.number}</Description>
@@ -52,10 +52,15 @@ const AddressCard: React.FC<Props> = ({
           <Description>Cidade: {address?.city}</Description>
         </ContentWrapper>
         <OptionsWrapper>
-          <Linker onClick={() => (onEditPress ? onEditPress(address) : {})}>
+          <Linker
+            isDefault={address?.addressDefault}
+            onClick={() => (onEditPress ? onEditPress(address) : {})}
+          >
             Editar
           </Linker>
-          <Linker onClick={onDeletePress}>Excluir</Linker>
+          <Linker isDefault={address?.addressDefault} onClick={onDeletePress}>
+            Excluir
+          </Linker>
           <If condition={!address?.addressDefault}>
             <Linker onClick={onDefineDefaultPress}>Definir como padrão</Linker>
           </If>
