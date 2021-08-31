@@ -2,10 +2,10 @@ name: Check
 
 on:
   pull_request:
-    branches: [develop, main]
+    branches: [develop, master]
 
 jobs:
-  eslint:
+  lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -16,3 +16,5 @@ jobs:
         run: yarn
       - name: ESLint Check
         run: yarn eslint-check
+      - name: Prettier Check
+        run: yarn prettier-check
