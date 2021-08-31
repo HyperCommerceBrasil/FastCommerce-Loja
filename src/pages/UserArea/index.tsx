@@ -26,6 +26,10 @@ import {
   addressUpdatedSentence,
   error,
   useScrollTo,
+  addressBeingUpdatedSentence,
+  addressBeingDefaultDefinedSentence,
+  addressBeingDeletedSentence,
+  addressBeingCreatedSentence,
 } from '../../utils';
 import { initialFormErrors, initialFormValues } from './form';
 import {
@@ -55,6 +59,7 @@ const UserArea: React.FC = () => {
   } = useContext(GlobalUserContext);
   const { scrollToDiv } = useScrollTo();
   const [showForm, setShowForm] = useState<'opened' | 'closed'>('closed');
+  const [isValidZipCode, setIsValidZipCode] = useState(false);
   const [
     formEditingState,
     setFormEditingState,
@@ -77,6 +82,7 @@ const UserArea: React.FC = () => {
   };
 
   const handleCreateNewAddress = async () => {
+    addressBeingCreatedSentence();
     try {
       await createNewAddress(formValues);
 
@@ -93,6 +99,7 @@ const UserArea: React.FC = () => {
   };
 
   const handleUpdateAddress = async (addressId: string) => {
+    addressBeingUpdatedSentence();
     try {
       await updateAddress(formValues, addressId);
 
@@ -109,6 +116,7 @@ const UserArea: React.FC = () => {
   };
 
   const handleDeleteAddress = async (addressId: string): Promise<void> => {
+    addressBeingDeletedSentence();
     try {
       await deleteAddress(addressId);
 
@@ -129,6 +137,7 @@ const UserArea: React.FC = () => {
     showForm === 'closed' ? setShowForm('opened') : setShowForm('closed');
 
   const onNewPress = () => {
+    scrollToDiv(USER_AREA.ADDRESSES_WRAPPER, { behavior: 'smooth' });
     setFormValues(initialFormValues);
     setFormErrors(initialFormErrors);
 
@@ -171,6 +180,7 @@ const UserArea: React.FC = () => {
     address: UserAddress,
     addressId: string,
   ) => {
+    addressBeingDefaultDefinedSentence();
     try {
       await updateAddress({ ...address, defaultAddress: true }, addressId);
 
@@ -186,10 +196,6 @@ const UserArea: React.FC = () => {
     }
   };
 
-  // const onDeletePress = () => {};
-
-  // const onDefineDefaultPress = () => {};
-
   const fetchZipCodeLocal = async (zipCode: string) => {
     try {
       const { bairro, logradouro, localidade, uf, erro } = await fetchZipCode(
@@ -201,8 +207,11 @@ const UserArea: React.FC = () => {
           ...oldFormErrors,
           cep: 'CEP inválido!',
         }));
+        setIsValidZipCode(false);
         return;
       }
+
+      setIsValidZipCode(true);
 
       setFormErrors(oldFormErrors => ({
         ...oldFormErrors,
@@ -304,6 +313,7 @@ const UserArea: React.FC = () => {
               fullWidth
             />
             <TextInput
+              impossibleToEdit={isValidZipCode}
               label="Estado"
               inputProps={{
                 placeholder: 'RS',
@@ -315,6 +325,7 @@ const UserArea: React.FC = () => {
               fullWidth
             />
             <TextInput
+              impossibleToEdit={isValidZipCode}
               label="Cidade"
               inputProps={{
                 placeholder: 'Alegrete',

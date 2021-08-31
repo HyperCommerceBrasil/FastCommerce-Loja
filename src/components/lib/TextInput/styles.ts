@@ -8,6 +8,21 @@ type InputWrapperProps = {
   fullWidth?: boolean;
 };
 
+type TextFieldProps = {
+  impossibleToEdit?: boolean;
+};
+
+const handleTextInputImpossibleToEditBackgroundColor = (
+  impossibleToEdit?: boolean,
+) => (impossibleToEdit ? Colors.light?.text.light : 'transparent');
+
+const handleTextInputImpossibleToEditBorderColor = (
+  impossibleToEdit?: boolean,
+) => (impossibleToEdit ? Colors.light?.text.light : Colors.light?.text.main);
+
+const handleTextInputImpossibleToEditCursor = (impossibleToEdit?: boolean) =>
+  impossibleToEdit ? 'not-allowed' : 'unset';
+
 export const InputWrapper = styled.div<InputWrapperProps>`
   display: flex;
   flex-direction: column;
@@ -22,18 +37,23 @@ export const TextFieldLabel = styled.h4`
   color: ${Colors.light?.text.main};
 `;
 
-export const TextField = styled.input`
-  background-color: transparent;
+export const TextField = styled.input<TextFieldProps>`
+  background-color: ${({ impossibleToEdit }) =>
+    handleTextInputImpossibleToEditBackgroundColor(impossibleToEdit)};
   color: ${Colors.light?.text.main};
   padding: ${small}px ${short}px;
-  border: 1px solid ${Colors.light?.text.main};
+  border: 1px solid
+    ${({ impossibleToEdit }) =>
+      handleTextInputImpossibleToEditBorderColor(impossibleToEdit)};
   border-radius: ${smallRadius}px;
 
   font-size: 1.2rem;
 
-  transition: 0.3s;
+  transition: 0.4s;
 
   &:hover {
+    cursor: ${({ impossibleToEdit }) =>
+      handleTextInputImpossibleToEditCursor(impossibleToEdit)};
     border: 1px solid ${Colors.light?.primary.lighter};
   }
 
