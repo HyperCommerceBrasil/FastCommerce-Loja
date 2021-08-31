@@ -32,6 +32,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "prettier-format": "prettier --config .prettierrc 'src/**/*.{ts,tsx}' --write",
+    "prettier-check": "prettier --check 'src/**/*.{ts,tsx}'",
     "eslint-check": "eslint 'src/**/*.{ts,tsx}' --fix",
     "lint": " yarn eslint-check && yarn prettier-format",
     "test": "react-scripts test",
