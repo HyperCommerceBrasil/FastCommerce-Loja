@@ -9,6 +9,7 @@ type Props = {
   labelProps?: React.HTMLAttributes<HTMLParagraphElement>;
   error?: string;
   errorProps?: React.HTMLAttributes<HTMLParagraphElement>;
+  impossibleToEdit?: boolean;
 };
 
 const TextInput: FC<Props> = ({
@@ -18,11 +19,16 @@ const TextInput: FC<Props> = ({
   error,
   label,
   fullWidth,
+  impossibleToEdit = false,
 }) => {
   return (
     <InputWrapper {...inputWrapperProps} fullWidth={fullWidth}>
       <TextFieldLabel>{label}</TextFieldLabel>
-      <TextField {...inputProps} />
+      <TextField
+        {...inputProps}
+        impossibleToEdit={impossibleToEdit}
+        disabled={impossibleToEdit}
+      />
       <Error {...errorProps}>{error}</Error>
     </InputWrapper>
   );

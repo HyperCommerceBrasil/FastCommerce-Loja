@@ -55,6 +55,7 @@ const UserArea: React.FC = () => {
   } = useContext(GlobalUserContext);
   const { scrollToDiv } = useScrollTo();
   const [showForm, setShowForm] = useState<'opened' | 'closed'>('closed');
+  const [isValidZipCode, setIsValidZipCode] = useState(false);
   const [
     formEditingState,
     setFormEditingState,
@@ -186,10 +187,6 @@ const UserArea: React.FC = () => {
     }
   };
 
-  // const onDeletePress = () => {};
-
-  // const onDefineDefaultPress = () => {};
-
   const fetchZipCodeLocal = async (zipCode: string) => {
     try {
       const { bairro, logradouro, localidade, uf, erro } = await fetchZipCode(
@@ -201,8 +198,11 @@ const UserArea: React.FC = () => {
           ...oldFormErrors,
           cep: 'CEP inválido!',
         }));
+        setIsValidZipCode(false);
         return;
       }
+
+      setIsValidZipCode(true);
 
       setFormErrors(oldFormErrors => ({
         ...oldFormErrors,
@@ -304,6 +304,7 @@ const UserArea: React.FC = () => {
               fullWidth
             />
             <TextInput
+              impossibleToEdit={isValidZipCode}
               label="Estado"
               inputProps={{
                 placeholder: 'RS',
@@ -315,6 +316,7 @@ const UserArea: React.FC = () => {
               fullWidth
             />
             <TextInput
+              impossibleToEdit={isValidZipCode}
               label="Cidade"
               inputProps={{
                 placeholder: 'Alegrete',

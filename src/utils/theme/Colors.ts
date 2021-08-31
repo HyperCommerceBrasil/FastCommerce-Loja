@@ -5,11 +5,11 @@ export const Colors: DarkLightTheme = {
     success: '#47ed9a',
     info: '#478fed',
     text: {
-      darker: '#050921',
-      dark: '#141414',
+      darker: '#1a1a1a',
+      dark: '#3b3b3b',
       main: '#faf4f0',
-      light: '#fffbf7',
-      lighter: '#fffcfa',
+      light: '#828282',
+      lighter: '#fff',
     },
     primary: {
       darker: '#cf5711',
@@ -32,10 +32,10 @@ export const Colors: DarkLightTheme = {
     success: '#47ed9a',
     info: '#478fed',
     text: {
-      darker: '#050921',
-      dark: '#141414',
-      main: '#262625',
-      light: '#faf4f0',
+      darker: '#141414',
+      dark: '#262625',
+      main: '#303030',
+      light: '#a8a8a8',
       lighter: '#ffffff',
     },
     primary: {
