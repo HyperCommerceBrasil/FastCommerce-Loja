@@ -26,6 +26,9 @@ import {
   addressUpdatedSentence,
   error,
   useScrollTo,
+  addressBeingUpdatedSentence,
+  addressBeingDefaultDefinedSentence,
+  addressBeingDeletedSentence,
 } from '../../utils';
 import { initialFormErrors, initialFormValues } from './form';
 import {
@@ -94,6 +97,7 @@ const UserArea: React.FC = () => {
   };
 
   const handleUpdateAddress = async (addressId: string) => {
+    addressBeingUpdatedSentence();
     try {
       await updateAddress(formValues, addressId);
 
@@ -110,6 +114,7 @@ const UserArea: React.FC = () => {
   };
 
   const handleDeleteAddress = async (addressId: string): Promise<void> => {
+    addressBeingDeletedSentence();
     try {
       await deleteAddress(addressId);
 
@@ -130,6 +135,7 @@ const UserArea: React.FC = () => {
     showForm === 'closed' ? setShowForm('opened') : setShowForm('closed');
 
   const onNewPress = () => {
+    scrollToDiv(USER_AREA.ADDRESSES_WRAPPER, { behavior: 'smooth' });
     setFormValues(initialFormValues);
     setFormErrors(initialFormErrors);
 
@@ -172,6 +178,7 @@ const UserArea: React.FC = () => {
     address: UserAddress,
     addressId: string,
   ) => {
+    addressBeingDefaultDefinedSentence();
     try {
       await updateAddress({ ...address, defaultAddress: true }, addressId);
 

@@ -1,3 +1,4 @@
+import info from '../info';
 import success from '../success';
 
 export const addressCreatedSentence = (addressName: string): void => {
@@ -10,4 +11,16 @@ export const addressUpdatedSentence = (addressName: string): void => {
 
 export const addressDeletedSentence = (addressName: string): void => {
   success(`O endereço ${addressName}, foi excluído!`);
+};
+
+export const addressBeingDeletedSentence = (): void => {
+  info(`Excluindo o endereço...`);
+};
+
+export const addressBeingUpdatedSentence = (): void => {
+  info(`Atualizando o endereço...`);
+};
+
+export const addressBeingDefaultDefinedSentence = (): void => {
+  info(`Padronizando o endereço...`);
 };
