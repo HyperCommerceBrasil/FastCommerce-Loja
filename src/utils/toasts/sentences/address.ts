@@ -13,6 +13,10 @@ export const addressDeletedSentence = (addressName: string): void => {
   success(`O endereço ${addressName}, foi excluído!`);
 };
 
+export const addressBeingCreatedSentence = (): void => {
+  info(`Criando o endereço...`);
+};
+
 export const addressBeingDeletedSentence = (): void => {
   info(`Excluindo o endereço...`);
 };

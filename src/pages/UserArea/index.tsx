@@ -29,6 +29,7 @@ import {
   addressBeingUpdatedSentence,
   addressBeingDefaultDefinedSentence,
   addressBeingDeletedSentence,
+  addressBeingCreatedSentence,
 } from '../../utils';
 import { initialFormErrors, initialFormValues } from './form';
 import {
@@ -81,6 +82,7 @@ const UserArea: React.FC = () => {
   };
 
   const handleCreateNewAddress = async () => {
+    addressBeingCreatedSentence();
     try {
       await createNewAddress(formValues);
 

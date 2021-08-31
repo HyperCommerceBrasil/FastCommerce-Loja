@@ -29,7 +29,7 @@ export const Colors: DarkLightTheme = {
   light: {
     error: '#ed4747',
     warning: '#eded47',
-    success: '#2ed15f',
+    success: '#47ed6e',
     info: '#478fed',
     text: {
       darker: '#141414',

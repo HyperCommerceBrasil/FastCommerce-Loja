@@ -9,7 +9,7 @@ export const success = (content: string | JSX.Element | React.FC): void => {
     type: 'success',
     style: {
       backgroundColor: Colors.light?.success,
-      color: Colors.light?.text.lighter,
+      color: Colors.light?.text.darker,
       margin: small,
     },
     bodyStyle: { backgroundColor: Colors.light?.success },
