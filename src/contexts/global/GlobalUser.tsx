@@ -18,6 +18,7 @@ import {
   welcomeToFastCommerce,
   useLocalStorage,
   STORAGE_KEYS,
+  sortByKey,
 } from '../../utils';
 
 type ContextUserData = {
@@ -49,6 +50,19 @@ export const GlobalUserProvider: React.FC = ({ children }) => {
   const { getURLQueryParam } = useQuery();
   const [token, setToken] = useState<string>();
   const [user, setUser] = useState<UserData>();
+
+  const sortByAddressName = (user: UserData) => {
+    const sortedAddreses: UserAddress[] = sortByKey('name', user.adresses);
+
+    const treatedUser: UserData = {
+      ...user,
+      adresses: sortedAddreses,
+    };
+
+    return treatedUser;
+  };
+
+  const treatmentOverFetchedUser = (user: UserData) => sortByAddressName(user);
 
   const fetchZipCode = async (zipCode: string) => {
     const data = await fetchZipCodeData(zipCode);
@@ -85,7 +99,9 @@ export const GlobalUserProvider: React.FC = ({ children }) => {
       const user = await getUserData();
 
       setToken(token);
-      setUser(user);
+
+      const treatedUser = treatmentOverFetchedUser(user);
+      setUser(treatedUser);
 
       welcomeToFastCommerce(user.name);
     }
@@ -102,8 +118,10 @@ export const GlobalUserProvider: React.FC = ({ children }) => {
 
         const user = await getUserData();
 
+        const treatedUser = treatmentOverFetchedUser(user);
+
         setToken(token);
-        setUser(user);
+        setUser(treatedUser);
       } catch (err) {
         deleteValue(STORAGE_KEYS.USER_TOKEN);
       }
@@ -117,8 +135,10 @@ export const GlobalUserProvider: React.FC = ({ children }) => {
 
     const user = await getUserData();
 
+    const treatedUser = treatmentOverFetchedUser(user);
+
     setToken(token);
-    setUser(user);
+    setUser(treatedUser);
 
     saveValue(STORAGE_KEYS.USER_TOKEN, JSON.stringify({ token }));
 
@@ -140,7 +160,9 @@ export const GlobalUserProvider: React.FC = ({ children }) => {
   const fetchUserData = async () => {
     const user = await getUserData();
 
-    setUser(user);
+    const treatedUser = treatmentOverFetchedUser(user);
+
+    setUser(treatedUser);
   };
 
   useEffect(() => {
