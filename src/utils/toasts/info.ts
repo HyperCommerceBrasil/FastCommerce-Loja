@@ -9,7 +9,7 @@ export const info = (content: string | JSX.Element | React.FC): void => {
     type: 'info',
     style: {
       backgroundColor: Colors.light?.info,
-      color: Colors.light?.text.darker,
+      color: Colors.light?.text.lighter,
       margin: small,
     },
     bodyStyle: { backgroundColor: Colors.light?.info },

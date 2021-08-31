@@ -1,8 +1,8 @@
 export const Colors: DarkLightTheme = {
   dark: {
     error: '#ed4747',
-    warning: '#edbe47',
-    success: '#47ed9a',
+    warning: '#eded47',
+    success: '#2ed15f',
     info: '#478fed',
     text: {
       darker: '#1a1a1a',
@@ -28,8 +28,8 @@ export const Colors: DarkLightTheme = {
   },
   light: {
     error: '#ed4747',
-    warning: '#edbe47',
-    success: '#47ed9a',
+    warning: '#eded47',
+    success: '#2ed15f',
     info: '#478fed',
     text: {
       darker: '#141414',
