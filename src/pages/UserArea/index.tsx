@@ -15,15 +15,17 @@ import {
 } from '../../components';
 import { GlobalUserContext } from '../../contexts';
 import {
+  ADDRESS_EDITING_STATUS,
+  ADDRESS_EDITING_STATUS_MESSAGE,
+  ADDRESS_EDITING_STATUS_MESSAGE_BUTTON,
+  DRAWER_VALUES,
+  USER_AREA,
+  ZipCodeMask,
   addressCreatedSentence,
   addressDeletedSentence,
   addressUpdatedSentence,
   error,
-  ZipCodeMask,
-  ADDRESS_EDITING_STATUS_MESSAGE,
-  ADDRESS_EDITING_STATUS,
-  DRAWER_VALUES,
-  ADDRESS_EDITING_STATUS_MESSAGE_BUTTON,
+  useScrollTo,
 } from '../../utils';
 import { initialFormErrors, initialFormValues } from './form';
 import {
@@ -51,6 +53,7 @@ const UserArea: React.FC = () => {
     deleteAddress,
     fetchUserData,
   } = useContext(GlobalUserContext);
+  const { scrollToDiv } = useScrollTo();
   const [showForm, setShowForm] = useState<'opened' | 'closed'>('closed');
   const [
     formEditingState,
@@ -137,6 +140,7 @@ const UserArea: React.FC = () => {
   const onEditPress = (address: UserAddress): void => {
     setAddresIDToEdit(address.id);
     setFormEditingState('UPDATE');
+    scrollToDiv(USER_AREA.ADDRESSES_WRAPPER, { behavior: 'smooth' });
 
     const {
       cep,
@@ -232,7 +236,7 @@ const UserArea: React.FC = () => {
   };
 
   const addressesComponent = () => (
-    <AddressesWrapper>
+    <AddressesWrapper id={USER_AREA.ADDRESSES_WRAPPER}>
       <NewAddressFormWrapper openState={showForm}>
         <NewAddressOutsideFormWrapper>
           <FormHeader>
