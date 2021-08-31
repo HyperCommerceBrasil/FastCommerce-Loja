@@ -230,7 +230,7 @@ const UserArea: React.FC = () => {
 
   const genericFormChange = (
     target: EventTarget & HTMLInputElement,
-    key: string,
+    key: any,
   ) => {
     setFormValues(oldFormValues => ({ ...oldFormValues, [key]: target.value }));
   };
