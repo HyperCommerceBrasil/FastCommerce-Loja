@@ -78,7 +78,9 @@ const Footer: React.FC<FooterProps> = ({ shouldHaveBottomPadding }) => {
           </SignNewsletterWrapper>
         </Column>
       </ColumnsWrapper>
-      <CopyrightWrapper>Five Stars Store © 2021</CopyrightWrapper>
+      <CopyrightWrapper>
+        Five Stars Store © {new Date().getFullYear()}
+      </CopyrightWrapper>
     </Wrapper>
   );
 };
