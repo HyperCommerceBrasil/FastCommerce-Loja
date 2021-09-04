@@ -294,8 +294,8 @@ const UserArea: React.FC = () => {
               label="Número"
               inputProps={{
                 placeholder: '1234',
-                inputMode: 'numeric',
-                maxLength: 9,
+                inputMode: 'text',
+                maxLength: 20,
                 value: formValues.number,
                 onChange: ({ target }) => genericFormChange(target, 'number'),
               }}
@@ -307,6 +307,7 @@ const UserArea: React.FC = () => {
               inputProps={{
                 placeholder: 'Jardim das Palmeiras',
                 value: formValues.district,
+                maxLength: 80,
                 onChange: ({ target }) => genericFormChange(target, 'district'),
               }}
               error={formErrors.district}

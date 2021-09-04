@@ -2,8 +2,9 @@ import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Logo } from '../../assets';
 import { GlobalCartContext, GlobalUserContext } from '../../contexts';
-import { error, isValidSearch, getFirstName } from '../../utils';
+import { error, isValidSearch, getFirstName, isValidEmail } from '../../utils';
 import CartIcon from '../CartIcon';
+import { initialFormErrors, initialFormValues } from './form';
 import {
   CartWrapper,
   InternUserWrapper,
@@ -35,9 +36,8 @@ const Header: React.FC<HeaderProps> = ({ onSearchName }) => {
   const [isCreatingAccount, setIsCreatingAccount] = useState(false);
   const [searchValue, setSearchValue] = useState('');
 
-  const [password, setPassword] = useState('');
-  const [email, setEmail] = useState('');
-  const [name, setName] = useState('');
+  const [formValues, setFormValues] = useState(initialFormValues);
+  const [formErrors, setFormErrors] = useState(initialFormErrors);
 
   const handleSearch = () => {
     if (isValidSearch(searchValue)) {
@@ -48,16 +48,29 @@ const Header: React.FC<HeaderProps> = ({ onSearchName }) => {
     }
   };
 
+  const genericFormChange = (target: string, key: string) => {
+    setFormValues(oldFormValues => ({ ...oldFormValues, [key]: target }));
+  };
+
+  const onEmailChange = (email: string) => {
+    setFormErrors(oldFormError => ({ ...oldFormError, email: undefined }));
+    genericFormChange(email, 'email');
+  };
+
   const handleLogin = async (
     email: string,
     password: string,
   ): Promise<void> => {
+    if (!isValidEmail(formValues.email)) {
+      setFormErrors({ ...formErrors, email: 'Insira um email válido!' });
+      return;
+    }
+
     try {
       await login({ email, password });
 
       setIsLoginBoxOpened(false);
-      setPassword('');
-      setEmail('');
+      setFormValues(initialFormValues);
     } catch (err) {
       error(err.message);
     }
@@ -68,13 +81,16 @@ const Header: React.FC<HeaderProps> = ({ onSearchName }) => {
     email: string,
     password: string,
   ) => {
+    if (!isValidEmail(formValues.email)) {
+      setFormErrors({ ...formErrors, email: 'Insira um email válido!' });
+      return;
+    }
+
     try {
       await createUser({ email, name, password }, true);
 
       setIsLoginBoxOpened(false);
-      setPassword('');
-      setEmail('');
-      setName('');
+      setFormValues(initialFormValues);
     } catch (err) {
       error(err.message);
     }
@@ -120,18 +136,21 @@ const Header: React.FC<HeaderProps> = ({ onSearchName }) => {
         </CartWrapper>
         <LoginBoxWrapper>
           <LoginBox
-            nameValue={name}
-            onNameChange={setName}
+            nameValue={formValues.name}
+            onNameChange={name => genericFormChange(name, 'name')}
             isCreatingAccount={isCreatingAccount}
             onCreateAccountLinkClick={() =>
               setIsCreatingAccount(!isCreatingAccount)
             }
             onAccessClick={handleLogin}
             onCreateAccountClick={handleCreateAccount}
-            emailValue={email}
-            passwordValue={password}
-            onPasswordChange={setPassword}
-            onEmailChange={setEmail}
+            emailValue={formValues.email}
+            emailError={formErrors.email}
+            passwordValue={formValues.password}
+            onPasswordChange={password =>
+              genericFormChange(password, 'password')
+            }
+            onEmailChange={onEmailChange}
             isShowing={isLoginBoxOpened}
           />
         </LoginBoxWrapper>
