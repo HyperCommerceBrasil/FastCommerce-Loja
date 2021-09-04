@@ -50,13 +50,6 @@ export const InputWrapper = styled.div`
   margin: ${short}px 0;
 `;
 
-export const TextFieldLabel = styled.h4`
-  text-align: left;
-  font-weight: 300;
-  margin-bottom: ${meaningless}px;
-  color: ${Colors.light?.text.main};
-`;
-
 export const ButtonMain = styled(ButtonMainBase)`
   background-color: ${Colors.light?.text.darker};
 
@@ -71,6 +64,11 @@ export const ButtonLink = styled.button`
   color: ${Colors.light?.primary.main};
   text-decoration: underline;
   background-color: transparent;
+
+  &:hover {
+    cursor: pointer;
+    color: ${Colors.light?.primary.lighter};
+  }
 `;
 
 export const LoginBoxLink = styled(Link)`

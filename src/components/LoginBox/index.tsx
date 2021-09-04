@@ -1,6 +1,6 @@
-import { TextField } from '@material-ui/core';
 import React from 'react';
 import { If } from '../lib';
+import { TextInput } from '..';
 import {
   LoginBoxLink,
   Header,
@@ -9,7 +9,6 @@ import {
   FormWrapper,
   InputWrapper,
   LinkWrapper,
-  TextFieldLabel,
   ButtonMain,
   ButtonLink,
 } from './styles';
@@ -18,6 +17,7 @@ type Props = {
   isShowing: boolean;
   isCreatingAccount?: boolean;
   emailValue: string;
+  emailError?: string;
   passwordValue: string;
   nameValue: string;
   onNameChange(name: string): void;
@@ -35,6 +35,7 @@ const LoginBox: React.FC<Props> = ({
   onCreateAccountLinkClick,
   onCreateAccountClick,
   emailValue,
+  emailError,
   passwordValue,
   nameValue,
   onPasswordChange,
@@ -60,36 +61,40 @@ const LoginBox: React.FC<Props> = ({
       <FormWrapper>
         <If condition={isCreatingAccount}>
           <InputWrapper>
-            <TextFieldLabel>Nome Completo</TextFieldLabel>
-            <TextField
-              placeholder="Jefferson da Silva Rocha"
+            <TextInput
+              label="Nome Completo"
+              inputProps={{
+                placeholder: 'Jefferson da Silva Rocha',
+                value: nameValue,
+                onChange: ({ target }) => onNameChange(target.value),
+              }}
               fullWidth
-              variant="outlined"
-              value={nameValue}
-              onChange={({ target }) => onNameChange(target.value)}
             />
           </InputWrapper>
         </If>
         <InputWrapper>
-          <TextFieldLabel>E-mail</TextFieldLabel>
-          <TextField
-            placeholder="jeff@mymail.com"
-            type="email"
+          <TextInput
+            label="Email"
+            inputProps={{
+              placeholder: 'jeffinho@mail.com.br',
+              inputMode: 'email',
+              value: emailValue,
+              onChange: ({ target }) => onEmailChange(target.value),
+            }}
             fullWidth
-            variant="outlined"
-            value={emailValue}
-            onChange={({ target }) => onEmailChange(target.value)}
+            error={emailError}
           />
         </InputWrapper>
         <InputWrapper>
-          <TextFieldLabel>Senha</TextFieldLabel>
-          <TextField
-            placeholder="********"
-            type="password"
+          <TextInput
+            label="Senha"
+            inputProps={{
+              placeholder: '********',
+              type: 'password',
+              value: passwordValue,
+              onChange: ({ target }) => onPasswordChange(target.value),
+            }}
             fullWidth
-            variant="outlined"
-            value={passwordValue}
-            onChange={({ target }) => onPasswordChange(target.value)}
           />
         </InputWrapper>
       </FormWrapper>
