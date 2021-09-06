@@ -32,10 +32,11 @@ export const DefaultDescriptionWrapper = styled.div`
 `;
 
 export const ImageWrapper = styled.div`
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  display: flex;
+  @media (max-width: ${laptop}px) {
+    max-width: 100%;
+  }
+  max-width: 700px;
+  max-height: 700px;
 `;
 
 export const Image = styled.img.attrs<ImgProps>(
@@ -53,6 +54,7 @@ export const Image = styled.img.attrs<ImgProps>(
 
 export const ContentWrapper = styled.div`
   display: flex;
+  flex: 1;
   flex-direction: column;
   justify-content: space-between;
   max-width: 900px;

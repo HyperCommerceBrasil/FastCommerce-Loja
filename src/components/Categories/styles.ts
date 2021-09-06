@@ -13,8 +13,13 @@ export const Wrapper = styled.div`
 export const ScrollabelDiv = styled.div`
   display: flex;
   flex-direction: row;
-  overflow-x: auto;
+  overflow-x: hidden;
   width: 100%;
+  transition: 0.3s;
+
+  &:hover {
+    overflow-x: auto;
+  }
 `;
 
 export const CategoryWrapper = styled(Link)`
