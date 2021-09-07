@@ -30,9 +30,19 @@ import {
   addressBeingDefaultDefinedSentence,
   addressBeingDeletedSentence,
   addressBeingCreatedSentence,
+  userDataBeingUpdated,
+  userDataUpdated,
+  isValidEmail,
+  getBackFormattedDate,
 } from '../../utils';
-import { initialFormErrors, initialFormValues } from './form';
 import {
+  initialAddressFormErrors,
+  initialAddressFormValues,
+  initialUserInfoFormErrors,
+} from './form';
+import {
+  AccountInformationSubtitle,
+  AccountInformationWrapper,
   AddressCardsWrapper,
   AddressesWrapper,
   DeleteWrapper,
@@ -45,6 +55,7 @@ import {
   NewAddressInternFormWrapper,
   NewAddressOutsideFormWrapper,
   NewAddressTitle,
+  UserInfoFormWrapper,
   Wrapper,
 } from './styles';
 
@@ -56,6 +67,7 @@ const UserArea: React.FC = () => {
     updateAddress,
     deleteAddress,
     fetchUserData,
+    updateNewUserData,
   } = useContext(GlobalUserContext);
   const { scrollToDiv } = useScrollTo();
   const [showForm, setShowForm] = useState<'opened' | 'closed'>('closed');
@@ -64,18 +76,32 @@ const UserArea: React.FC = () => {
     formEditingState,
     setFormEditingState,
   ] = useState<AddressEditingStatus>('CREATE');
-  const [formValues, setFormValues] = useState<CreateUserAddress>(
-    initialFormValues,
+  const [addressFormValues, setAddressFormValues] = useState<CreateUserAddress>(
+    initialAddressFormValues,
   );
+  const [userInfoFormValues, setUserInfoFormValues] = useState<UserData>({
+    adresses: user?.adresses || [],
+    birthdate: getBackFormattedDate(user?.birthdate) || '',
+    cpf: user?.cpf || '',
+    email: user?.email || '',
+    name: user?.name || '',
+    id: user?.id || '',
+    password: '',
+  });
   const [addresIDToEdit, setAddresIDToEdit] = useState('');
-  const [formErrors, setFormErrors] = useState(initialFormErrors);
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [confirmPasswordError, setConfirmPasswordError] = useState('');
+  const [formErrors, setFormErrors] = useState(initialAddressFormErrors);
+  const [userInfoFormErrors, setUserInfoFormErrors] = useState(
+    initialUserInfoFormErrors,
+  );
 
   const [activeState, setActiveState] = useState<DrawerOptions>(
     'ACCOUNT_INFORMATION',
   );
 
   const onCheckboxClick = () => {
-    setFormValues(oldFormValues => ({
+    setAddressFormValues(oldFormValues => ({
       ...oldFormValues,
       defaultAddress: !oldFormValues.defaultAddress,
     }));
@@ -84,11 +110,11 @@ const UserArea: React.FC = () => {
   const handleCreateNewAddress = async () => {
     addressBeingCreatedSentence();
     try {
-      await createNewAddress(formValues);
+      await createNewAddress(addressFormValues);
 
-      addressCreatedSentence(formValues.name);
+      addressCreatedSentence(addressFormValues.name);
 
-      setFormValues(initialFormValues);
+      setAddressFormValues(initialAddressFormValues);
 
       await fetchUserData();
 
@@ -101,11 +127,11 @@ const UserArea: React.FC = () => {
   const handleUpdateAddress = async (addressId: string) => {
     addressBeingUpdatedSentence();
     try {
-      await updateAddress(formValues, addressId);
+      await updateAddress(addressFormValues, addressId);
 
-      addressUpdatedSentence(formValues.name);
+      addressUpdatedSentence(addressFormValues.name);
 
-      setFormValues(initialFormValues);
+      setAddressFormValues(initialAddressFormValues);
 
       await fetchUserData();
 
@@ -120,7 +146,7 @@ const UserArea: React.FC = () => {
     try {
       await deleteAddress(addressId);
 
-      addressDeletedSentence(formValues.name);
+      addressDeletedSentence(addressFormValues.name);
 
       await fetchUserData();
     } catch (err) {
@@ -136,10 +162,63 @@ const UserArea: React.FC = () => {
   const handleShowForm = () =>
     showForm === 'closed' ? setShowForm('opened') : setShowForm('closed');
 
+  const handleConfirmPasswordChange = (confirmPassword: string) => {
+    setConfirmPasswordError('');
+    setConfirmPassword(confirmPassword);
+  };
+
+  const isValidUserInfoFormValues = (): boolean => {
+    if (userInfoFormValues.password !== confirmPassword) {
+      setConfirmPasswordError('As senhas estão diferentes!');
+      return false;
+    }
+
+    if (userInfoFormValues.password === '') {
+      setUserInfoFormErrors(oldUserInfoFormErrors => ({
+        ...oldUserInfoFormErrors,
+        password: 'Senha inválida!',
+      }));
+      return false;
+    }
+
+    if (!isValidEmail(userInfoFormValues.email)) {
+      setUserInfoFormErrors(oldUserInfoFormErrors => ({
+        ...oldUserInfoFormErrors,
+        email: 'Email inválido!',
+      }));
+      return false;
+    }
+
+    if (userInfoFormValues.name === '') {
+      setUserInfoFormErrors(oldUserInfoFormErrors => ({
+        ...oldUserInfoFormErrors,
+        name: 'Nome inválido!',
+      }));
+      return false;
+    }
+
+    return true;
+  };
+
+  const handleUpdateUserData = async () => {
+    if (!isValidUserInfoFormValues()) return;
+
+    userDataBeingUpdated();
+    try {
+      await updateNewUserData(userInfoFormValues);
+
+      userDataUpdated();
+
+      await fetchUserData();
+    } catch (err) {
+      error(err.message);
+    }
+  };
+
   const onNewPress = () => {
     scrollToDiv(USER_AREA.ADDRESSES_WRAPPER, { behavior: 'smooth' });
-    setFormValues(initialFormValues);
-    setFormErrors(initialFormErrors);
+    setAddressFormValues(initialAddressFormValues);
+    setFormErrors(initialAddressFormErrors);
 
     setFormEditingState('CREATE');
 
@@ -162,7 +241,7 @@ const UserArea: React.FC = () => {
       addressDefault,
     } = address;
 
-    setFormValues({
+    setAddressFormValues({
       cep,
       city,
       uf,
@@ -184,9 +263,9 @@ const UserArea: React.FC = () => {
     try {
       await updateAddress({ ...address, defaultAddress: true }, addressId);
 
-      addressUpdatedSentence(formValues.name);
+      addressUpdatedSentence(addressFormValues.name);
 
-      setFormValues(initialFormValues);
+      setAddressFormValues(initialAddressFormValues);
 
       await fetchUserData();
 
@@ -218,7 +297,7 @@ const UserArea: React.FC = () => {
         cep: '',
       }));
 
-      setFormValues(oldFormValues => ({
+      setAddressFormValues(oldFormValues => ({
         ...oldFormValues,
         district: bairro,
         city: localidade,
@@ -234,14 +313,48 @@ const UserArea: React.FC = () => {
     const treatedCep = ZipCodeMask(target.value);
     if (treatedCep.length === 9) fetchZipCodeLocal(treatedCep);
     if (treatedCep.length <= 9)
-      setFormValues(oldFormValues => ({ ...oldFormValues, cep: treatedCep }));
+      setAddressFormValues(oldFormValues => ({
+        ...oldFormValues,
+        cep: treatedCep,
+      }));
   };
 
-  const genericFormChange = (
+  const genericAddressFormChange = (
     target: EventTarget & HTMLInputElement,
     key: string,
   ) => {
-    setFormValues(oldFormValues => ({ ...oldFormValues, [key]: target.value }));
+    setAddressFormValues(oldFormValues => ({
+      ...oldFormValues,
+      [key]: target.value,
+    }));
+  };
+
+  const genericUserInfoFormChange = (
+    target: EventTarget & HTMLInputElement,
+    key: string,
+  ) => {
+    if (key === 'email')
+      setUserInfoFormErrors(oldUserInfoFormErrors => ({
+        ...oldUserInfoFormErrors,
+        email: '',
+      }));
+
+    if (key === 'name')
+      setUserInfoFormErrors(oldUserInfoFormErrors => ({
+        ...oldUserInfoFormErrors,
+        name: '',
+      }));
+
+    if (key === 'password')
+      setUserInfoFormErrors(oldUserInfoFormErrors => ({
+        ...oldUserInfoFormErrors,
+        password: '',
+      }));
+
+    setUserInfoFormValues(oldFormValues => ({
+      ...oldFormValues,
+      [key]: target.value,
+    }));
   };
 
   const addressesComponent = () => (
@@ -262,8 +375,9 @@ const UserArea: React.FC = () => {
               label="Nome do endereço"
               inputProps={{
                 placeholder: 'Casa da vó',
-                value: formValues.name,
-                onChange: ({ target }) => genericFormChange(target, 'name'),
+                value: addressFormValues.name,
+                onChange: ({ target }) =>
+                  genericAddressFormChange(target, 'name'),
               }}
               error={formErrors.name}
               fullWidth
@@ -273,7 +387,7 @@ const UserArea: React.FC = () => {
               inputProps={{
                 placeholder: '123456-000',
                 inputMode: 'numeric',
-                value: formValues.cep,
+                value: addressFormValues.cep,
                 maxLength: 9,
                 onChange: ({ target }) => handleZipCodeChange(target),
               }}
@@ -284,8 +398,9 @@ const UserArea: React.FC = () => {
               label="Rua"
               inputProps={{
                 placeholder: 'Alfredo Neves',
-                value: formValues.street,
-                onChange: ({ target }) => genericFormChange(target, 'street'),
+                value: addressFormValues.street,
+                onChange: ({ target }) =>
+                  genericAddressFormChange(target, 'street'),
               }}
               error={formErrors.street}
               fullWidth
@@ -296,8 +411,9 @@ const UserArea: React.FC = () => {
                 placeholder: '1234',
                 inputMode: 'text',
                 maxLength: 20,
-                value: formValues.number,
-                onChange: ({ target }) => genericFormChange(target, 'number'),
+                value: addressFormValues.number,
+                onChange: ({ target }) =>
+                  genericAddressFormChange(target, 'number'),
               }}
               error={formErrors.number}
               fullWidth
@@ -306,9 +422,10 @@ const UserArea: React.FC = () => {
               label="Bairro"
               inputProps={{
                 placeholder: 'Jardim das Palmeiras',
-                value: formValues.district,
+                value: addressFormValues.district,
                 maxLength: 80,
-                onChange: ({ target }) => genericFormChange(target, 'district'),
+                onChange: ({ target }) =>
+                  genericAddressFormChange(target, 'district'),
               }}
               error={formErrors.district}
               fullWidth
@@ -319,8 +436,9 @@ const UserArea: React.FC = () => {
               inputProps={{
                 placeholder: 'RS',
                 contentEditable: false,
-                value: formValues.uf,
-                onChange: ({ target }) => genericFormChange(target, 'uf'),
+                value: addressFormValues.uf,
+                onChange: ({ target }) =>
+                  genericAddressFormChange(target, 'uf'),
               }}
               error={formErrors.uf}
               fullWidth
@@ -330,8 +448,9 @@ const UserArea: React.FC = () => {
               label="Cidade"
               inputProps={{
                 placeholder: 'Alegrete',
-                value: formValues.city,
-                onChange: ({ target }) => genericFormChange(target, 'city'),
+                value: addressFormValues.city,
+                onChange: ({ target }) =>
+                  genericAddressFormChange(target, 'city'),
               }}
               error={formErrors.city}
               fullWidth
@@ -339,7 +458,7 @@ const UserArea: React.FC = () => {
             <CheckBox
               label="Endereço padrão?"
               checkBoxProps={{
-                checked: formValues.defaultAddress,
+                checked: addressFormValues.defaultAddress,
                 onClick: onCheckboxClick,
               }}
             />
@@ -368,13 +487,77 @@ const UserArea: React.FC = () => {
     </AddressesWrapper>
   );
 
+  const accountInformationComponent = () => (
+    <AccountInformationWrapper>
+      <UserInfoFormWrapper>
+        <AccountInformationSubtitle>Cadastro</AccountInformationSubtitle>
+        <TextInput
+          label="Nome"
+          inputProps={{
+            type: 'name',
+            placeholder: 'Ricardo Freitas',
+            value: userInfoFormValues.name,
+            onChange: ({ target }) => genericUserInfoFormChange(target, 'name'),
+          }}
+          error={userInfoFormErrors.name}
+          fullWidth
+        />
+        <TextInput
+          label="Email"
+          inputProps={{
+            placeholder: 'ricardofreitas@mail.com.br',
+            value: userInfoFormValues.email,
+            onChange: ({ target }) =>
+              genericUserInfoFormChange(target, 'email'),
+          }}
+          error={userInfoFormErrors.email}
+          fullWidth
+        />
+        <TextInput
+          label="Data de nascimento"
+          inputProps={{
+            placeholder: '25/02/2000',
+            type: 'date',
+            value: userInfoFormValues.birthdate,
+            onChange: ({ target }) =>
+              genericUserInfoFormChange(target, 'birthdate'),
+          }}
+          error={userInfoFormErrors.birthdate}
+          fullWidth
+        />
+        <TextInput
+          label="Nova Senha"
+          inputProps={{
+            type: 'password',
+            placeholder: '94836862299',
+            value: userInfoFormValues.password,
+            onChange: ({ target }) =>
+              genericUserInfoFormChange(target, 'password'),
+          }}
+          error={userInfoFormErrors.password}
+          fullWidth
+        />
+        <TextInput
+          label="Confirmar nova senha"
+          inputProps={{
+            type: 'password',
+            placeholder: '94836862299',
+            value: confirmPassword,
+            onChange: ({ target }) => handleConfirmPasswordChange(target.value),
+          }}
+          error={confirmPasswordError}
+          fullWidth
+        />
+        <ButtonMain onClick={handleUpdateUserData}>Atualizar dados</ButtonMain>
+      </UserInfoFormWrapper>
+    </AccountInformationWrapper>
+  );
+
   /**
    * This is defined to maintain functions for the selected option in drawer to render
    */
   const SelectedDrawerRenderFunctions = {
-    [DRAWER_VALUES.ACCOUNT_INFORMATION]: () => (
-      <CartOrderCard text={DRAWER_VALUES.ACCOUNT_INFORMATION} />
-    ),
+    [DRAWER_VALUES.ACCOUNT_INFORMATION]: accountInformationComponent,
     [DRAWER_VALUES.ADRESSES]: addressesComponent,
     [DRAWER_VALUES.ORDERS]: () => <CartOrderCard text={DRAWER_VALUES.ORDERS} />,
   };
