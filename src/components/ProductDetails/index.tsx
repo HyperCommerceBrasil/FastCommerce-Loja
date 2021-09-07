@@ -11,7 +11,6 @@ import {
   DefaultDescriptionWrapper,
   TextWrapper,
   OptionsWrapper,
-  Image,
   Wrapper,
   CustomizedDescriptionWrapper,
   Price,
@@ -25,6 +24,7 @@ import {
 } from '../../utils';
 import { PurchaseBottom, Counter } from '..';
 import { GlobalCartContext } from '../../contexts';
+import { ImageCarousel } from '../lib';
 
 type ProductDetailsProps = {
   id?: string;
@@ -62,17 +62,6 @@ const ProductDetails: React.FC<ProductDetailsProps> = () => {
       amountOrdered: counterValue,
     });
 
-  const handleRetrieveFirstProductImage = () => {
-    if (productData?.images) {
-      try {
-        return productData.images[0].image;
-      } catch (err) {
-        return undefined;
-      }
-    }
-    return undefined;
-  };
-
   return (
     <Wrapper>
       <Helmet title={productData?.name}>
@@ -80,7 +69,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = () => {
       </Helmet>
       <DefaultDescriptionWrapper>
         <ImageWrapper>
-          <Image alt="product-image" src={handleRetrieveFirstProductImage()} />
+          <ImageCarousel images={productData?.images} />
         </ImageWrapper>
         <ContentWrapper>
           <TextWrapper>
