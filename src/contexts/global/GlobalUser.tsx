@@ -9,6 +9,7 @@ import {
   createUserAddress,
   updateUserAddress,
   deleteUserAddress,
+  updateUserData,
 } from '../../services';
 import api from '../../services/api';
 import {
@@ -29,6 +30,7 @@ type ContextUserData = {
     userCredentials: Partial<UserSignupCredentials>,
     shouldLogin?: boolean,
   ): Promise<void>;
+  updateNewUserData(userData: UserData): Promise<void>;
   fetchUserData(): Promise<void>;
   forgotPasswordChallenge(email: string): Promise<void>;
   forgotPasswordReset(password: string): Promise<void>;
@@ -165,6 +167,14 @@ export const GlobalUserProvider: React.FC = ({ children }) => {
     setUser(treatedUser);
   };
 
+  const updateNewUserData = async (userData: Partial<UserData>) => {
+    const user = await updateUserData(userData);
+
+    const treatedUser = treatmentOverFetchedUser(user);
+
+    setUser(treatedUser);
+  };
+
   useEffect(() => {
     loginFromStorageData();
   }, []);
@@ -176,6 +186,7 @@ export const GlobalUserProvider: React.FC = ({ children }) => {
         user,
         login,
         createUser,
+        updateNewUserData,
         forgotPasswordChallenge,
         forgotPasswordReset,
         fetchZipCode,
