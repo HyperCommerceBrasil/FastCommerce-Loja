@@ -5,7 +5,7 @@ import {
   warning,
   warningProductLimitReachedAmountOrdered,
 } from '../../utils';
-import { STORAGE_KEYS } from '../../utils/enums';
+import { LOCAL_STORAGE_KEYS } from '../../utils/enums';
 import useLocalStorage from '../../utils/hooks/useLocalStorage';
 
 type PushProductProps = {
@@ -33,7 +33,7 @@ export const GlobalCartProvider: React.FC = ({ children }) => {
 
   const [products, setProducts] = useState<ProductOnCart[]>(
     (JSON.parse(
-      fetchValue(STORAGE_KEYS.CART_PRODUCTS) || '[]',
+      fetchValue(LOCAL_STORAGE_KEYS.CART_PRODUCTS) || '[]',
     ) as ProductOnCart[]) || [],
   );
   const [totalProductsOnCart, setTotalProductsOnCart] = useState(0);
@@ -76,7 +76,10 @@ export const GlobalCartProvider: React.FC = ({ children }) => {
 
     setTotalPrice(handleGetTotalPrice(updatedProducts));
     setProducts(updatedProducts);
-    saveValue<ProductOnCart[]>(STORAGE_KEYS.CART_PRODUCTS, updatedProducts);
+    saveValue<ProductOnCart[]>(
+      LOCAL_STORAGE_KEYS.CART_PRODUCTS,
+      updatedProducts,
+    );
   };
 
   const handleMinusProductQuantityOrdered = (productId: string) => {
@@ -100,7 +103,10 @@ export const GlobalCartProvider: React.FC = ({ children }) => {
 
     setTotalPrice(handleGetTotalPrice(updatedProducts));
     setProducts(updatedProducts);
-    saveValue<ProductOnCart[]>(STORAGE_KEYS.CART_PRODUCTS, updatedProducts);
+    saveValue<ProductOnCart[]>(
+      LOCAL_STORAGE_KEYS.CART_PRODUCTS,
+      updatedProducts,
+    );
   };
 
   const pushProduct = ({ amountOrdered, product }: PushProductProps): void => {
@@ -120,7 +126,10 @@ export const GlobalCartProvider: React.FC = ({ children }) => {
     setTotalPrice(handleGetTotalPrice(updatedProducts));
     setTotalProductsOnCart(updatedProducts.length);
     setProducts(updatedProducts);
-    saveValue<ProductOnCart[]>(STORAGE_KEYS.CART_PRODUCTS, updatedProducts);
+    saveValue<ProductOnCart[]>(
+      LOCAL_STORAGE_KEYS.CART_PRODUCTS,
+      updatedProducts,
+    );
     success(`${product.name} adicionado ao carrinho! 🛒`);
   };
 
@@ -137,14 +146,17 @@ export const GlobalCartProvider: React.FC = ({ children }) => {
     setTotalPrice(handleGetTotalPrice(updatedProducts));
     setTotalProductsOnCart(updatedProducts.length);
     setProducts(updatedProducts);
-    saveValue<ProductOnCart[]>(STORAGE_KEYS.CART_PRODUCTS, updatedProducts);
+    saveValue<ProductOnCart[]>(
+      LOCAL_STORAGE_KEYS.CART_PRODUCTS,
+      updatedProducts,
+    );
   };
 
   const handleSetProducts = (products: ProductOnCart[]) => {
     setTotalPrice(handleGetTotalPrice(products));
     setTotalProductsOnCart(products.length);
     setProducts(products);
-    saveValue<ProductOnCart[]>(STORAGE_KEYS.CART_PRODUCTS, products);
+    saveValue<ProductOnCart[]>(LOCAL_STORAGE_KEYS.CART_PRODUCTS, products);
   };
 
   useEffect(() => {
