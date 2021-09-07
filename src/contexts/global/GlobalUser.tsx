@@ -16,8 +16,8 @@ import {
   useQuery,
   welcomeBack,
   welcomeToFastCommerce,
-  useLocalStorage,
-  STORAGE_KEYS,
+  useSessionStorage,
+  SESSION_STORAGE_KEYS,
   sortByKey,
 } from '../../utils';
 
@@ -46,7 +46,7 @@ export const GlobalUserContext = createContext<ContextUserData>(
 );
 
 export const GlobalUserProvider: React.FC = ({ children }) => {
-  const { saveValue, fetchValue, deleteValue } = useLocalStorage();
+  const { saveValue, fetchValue, deleteValue } = useSessionStorage();
   const { getURLQueryParam } = useQuery();
   const [token, setToken] = useState<string>();
   const [user, setUser] = useState<UserData>();
@@ -108,7 +108,7 @@ export const GlobalUserProvider: React.FC = ({ children }) => {
   };
 
   const loginFromStorageData = async () => {
-    const storageUserContent = fetchValue(STORAGE_KEYS.USER_TOKEN);
+    const storageUserContent = fetchValue(SESSION_STORAGE_KEYS.USER_TOKEN);
 
     if (storageUserContent) {
       try {
@@ -123,7 +123,7 @@ export const GlobalUserProvider: React.FC = ({ children }) => {
         setToken(token);
         setUser(treatedUser);
       } catch (err) {
-        deleteValue(STORAGE_KEYS.USER_TOKEN);
+        deleteValue(SESSION_STORAGE_KEYS.USER_TOKEN);
       }
     }
   };
@@ -140,7 +140,7 @@ export const GlobalUserProvider: React.FC = ({ children }) => {
     setToken(token);
     setUser(treatedUser);
 
-    saveValue(STORAGE_KEYS.USER_TOKEN, JSON.stringify({ token }));
+    saveValue(SESSION_STORAGE_KEYS.USER_TOKEN, JSON.stringify({ token }));
 
     welcomeBack(getFirstName(user.name) || '');
   };
