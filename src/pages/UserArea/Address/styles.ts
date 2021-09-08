@@ -9,7 +9,6 @@ type NewAddressFormWrapperProps = {
   openState?: 'opened' | 'closed' | 'none';
 };
 
-/// /////
 export const AddressesWrapper = styled.div`
   display: flex;
   width: 100%;
