@@ -1,9 +1,8 @@
 import styled from 'styled-components';
 import { IoMdClose as IoMdCloseBase } from 'react-icons/io';
-import { Breakpoints, Colors, Radius, Spacings } from '../../utils';
+import { Breakpoints, Colors, Spacings } from '../../utils';
 
 const { big, short, small, medium, meaningless } = Spacings;
-const { smallRadius } = Radius;
 const { tablet } = Breakpoints;
 
 type NewAddressFormWrapperProps = {
@@ -74,26 +73,6 @@ export const NewAddressFormWrapper = styled.div<NewAddressFormWrapperProps>`
   }
 `;
 
-export const NewAddressOutsideFormWrapper = styled.div<NewAddressFormWrapperProps>`
-  display: flex;
-  flex-direction: column;
-  padding: ${short}px;
-
-  border: 2px solid ${Colors.light?.primary.main};
-  border-style: dashed;
-  border-radius: ${smallRadius}px;
-  opacity: ${({ openState }) => (openState === 'closed' ? '0' : '1')};
-  width: ${({ openState }) => (openState === 'closed' ? '0' : '100%')};
-  max-width: 600px;
-  height: ${({ openState }) => (openState === 'closed' ? '0' : 'auto')};
-
-  @media (max-width: ${tablet}px) {
-    width: ${({ openState }) => (openState === 'closed' ? '0' : 'auto')};
-    max-width: unset;
-    margin: ${small}px;
-  }
-`;
-
 export const FormHeader = styled.div`
   display: flex;
   justify-content: space-between;
@@ -150,22 +129,4 @@ export const AccountInformationWrapper = styled.div`
 
 export const AccountInformationSubtitle = styled.h2`
   color: ${Colors.light?.text.main};
-`;
-
-export const UserInfoFormWrapper = styled.div`
-  display: flex;
-  border-radius: ${smallRadius}px;
-  flex-direction: column;
-  padding: ${short}px;
-
-  border: 2px solid ${Colors.light?.primary.main};
-  border-style: dashed;
-  width: 100%;
-  max-width: 600px;
-
-  @media (max-width: ${tablet}px) {
-    width: auto;
-    max-width: unset;
-    margin: ${small}px;
-  }
 `;

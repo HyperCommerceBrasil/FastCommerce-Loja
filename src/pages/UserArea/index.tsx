@@ -12,6 +12,7 @@ import {
   TextInput,
   ButtonMain,
   CheckBox,
+  FormWrapper,
 } from '../../components';
 import { GlobalUserContext } from '../../contexts';
 import {
@@ -53,9 +54,7 @@ import {
   IoMdClose,
   NewAddressFormWrapper,
   NewAddressInternFormWrapper,
-  NewAddressOutsideFormWrapper,
   NewAddressTitle,
-  UserInfoFormWrapper,
   Wrapper,
 } from './styles';
 
@@ -360,7 +359,7 @@ const UserArea: React.FC = () => {
   const addressesComponent = () => (
     <AddressesWrapper id={USER_AREA.ADDRESSES_WRAPPER}>
       <NewAddressFormWrapper openState={showForm}>
-        <NewAddressOutsideFormWrapper>
+        <FormWrapper>
           <FormHeader>
             <NewAddressTitle>
               {ADDRESS_EDITING_STATUS_MESSAGE[formEditingState] ||
@@ -468,7 +467,7 @@ const UserArea: React.FC = () => {
           >
             {ADDRESS_EDITING_STATUS_MESSAGE_BUTTON[formEditingState]}
           </ButtonMain>
-        </NewAddressOutsideFormWrapper>
+        </FormWrapper>
       </NewAddressFormWrapper>
       <AddressCardsWrapper>
         <AddressCard key={0} isNew onNewPress={onNewPress} />
@@ -489,7 +488,7 @@ const UserArea: React.FC = () => {
 
   const accountInformationComponent = () => (
     <AccountInformationWrapper>
-      <UserInfoFormWrapper>
+      <FormWrapper>
         <AccountInformationSubtitle>Cadastro</AccountInformationSubtitle>
         <TextInput
           label="Nome"
@@ -549,7 +548,7 @@ const UserArea: React.FC = () => {
           fullWidth
         />
         <ButtonMain onClick={handleUpdateUserData}>Atualizar dados</ButtonMain>
-      </UserInfoFormWrapper>
+      </FormWrapper>
     </AccountInformationWrapper>
   );
 
