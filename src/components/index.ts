@@ -21,5 +21,6 @@ export { default as CartOrderCard } from './UserAreaComponents/CartOrderCard';
 export { default as LoginBox } from './LoginBox';
 export { default as Paper } from './Paper';
 export { default as AddressCard } from './UserAreaComponents/Components/AddressCard';
+export { default as FormWrapper } from './UserAreaComponents/Components/FormWrapper';
 
 export * from './lib';

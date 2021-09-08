@@ -8,16 +8,10 @@ import {
   Drawer,
   Cart,
   CartOrderCard,
-  AddressCard,
-  TextInput,
-  ButtonMain,
-  CheckBox,
 } from '../../components';
 import { GlobalUserContext } from '../../contexts';
 import {
   ADDRESS_EDITING_STATUS,
-  ADDRESS_EDITING_STATUS_MESSAGE,
-  ADDRESS_EDITING_STATUS_MESSAGE_BUTTON,
   DRAWER_VALUES,
   USER_AREA,
   ZipCodeMask,
@@ -35,27 +29,17 @@ import {
   isValidEmail,
   getBackFormattedDate,
 } from '../../utils';
+import AccountInformationComponent from './AccountInformation';
+import AddressesComponent from './Address';
 import {
   initialAddressFormErrors,
   initialAddressFormValues,
   initialUserInfoFormErrors,
 } from './form';
 import {
-  AccountInformationSubtitle,
-  AccountInformationWrapper,
-  AddressCardsWrapper,
-  AddressesWrapper,
-  DeleteWrapper,
   DrawerSelectedWrapper,
   DrawerWrapper,
-  FormHeader,
   InternWrapper,
-  IoMdClose,
-  NewAddressFormWrapper,
-  NewAddressInternFormWrapper,
-  NewAddressOutsideFormWrapper,
-  NewAddressTitle,
-  UserInfoFormWrapper,
   Wrapper,
 } from './styles';
 
@@ -358,199 +342,35 @@ const UserArea: React.FC = () => {
   };
 
   const addressesComponent = () => (
-    <AddressesWrapper id={USER_AREA.ADDRESSES_WRAPPER}>
-      <NewAddressFormWrapper openState={showForm}>
-        <NewAddressOutsideFormWrapper>
-          <FormHeader>
-            <NewAddressTitle>
-              {ADDRESS_EDITING_STATUS_MESSAGE[formEditingState] ||
-                'Novo endereço'}
-            </NewAddressTitle>
-            <DeleteWrapper>
-              <IoMdClose size={30} onClick={handleShowForm} />
-            </DeleteWrapper>
-          </FormHeader>
-          <NewAddressInternFormWrapper>
-            <TextInput
-              label="Nome do endereço"
-              inputProps={{
-                placeholder: 'Casa da vó',
-                value: addressFormValues.name,
-                onChange: ({ target }) =>
-                  genericAddressFormChange(target, 'name'),
-              }}
-              error={formErrors.name}
-              fullWidth
-            />
-            <TextInput
-              label="CEP"
-              inputProps={{
-                placeholder: '123456-000',
-                inputMode: 'numeric',
-                value: addressFormValues.cep,
-                maxLength: 9,
-                onChange: ({ target }) => handleZipCodeChange(target),
-              }}
-              error={formErrors.cep}
-              fullWidth
-            />
-            <TextInput
-              label="Rua"
-              inputProps={{
-                placeholder: 'Alfredo Neves',
-                value: addressFormValues.street,
-                onChange: ({ target }) =>
-                  genericAddressFormChange(target, 'street'),
-              }}
-              error={formErrors.street}
-              fullWidth
-            />
-            <TextInput
-              label="Número"
-              inputProps={{
-                placeholder: '1234',
-                inputMode: 'text',
-                maxLength: 20,
-                value: addressFormValues.number,
-                onChange: ({ target }) =>
-                  genericAddressFormChange(target, 'number'),
-              }}
-              error={formErrors.number}
-              fullWidth
-            />
-            <TextInput
-              label="Bairro"
-              inputProps={{
-                placeholder: 'Jardim das Palmeiras',
-                value: addressFormValues.district,
-                maxLength: 80,
-                onChange: ({ target }) =>
-                  genericAddressFormChange(target, 'district'),
-              }}
-              error={formErrors.district}
-              fullWidth
-            />
-            <TextInput
-              impossibleToEdit={isValidZipCode}
-              label="Estado"
-              inputProps={{
-                placeholder: 'RS',
-                contentEditable: false,
-                value: addressFormValues.uf,
-                onChange: ({ target }) =>
-                  genericAddressFormChange(target, 'uf'),
-              }}
-              error={formErrors.uf}
-              fullWidth
-            />
-            <TextInput
-              impossibleToEdit={isValidZipCode}
-              label="Cidade"
-              inputProps={{
-                placeholder: 'Alegrete',
-                value: addressFormValues.city,
-                onChange: ({ target }) =>
-                  genericAddressFormChange(target, 'city'),
-              }}
-              error={formErrors.city}
-              fullWidth
-            />
-            <CheckBox
-              label="Endereço padrão?"
-              checkBoxProps={{
-                checked: addressFormValues.defaultAddress,
-                onClick: onCheckboxClick,
-              }}
-            />
-          </NewAddressInternFormWrapper>
-          <ButtonMain
-            onClick={ADDRESS_EDITING_STATUS_FUNCTION[formEditingState]}
-          >
-            {ADDRESS_EDITING_STATUS_MESSAGE_BUTTON[formEditingState]}
-          </ButtonMain>
-        </NewAddressOutsideFormWrapper>
-      </NewAddressFormWrapper>
-      <AddressCardsWrapper>
-        <AddressCard key={0} isNew onNewPress={onNewPress} />
-        {user?.adresses.map(address => (
-          <AddressCard
-            address={address}
-            key={address.id || 0}
-            onEditPress={onEditPress}
-            onDeletePress={() => handleDeleteAddress(address.id)}
-            onDefineDefaultPress={() =>
-              onDefineDefaultPress(address, address.id)
-            }
-          />
-        ))}
-      </AddressCardsWrapper>
-    </AddressesWrapper>
+    <AddressesComponent
+      ADDRESS_EDITING_STATUS_FUNCTION={ADDRESS_EDITING_STATUS_FUNCTION}
+      addressFormValues={addressFormValues}
+      formEditingState={formEditingState}
+      formErrors={formErrors}
+      genericAddressFormChange={genericAddressFormChange}
+      handleDeleteAddress={handleDeleteAddress}
+      handleShowForm={handleShowForm}
+      handleZipCodeChange={handleZipCodeChange}
+      isValidZipCode={isValidZipCode}
+      onCheckboxClick={onCheckboxClick}
+      onDefineDefaultPress={onDefineDefaultPress}
+      onEditPress={onEditPress}
+      onNewPress={onNewPress}
+      showForm={showForm}
+      user={user}
+    />
   );
 
   const accountInformationComponent = () => (
-    <AccountInformationWrapper>
-      <UserInfoFormWrapper>
-        <AccountInformationSubtitle>Cadastro</AccountInformationSubtitle>
-        <TextInput
-          label="Nome"
-          inputProps={{
-            type: 'name',
-            placeholder: 'Ricardo Freitas',
-            value: userInfoFormValues.name,
-            onChange: ({ target }) => genericUserInfoFormChange(target, 'name'),
-          }}
-          error={userInfoFormErrors.name}
-          fullWidth
-        />
-        <TextInput
-          label="Email"
-          inputProps={{
-            placeholder: 'ricardofreitas@mail.com.br',
-            value: userInfoFormValues.email,
-            onChange: ({ target }) =>
-              genericUserInfoFormChange(target, 'email'),
-          }}
-          error={userInfoFormErrors.email}
-          fullWidth
-        />
-        <TextInput
-          label="Data de nascimento"
-          inputProps={{
-            placeholder: '25/02/2000',
-            type: 'date',
-            value: userInfoFormValues.birthdate,
-            onChange: ({ target }) =>
-              genericUserInfoFormChange(target, 'birthdate'),
-          }}
-          error={userInfoFormErrors.birthdate}
-          fullWidth
-        />
-        <TextInput
-          label="Nova Senha"
-          inputProps={{
-            type: 'password',
-            placeholder: '94836862299',
-            value: userInfoFormValues.password,
-            onChange: ({ target }) =>
-              genericUserInfoFormChange(target, 'password'),
-          }}
-          error={userInfoFormErrors.password}
-          fullWidth
-        />
-        <TextInput
-          label="Confirmar nova senha"
-          inputProps={{
-            type: 'password',
-            placeholder: '94836862299',
-            value: confirmPassword,
-            onChange: ({ target }) => handleConfirmPasswordChange(target.value),
-          }}
-          error={confirmPasswordError}
-          fullWidth
-        />
-        <ButtonMain onClick={handleUpdateUserData}>Atualizar dados</ButtonMain>
-      </UserInfoFormWrapper>
-    </AccountInformationWrapper>
+    <AccountInformationComponent
+      confirmPassword={confirmPassword}
+      genericUserInfoFormChange={genericUserInfoFormChange}
+      handleConfirmPasswordChange={handleConfirmPasswordChange}
+      handleUpdateUserData={handleUpdateUserData}
+      userInfoFormErrors={userInfoFormErrors}
+      userInfoFormValues={userInfoFormValues}
+      confirmPasswordError={confirmPasswordError}
+    />
   );
 
   /**
