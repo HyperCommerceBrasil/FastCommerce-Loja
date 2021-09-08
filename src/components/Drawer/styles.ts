@@ -24,7 +24,7 @@ export const Wrapper = styled.div`
     width: 100%;
     flex-direction: row;
     justify-content: space-between;
-    overflow-x: scroll;
+    overflow-x: auto;
   }
 `;
 

@@ -52,6 +52,28 @@ export const createUser = async ({
   }
 };
 
+export const updateUserData = async (
+  userData: Partial<UserData>,
+): Promise<UserData> => {
+  const { birthdate, email, name, password } = userData;
+  try {
+    const { data } = await api.put<UserData>(
+      `${customerURL}`,
+      {
+        birthdate,
+        email,
+        name,
+        password,
+      },
+      requestConfig,
+    );
+
+    return data;
+  } catch (err) {
+    throw new ResponseErrorHandler(err);
+  }
+};
+
 export const resetUserPasswordChallenge = async (
   email: string,
 ): Promise<ResetPasswordCredentialsChallengeResponse> => {

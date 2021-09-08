@@ -135,3 +135,37 @@ export const TextFieldLabel = styled.h4`
   margin-bottom: ${meaningless}px;
   color: ${Colors.light?.text.main};
 `;
+
+export const AccountInformationWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-bottom: ${medium}px;
+  width: 100%;
+
+  @media (max-width: ${tablet}px) {
+    display: unset;
+    justify-content: unset;
+  }
+`;
+
+export const AccountInformationSubtitle = styled.h2`
+  color: ${Colors.light?.text.main};
+`;
+
+export const UserInfoFormWrapper = styled.div`
+  display: flex;
+  border-radius: ${smallRadius}px;
+  flex-direction: column;
+  padding: ${short}px;
+
+  border: 2px solid ${Colors.light?.primary.main};
+  border-style: dashed;
+  width: 100%;
+  max-width: 600px;
+
+  @media (max-width: ${tablet}px) {
+    width: auto;
+    max-width: unset;
+    margin: ${small}px;
+  }
+`;
