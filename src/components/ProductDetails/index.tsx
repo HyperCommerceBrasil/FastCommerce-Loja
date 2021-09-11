@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import parse from 'html-react-parser';
 import { Helmet } from 'react-helmet';
-import { fetchSingleProduct } from '../../services';
+import { fetchSingleProduct } from '../../api';
 import {
   ContentWrapper,
   ImageWrapper,

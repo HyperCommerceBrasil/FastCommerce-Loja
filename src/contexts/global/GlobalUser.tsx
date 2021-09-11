@@ -10,8 +10,8 @@ import {
   updateUserAddress,
   deleteUserAddress,
   updateUserData,
-} from '../../services';
-import api from '../../services/api';
+} from '../../api';
+import api from '../../api/api';
 import {
   getFirstName,
   useQuery,

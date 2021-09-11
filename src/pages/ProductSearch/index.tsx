@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { GlobalCategoriesContext } from '../../contexts';
-import { fetchAllProducts } from '../../services';
+import { fetchAllProducts } from '../../api';
 import ProductSearch from './ProductSearch';
 import {
   filterByCollection,

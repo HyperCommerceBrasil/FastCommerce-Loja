@@ -8,7 +8,7 @@ import {
   Header,
   Cart,
 } from '../../components';
-import { fetchTrendingProducts } from '../../services';
+import { fetchTrendingProducts } from '../../api';
 import { Wrapper } from './styles';
 
 const Home: React.FC = () => {

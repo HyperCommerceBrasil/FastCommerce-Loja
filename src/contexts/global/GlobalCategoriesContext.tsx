@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { fetchCollections } from '../../services';
+import { fetchCollections } from '../../api';
 
 type CategoriesData = {
   categories: Collections[];
