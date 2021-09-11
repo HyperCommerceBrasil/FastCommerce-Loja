@@ -80,9 +80,7 @@ const UserArea: React.FC = () => {
     initialUserInfoFormErrors,
   );
 
-  const [activeState, setActiveState] = useState<DrawerOptions>(
-    'ACCOUNT_INFORMATION',
-  );
+  const [activeState, setActiveState] = useState<DrawerOptions>('ORDERS');
 
   const onCheckboxClick = () => {
     setAddressFormValues(oldFormValues => ({
@@ -393,7 +391,10 @@ const UserArea: React.FC = () => {
       <ContentWrapper>
         <InternWrapper>
           <DrawerWrapper>
-            <Drawer onChangeActiveState={setActiveState} />
+            <Drawer
+              onChangeActiveState={setActiveState}
+              activeState={activeState}
+            />
           </DrawerWrapper>
           <DrawerSelectedWrapper>
             {renderActiveDrawerSelection()}

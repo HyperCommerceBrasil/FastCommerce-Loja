@@ -37,17 +37,17 @@ export const OptionWrapper = styled.button<OptionProps>`
   border-radius: ${smallRadius}px;
   border: 1px solid;
   border-color: ${({ isActive }) =>
-    isActive ? Colors.light?.primary.main : Colors.light?.text.main};
+    isActive ? Colors.light?.primary.main : Colors.light?.primary.darker};
   margin: ${smaller}px 0;
   color: ${({ isActive }) =>
-    isActive ? Colors.light?.text.lighter : Colors.light?.text.main};
+    isActive ? Colors.light?.text.lighter : Colors.light?.primary.darker};
 
   background-color: ${({ isActive }) =>
     isActive ? Colors.light?.primary.main : 'transparent'};
   transition: 0.2s;
   &:hover {
     color: ${Colors.light?.text.lighter};
-    background-color: ${Colors.light?.primary.darker};
+    background-color: ${Colors.light?.primary.main};
     cursor: pointer;
   }
 
@@ -70,7 +70,6 @@ export const TextWrapper = styled.div`
   display: flex;
   flex: 1;
   padding-left: ${smaller}px;
-  /* justify-content: center; */
 `;
 
 export const Text = styled.p``;

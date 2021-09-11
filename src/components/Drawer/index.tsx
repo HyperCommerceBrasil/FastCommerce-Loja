@@ -15,6 +15,7 @@ type Props = {
   externDrawerState?: DrawerState[];
   onChangeActiveState?(activeState: DrawerOptions): void;
   onChangeExternDrawerState?(activeState: DrawerState[]): void;
+  activeState: DrawerOptions;
 };
 
 const defaultDrawer: DrawerState[] = [
@@ -45,6 +46,7 @@ const Drawer: React.FC<Props> = ({
   externDrawerState,
   onChangeActiveState,
   onChangeExternDrawerState,
+  activeState,
 }) => {
   const [drawerStateLocal, setDrawerState] = useState(
     externDrawerState || defaultDrawer,
@@ -92,11 +94,11 @@ const Drawer: React.FC<Props> = ({
 
   return (
     <Wrapper>
-      {drawerStateLocal.map(({ id, isActive, label, icon }) => (
+      {drawerStateLocal.map(({ id, label, icon, value }) => (
         <OptionWrapper
           key={id}
           onClick={() => handleOptionClick(id)}
-          isActive={isActive}
+          isActive={activeState === value}
         >
           <IconWrapper>{icon || '🃏'}</IconWrapper>
           <TextWrapper>
