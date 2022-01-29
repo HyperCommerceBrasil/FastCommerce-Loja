@@ -7,6 +7,7 @@ const { small } = Spacings;
 export const success = (content: string | JSX.Element | React.FC): void => {
   toast(content, {
     type: 'success',
+    position: 'bottom-left',
     style: {
       backgroundColor: Colors.light?.success,
       color: Colors.light?.text.darker,

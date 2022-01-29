@@ -13,16 +13,27 @@ type ArrowWrapperProps = {
   isShowing?: boolean;
 };
 
+export const Overlay = styled.div<WrapperProps>`
+  visibility: ${props => (props.isShowing ? 'visible' : 'hidden')};
+  opacity: ${props => (props.isShowing ? '0.5' : '0')};
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #000;
+  transition: 0.7s;
+  z-index: -1;
+`;
+
 export const Wrapper = styled.div<WrapperProps>`
   display: flex;
   border-top-left-radius: 24px;
   border-bottom-left-radius: 24px;
   width: 500px;
   height: 100%;
-  z-index: 20;
   box-shadow: 3px 4px 13px rgba(0, 0, 0, 0.19);
   position: fixed;
-  background-color: ${Colors.light?.environment.main};
   right: ${({ isShowing }) => (isShowing ? 0 : -550)}px;
   transition: 0.6s;
 
@@ -42,6 +53,9 @@ export const InternalWrapper = styled.div`
   flex-direction: column;
   flex: 1;
   padding: ${medium}px;
+  z-index: 2;
+  background-color: ${Colors.light?.environment.main};
+  border-radius: 16px 0 0px 16px;
 `;
 
 export const CartHeader = styled.div`

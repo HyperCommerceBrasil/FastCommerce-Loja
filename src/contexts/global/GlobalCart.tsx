@@ -110,16 +110,14 @@ export const GlobalCartProvider: React.FC = ({ children }) => {
     );
   };
 
+  const setTotalItensInCart = (productsCart: ProductOnCart[]) => {
+    let qrdInCart = 0;
+    productsCart.forEach(item => {
+      qrdInCart += item.quantityOrdered;
+    });
 
-const setTotalItensInCart = (productsCart: ProductOnCart[]) => {
-      let qrdInCart = 0
-      productsCart.forEach(item => {
-        qrdInCart += item.quantityOrdered
-      })
-
-      setTotalProductsOnCart(qrdInCart);
-
-}
+    setTotalProductsOnCart(qrdInCart);
+  };
 
   const pushProduct = ({ amountOrdered, product }: PushProductProps): void => {
     if (productOnCartExistsOnArray(product, products)) {
@@ -128,10 +126,10 @@ const setTotalItensInCart = (productsCart: ProductOnCart[]) => {
       let productsCartUpdate = products;
 
       productsCartUpdate.map(productToAddQuantity => {
-        if(productToAddQuantity.id = product.id) {
-          productToAddQuantity.quantityOrdered += 1
+        if ((productToAddQuantity.id = product.id)) {
+          productToAddQuantity.quantityOrdered += 1;
         }
-      })
+      });
       setTotalPrice(handleGetTotalPrice(productsCartUpdate));
       setTotalItensInCart(productsCartUpdate);
       setProducts(productsCartUpdate);
@@ -139,7 +137,7 @@ const setTotalItensInCart = (productsCart: ProductOnCart[]) => {
         LOCAL_STORAGE_KEYS.CART_PRODUCTS,
         productsCartUpdate,
       );
-      success(`${product.name} adicionado ao carrinho! 🛒`);
+      success('Adicionado ao carrinho com sucesso !');
 
       console.log(productsCartUpdate);
 
@@ -159,7 +157,7 @@ const setTotalItensInCart = (productsCart: ProductOnCart[]) => {
       LOCAL_STORAGE_KEYS.CART_PRODUCTS,
       updatedProducts,
     );
-    success(`${product.name} adicionado ao carrinho! 🛒`);
+    success('Adicionado ao carrinho com sucesso !');
   };
 
   const removeProduct = (product: ProductOnCart): void => {
@@ -173,7 +171,7 @@ const setTotalItensInCart = (productsCart: ProductOnCart[]) => {
     }
 
     setTotalPrice(handleGetTotalPrice(updatedProducts));
-    setTotalProductsOnCart(updatedProducts.length);
+    setTotalItensInCart(updatedProducts);
     setProducts(updatedProducts);
     saveValue<ProductOnCart[]>(
       LOCAL_STORAGE_KEYS.CART_PRODUCTS,
