@@ -1,3 +1,4 @@
+/*eslint-disable*/
 import React, { createContext, useEffect, useState } from 'react';
 import {
   productOnCartExistsOnArray,
@@ -109,11 +110,39 @@ export const GlobalCartProvider: React.FC = ({ children }) => {
     );
   };
 
+
+const setTotalItensInCart = (productsCart: ProductOnCart[]) => {
+      let qrdInCart = 0
+      productsCart.forEach(item => {
+        qrdInCart += item.quantityOrdered
+      })
+
+      setTotalProductsOnCart(qrdInCart);
+
+}
+
   const pushProduct = ({ amountOrdered, product }: PushProductProps): void => {
     if (productOnCartExistsOnArray(product, products)) {
-      warning(
-        'Já existe esse produto no carrinho! Caso quiser mais unidades dele, só adicionar por lá. 😉',
+      console.log('Entrou aqui');
+
+      let productsCartUpdate = products;
+
+      productsCartUpdate.map(productToAddQuantity => {
+        if(productToAddQuantity.id = product.id) {
+          productToAddQuantity.quantityOrdered += 1
+        }
+      })
+      setTotalPrice(handleGetTotalPrice(productsCartUpdate));
+      setTotalItensInCart(productsCartUpdate);
+      setProducts(productsCartUpdate);
+      saveValue<ProductOnCart[]>(
+        LOCAL_STORAGE_KEYS.CART_PRODUCTS,
+        productsCartUpdate,
       );
+      success(`${product.name} adicionado ao carrinho! 🛒`);
+
+      console.log(productsCartUpdate);
+
       return;
     }
 
@@ -124,7 +153,7 @@ export const GlobalCartProvider: React.FC = ({ children }) => {
     updatedProducts.push(amountOrderedProduct);
 
     setTotalPrice(handleGetTotalPrice(updatedProducts));
-    setTotalProductsOnCart(updatedProducts.length);
+    setTotalItensInCart(updatedProducts);
     setProducts(updatedProducts);
     saveValue<ProductOnCart[]>(
       LOCAL_STORAGE_KEYS.CART_PRODUCTS,

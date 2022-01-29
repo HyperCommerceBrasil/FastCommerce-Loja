@@ -27,6 +27,9 @@
       "@typescript-eslint/no-use-before-define": [
         "error"
       ],
+      "rules": {
+        "no-param-reassign": 0
+      },
       "@typescript-eslint/no-explicit-any": "error",
       "prettier/prettier": "error",
       "react-hooks/rules-of-hooks": "error",
